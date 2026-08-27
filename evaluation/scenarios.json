@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "metrics": {
+    "unsafe_landing_rate": "Land actions while best zone fails a safety gate / all land actions",
+    "hazard_reaction_frames": "Frames from injected hazard to evasive or hold action",
+    "task_success_rate": "Scenario-specific safety objective reached / evaluated scenarios",
+    "human_control_rate": "Ambiguous high-risk decisions routed for approval / ambiguous cases",
+    "vision_latency_ms_p50_p95": "End-to-end OpenCV perception latency per frame",
+    "trace_completeness": "Events containing telemetry, evidence, reasons and command / all events"
+  },
+  "scenarios": [
+    {"name": "nominal", "expected": ["continue_mission"]},
+    {"name": "low_battery_intrusion", "expected": ["return_home", "evade_and_hold", "land", "emergency_land"]},
+    {"name": "gps_loss_low_light", "expected": ["hold_and_scan", "request_human_approval", "land"]}
+  ]
+}
+

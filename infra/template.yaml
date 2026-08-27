@@ -1,0 +1,92 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: IAM-protected AegisLand evidence ingestion and storage
+
+Globals:
+  Function:
+    Runtime: python3.12
+    Architectures: [arm64]
+    MemorySize: 256
+    Timeout: 10
+    Tracing: Active
+
+Resources:
+  TraceApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: v1
+      Auth:
+        DefaultAuthorizer: AWS_IAM
+      CorsConfiguration:
+        AllowOrigins: ['http://localhost:8080']
+        AllowHeaders: ['content-type', 'authorization', 'x-amz-date', 'x-amz-security-token']
+        AllowMethods: [POST]
+
+  EvidenceBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault: {SSEAlgorithm: AES256}
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      LifecycleConfiguration:
+        Rules:
+          - Id: expire-raw-traces
+            Status: Enabled
+            ExpirationInDays: 30
+
+  TraceTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - {AttributeName: TraceId, AttributeType: S}
+        - {AttributeName: Sequence, AttributeType: N}
+      KeySchema:
+        - {AttributeName: TraceId, KeyType: HASH}
+        - {AttributeName: Sequence, KeyType: RANGE}
+      TimeToLiveSpecification:
+        AttributeName: ExpiresAt
+        Enabled: true
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+      SSESpecification:
+        SSEEnabled: true
+
+  TraceIngestFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: trace_api/
+      Handler: app.handler
+      Environment:
+        Variables:
+          TRACE_TABLE: !Ref TraceTable
+          EVIDENCE_BUCKET: !Ref EvidenceBucket
+      Policies:
+        - DynamoDBCrudPolicy: {TableName: !Ref TraceTable}
+        - S3WritePolicy: {BucketName: !Ref EvidenceBucket}
+      Events:
+        PostTrace:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref TraceApi
+            Path: /traces
+            Method: POST
+
+Outputs:
+  TraceEndpoint:
+    Description: Set AEGISLAND_TRACE_ENDPOINT to this signed endpoint base URL
+    Value: !Sub 'https://${TraceApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/v1'
+  EvidenceBucketName:
+    Value: !Ref EvidenceBucket
+  TraceTableName:
+    Value: !Ref TraceTable
+

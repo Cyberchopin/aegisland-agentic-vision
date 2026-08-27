@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aegisland-agentic-vision"
+version = "0.1.0"
+description = "Safety-first agentic vision for emergency drone landing"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "Apache-2.0"}
+authors = [{name = "Shiyue Wang"}]
+dependencies = [
+  "numpy==2.5.2",
+  "opencv-python==5.0.0.93",
+]
+
+[project.optional-dependencies]
+aws = ["boto3==1.40.18"]
+dev = ["pytest>=8.4,<9", "ruff>=0.12,<1"]
+
+[project.scripts]
+aegisland = "aegisland.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

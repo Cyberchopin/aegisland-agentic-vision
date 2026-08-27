@@ -1,0 +1,91 @@
+from __future__ import annotations
+
+from collections.abc import Iterator
+from dataclasses import dataclass
+from typing import Any
+
+from .domain import Telemetry
+from .perception import cv2, np, require_opencv
+
+
+@dataclass(frozen=True, slots=True)
+class Scenario:
+    name: str
+    description: str
+    frame_count: int
+    start_battery: float
+    end_battery: float
+    gps_loss_frame: int | None = None
+    intrusion_frame: int | None = None
+    low_light_frame: int | None = None
+
+
+SCENARIOS = {
+    "low_battery_intrusion": Scenario(
+        name="low_battery_intrusion",
+        description="Battery collapses while a moving person enters the best landing zone.",
+        frame_count=90,
+        start_battery=12,
+        end_battery=2,
+        intrusion_frame=38,
+    ),
+    "gps_loss_low_light": Scenario(
+        name="gps_loss_low_light",
+        description="GPS is lost and illumination drops, forcing an active-perception retry.",
+        frame_count=80,
+        start_battery=18,
+        end_battery=6,
+        gps_loss_frame=22,
+        low_light_frame=30,
+    ),
+    "nominal": Scenario(
+        name="nominal",
+        description="Healthy mission with stable telemetry and clear ground.",
+        frame_count=60,
+        start_battery=88,
+        end_battery=76,
+    ),
+}
+
+
+def generate(scenario: Scenario, size: tuple[int, int] = (960, 540)) -> Iterator[tuple[Any, Telemetry]]:
+    require_opencv()
+    width, height = size
+    for index in range(scenario.frame_count):
+        progress = index / max(1, scenario.frame_count - 1)
+        battery = scenario.start_battery + progress * (scenario.end_battery - scenario.start_battery)
+        frame = np.full((height, width, 3), (87, 114, 92), dtype=np.uint8)
+
+        # Deterministic texture gives Canny/Laplacian meaningful but reproducible input.
+        for y in range(0, height, 36):
+            cv2.line(frame, (0, y), (width, y), (83, 108, 87), 1)
+        cv2.rectangle(frame, (58, 225), (285, 495), (113, 151, 116), -1)
+        cv2.rectangle(frame, (355, 240), (605, 500), (126, 160, 126), -1)
+        cv2.rectangle(frame, (670, 235), (915, 495), (105, 139, 110), -1)
+        cv2.putText(frame, "LZ-A", (425, 375), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (174, 195, 174), 2)
+
+        # Static obstacles create structural risk in the left and right candidates.
+        cv2.circle(frame, (170, 365), 62, (52, 64, 70), -1)
+        cv2.rectangle(frame, (752, 280), (825, 470), (63, 73, 79), -1)
+
+        if scenario.intrusion_frame is not None and index >= scenario.intrusion_frame:
+            dx = min(260, (index - scenario.intrusion_frame) * 7)
+            person_x = 635 - dx
+            cv2.circle(frame, (person_x, 325), 22, (45, 48, 54), -1)
+            cv2.rectangle(frame, (person_x - 16, 346), (person_x + 16, 425), (48, 51, 58), -1)
+
+        if scenario.low_light_frame is not None and index >= scenario.low_light_frame:
+            factor = 0.34 + 0.08 * ((index // 8) % 2)
+            frame = cv2.convertScaleAbs(frame, alpha=factor, beta=0)
+
+        gps_available = scenario.gps_loss_frame is None or index < scenario.gps_loss_frame
+        telemetry = Telemetry(
+            battery_percent=round(battery, 2),
+            altitude_m=max(1.2, 18.0 - progress * 6.0),
+            horizontal_speed_mps=2.0 if battery > 15 else 0.4,
+            gps_available=gps_available,
+            home_link_available=gps_available,
+            timestamp_s=index / 15.0,
+        )
+        yield frame, telemetry
+

@@ -1,0 +1,10 @@
+# Reproducible local vision and test environment for Python 3.12.
+# Install with: python -m pip install -r requirements-lock.txt
+iniconfig==2.3.0
+numpy==2.5.2
+opencv-python==5.0.0.93
+packaging==26.3
+pluggy==1.6.0
+Pygments==2.21.0
+pytest==8.4.2
+ruff==0.16.4
