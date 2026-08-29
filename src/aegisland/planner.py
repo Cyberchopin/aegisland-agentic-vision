@@ -26,9 +26,15 @@ class SafetyPlanner:
     def __init__(self, policy: SafetyPolicy | None = None) -> None:
         self.policy = policy or SafetyPolicy()
 
-    def decide(self, telemetry: Telemetry, evidence: VisionEvidence) -> Decision:
+    def decide(
+        self,
+        telemetry: Telemetry,
+        evidence: VisionEvidence,
+        *,
+        target_zone=None,
+    ) -> Decision:
         policy = self.policy
-        best = evidence.best_zone
+        best = target_zone if target_zone is not None else evidence.best_zone
         zone_score = best.score if best else 0.0
         zone_safe = bool(best and best.safe and best.score >= policy.safe_zone_score)
 
@@ -61,9 +67,30 @@ class SafetyPlanner:
                 target_zone_id=target,
             )
 
+        local_zone_motion = (
+            best.motion_occupancy
+            if best is not None
+            else 0.0
+        )
+
+        local_zone_clearance = (
+            best.clearance
+            if best is not None
+            else 1.0
+        )
+
+        landing_zone_intrusion = (
+            best is not None
+            and (
+                local_zone_motion >= 0.08
+                or local_zone_clearance < 0.35
+            )
+        )
+
         collision_critical = (
             evidence.obstacle_risk >= policy.collision_risk
             or evidence.motion_risk >= 0.85
+            or landing_zone_intrusion
         )
 
         battery_critical = (

@@ -29,6 +29,17 @@ SCENARIOS = {
         end_battery=2,
         intrusion_frame=38,
     ),
+    "critical_battery_collision": Scenario(
+        name="critical_battery_collision",
+        description=(
+            "Critical battery coincides with an immediate moving obstacle, "
+            "forcing compound emergency recovery."
+        ),
+        frame_count=45,
+        start_battery=3.0,
+        end_battery=1.5,
+        intrusion_frame=2,
+    ),
     "gps_loss_low_light": Scenario(
         name="gps_loss_low_light",
         description="GPS is lost and illumination drops, forcing an active-perception retry.",

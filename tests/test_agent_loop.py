@@ -89,4 +89,17 @@ def test_critical_battery_and_collision_flows_through_agent() -> None:
     assert event.decision.safety_level.value == "critical"
     assert event.decision.target_zone_id == "Z2-1"
     assert event.command["hardware_command_sent"] is False
+
+    maneuvers = [
+        step["maneuver"]
+        for step in event.command["recovery_plan"]
+    ]
+
+    assert maneuvers == [
+        "evade",
+        "align_safe_zone",
+        "descend",
+        "land",
+    ]
+
     assert len(traces.events) == 1

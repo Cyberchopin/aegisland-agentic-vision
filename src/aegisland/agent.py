@@ -6,6 +6,8 @@ from typing import Any, Protocol
 
 from .domain import Action, Decision, Telemetry, TraceEvent, VisionEvidence
 from .planner import SafetyPlanner
+from .recovery import RecoveryPlanner
+from .targeting import LandingTargetManager
 
 
 class PerceptionTool(Protocol):
@@ -41,6 +43,8 @@ class AegisLandAgent:
         planner: SafetyPlanner,
         trace_sink: TraceSink,
         command_adapter: SimulatedCommandAdapter | None = None,
+        recovery_planner: RecoveryPlanner | None = None,
+        target_manager: LandingTargetManager | None = None,
         *,
         active_perception_trigger: float = 0.62,
     ) -> None:
@@ -48,6 +52,8 @@ class AegisLandAgent:
         self.planner = planner
         self.trace_sink = trace_sink
         self.command_adapter = command_adapter or SimulatedCommandAdapter()
+        self.recovery_planner = recovery_planner or RecoveryPlanner()
+        self.target_manager = target_manager or LandingTargetManager()
         self.active_perception_trigger = active_perception_trigger
         self.trace_id = uuid.uuid4().hex
         self.sequence = 0
@@ -69,8 +75,31 @@ class AegisLandAgent:
             if retry.confidence >= evidence.confidence:
                 evidence, annotated = retry, retry_annotated
 
-        decision = self.planner.decide(telemetry, evidence)
+        target = self.target_manager.select(evidence)
+
+        decision = self.planner.decide(
+            telemetry,
+            evidence,
+            target_zone=target,
+        )
+
+        recovery_plan = self.recovery_planner.plan(
+            decision,
+            telemetry,
+            evidence,
+        )
+
         command = self.command_adapter.execute(decision)
+
+        if recovery_plan is not None:
+            command["recovery_plan"] = [
+                {
+                    "maneuver": step.maneuver.value,
+                    "reason": step.reason,
+                    "target_zone_id": step.target_zone_id,
+                }
+                for step in recovery_plan.steps
+            ]
         decision = dataclasses.replace(
             decision,
             command_executed=command["status"] == "simulated",
@@ -101,7 +130,7 @@ class AegisLandAgent:
             Action.REQUEST_HUMAN_APPROVAL: (180, 80, 250),
             Action.LAND: (30, 220, 225),
             Action.EMERGENCY_LAND: (30, 30, 255),
-	    Action.EMERGENCY_RECOVERY: (0, 80, 255),
+            Action.EMERGENCY_RECOVERY: (0, 80, 255),
         }
         color = color_by_action[decision.action]
         y0 = frame.shape[0] - 58
