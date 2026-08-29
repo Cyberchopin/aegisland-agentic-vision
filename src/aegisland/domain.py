@@ -14,6 +14,11 @@ class Action(StrEnum):
     LAND = "land"
     EMERGENCY_LAND = "emergency_land"
 
+    # Compound failsafe:
+    # avoid immediate collision while transitioning toward
+    # the fastest viable emergency landing.
+    EMERGENCY_RECOVERY = "emergency_recovery"
+
 
 class SafetyLevel(StrEnum):
     NOMINAL = "nominal"

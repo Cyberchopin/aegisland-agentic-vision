@@ -61,11 +61,34 @@ class SafetyPlanner:
                 target_zone_id=target,
             )
 
-        if evidence.obstacle_risk >= policy.collision_risk or evidence.motion_risk >= 0.85:
+        collision_critical = (
+            evidence.obstacle_risk >= policy.collision_risk
+            or evidence.motion_risk >= 0.85
+        )
+
+        battery_critical = (
+            telemetry.battery_percent <= policy.critical_battery
+        )
+
+        if collision_critical and battery_critical:
+            return result(
+                Action.EMERGENCY_RECOVERY,
+                SafetyLevel.CRITICAL,
+                (
+                    "Critical battery and immediate collision risk are active simultaneously.",
+                    "Long-duration hold is unsafe because remaining energy is critically limited.",
+                    "The vehicle must evade the immediate hazard while transitioning toward emergency landing.",
+                ),
+                target=best.zone_id if best else None,
+            )
+
+        if collision_critical:
             return result(
                 Action.EVADE_AND_HOLD,
                 SafetyLevel.CRITICAL,
-                ("Immediate collision or moving-object risk exceeds the safety envelope.",),
+                (
+                    "Immediate collision or moving-object risk exceeds the safety envelope.",
+                ),
             )
 
         if telemetry.battery_percent <= policy.critical_battery:

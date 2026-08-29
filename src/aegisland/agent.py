@@ -101,6 +101,7 @@ class AegisLandAgent:
             Action.REQUEST_HUMAN_APPROVAL: (180, 80, 250),
             Action.LAND: (30, 220, 225),
             Action.EMERGENCY_LAND: (30, 30, 255),
+	    Action.EMERGENCY_RECOVERY: (0, 80, 255),
         }
         color = color_by_action[decision.action]
         y0 = frame.shape[0] - 58

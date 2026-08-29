@@ -54,7 +54,15 @@ def test_open_cv_result_changes_the_action() -> None:
 
 
 def test_collision_risk_has_priority_over_battery_plan() -> None:
-    decision = SafetyPlanner().decide(telemetry(12), evidence(obstacle=0.91))
+    decision = SafetyPlanner().decide(
+        telemetry(12),
+        evidence(
+            obstacle=0.91,
+            motion=0.20,
+            candidate=zone(0.84, safe=True),
+        ),
+    )
+
     assert decision.action == Action.EVADE_AND_HOLD
     assert decision.safety_level == SafetyLevel.CRITICAL
 
@@ -80,3 +88,18 @@ def test_low_battery_returns_home_only_when_navigation_is_available() -> None:
     no_gps = planner.decide(telemetry(11, gps=False), evidence())
     assert rth.action == Action.RETURN_HOME
     assert no_gps.action == Action.REQUEST_HUMAN_APPROVAL
+
+
+def test_collision_and_critical_battery_needs_emergency_recovery() -> None:
+    decision = SafetyPlanner().decide(
+        telemetry(2),
+        evidence(
+            obstacle=0.91,
+            motion=0.20,
+            candidate=zone(0.84, safe=True),
+        ),
+    )
+
+    assert decision.safety_level == SafetyLevel.CRITICAL
+    assert decision.action == Action.EMERGENCY_RECOVERY
+    assert decision.target_zone_id == "Z2-1"
