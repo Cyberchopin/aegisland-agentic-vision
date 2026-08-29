@@ -5,9 +5,13 @@ import uuid
 from typing import Any, Protocol
 
 from .domain import Action, Decision, Telemetry, TraceEvent, VisionEvidence
+from .commands import CommandRuntime
+from .approval import ApprovalManager
+from .execution import ExecutionSafetyGuard
 from .planner import SafetyPlanner
 from .recovery import RecoveryPlanner
 from .targeting import LandingTargetManager
+from .stability import ActionStabilizer
 
 
 class PerceptionTool(Protocol):
@@ -45,6 +49,10 @@ class AegisLandAgent:
         command_adapter: SimulatedCommandAdapter | None = None,
         recovery_planner: RecoveryPlanner | None = None,
         target_manager: LandingTargetManager | None = None,
+        action_stabilizer: ActionStabilizer | None = None,
+        command_runtime: CommandRuntime | None = None,
+        execution_guard: ExecutionSafetyGuard | None = None,
+        approval_manager: ApprovalManager | None = None,
         *,
         active_perception_trigger: float = 0.62,
     ) -> None:
@@ -54,9 +62,51 @@ class AegisLandAgent:
         self.command_adapter = command_adapter or SimulatedCommandAdapter()
         self.recovery_planner = recovery_planner or RecoveryPlanner()
         self.target_manager = target_manager or LandingTargetManager()
+        self.action_stabilizer = action_stabilizer or ActionStabilizer()
+        self.command_runtime = command_runtime or CommandRuntime()
+        self.execution_guard = execution_guard or ExecutionSafetyGuard()
+        self.approval_manager = approval_manager or ApprovalManager()
         self.active_perception_trigger = active_perception_trigger
         self.trace_id = uuid.uuid4().hex
         self.sequence = 0
+
+    def approve_action(self, approval_id: str) -> bool:
+        request = self.approval_manager.get(approval_id)
+
+        if request is None:
+            return False
+
+        self.approval_manager.approve(request)
+        return True
+
+    def reject_action(self, approval_id: str) -> bool:
+        request = self.approval_manager.get(approval_id)
+
+        if request is None:
+            return False
+
+        self.approval_manager.reject(request)
+        return True
+
+    def expire_action(self, approval_id: str) -> bool:
+        request = self.approval_manager.get(approval_id)
+
+        if request is None:
+            return False
+
+        self.approval_manager.expire(request)
+        return True
+
+    def reset_execution_guard(
+        self,
+        *,
+        operator_acknowledged: bool,
+        channel_healthy: bool,
+    ) -> bool:
+        return self.execution_guard.try_reset(
+            operator_acknowledged=operator_acknowledged,
+            channel_healthy=channel_healthy,
+        )
 
     def step(self, frame: Any, telemetry: Telemetry, frame_index: int) -> tuple[TraceEvent, Any]:
         evidence, annotated = self.perception.observe(frame, frame_index)
@@ -77,11 +127,19 @@ class AegisLandAgent:
 
         target = self.target_manager.select(evidence)
 
-        decision = self.planner.decide(
+        raw_decision = self.planner.decide(
             telemetry,
             evidence,
             target_zone=target,
         )
+
+        decision = self.action_stabilizer.stabilize(raw_decision)
+        decision = self.execution_guard.guard_decision(decision)
+
+        approval = self.approval_manager.request(decision)
+
+        if approval is not None and approval.status.value == "requested":
+            approval = self.approval_manager.mark_pending(approval)
 
         recovery_plan = self.recovery_planner.plan(
             decision,
@@ -89,7 +147,78 @@ class AegisLandAgent:
             evidence,
         )
 
-        command = self.command_adapter.execute(decision)
+        command_envelope = self.command_runtime.prepare(decision)
+
+        approval_status = approval.status.value if approval is not None else None
+
+        if approval_status in {"pending", "requested"}:
+            command = {
+                "adapter": "simulation",
+                "action": decision.action.value,
+                "target_zone_id": decision.target_zone_id,
+                "status": "awaiting_human_approval",
+                "hardware_command_sent": False,
+            }
+
+        elif approval_status in {"rejected", "expired"}:
+            command = {
+                "adapter": "simulation",
+                "action": decision.action.value,
+                "target_zone_id": decision.target_zone_id,
+                "status": f"approval_{approval_status}",
+                "hardware_command_sent": False,
+            }
+
+        else:
+            command_envelope = self.command_runtime.dispatch(command_envelope)
+
+            execution_decision = (
+                dataclasses.replace(
+                    decision,
+                    requires_human_approval=False,
+                )
+                if approval_status == "approved"
+                else decision
+            )
+
+            command = self.command_adapter.execute(execution_decision)
+
+        adapter_status = command.get("status")
+
+        if adapter_status in {
+            "awaiting_human_approval",
+            "approval_rejected",
+            "approval_expired",
+        }:
+            pass
+        elif adapter_status == "timeout":
+            command_envelope = self.command_runtime.timeout(command_envelope)
+        elif adapter_status == "failed":
+            command_envelope = self.command_runtime.fail(
+                command_envelope,
+                "simulated command failure",
+            )
+        else:
+            command_envelope = self.command_runtime.acknowledge(command_envelope)
+            command_envelope = self.command_runtime.complete(command_envelope)
+
+        command["command_id"] = command_envelope.command_id
+        command["command_status"] = command_envelope.status.value
+
+        if approval is not None:
+            command["approval_id"] = approval.approval_id
+            command["approval_status"] = approval.status.value
+
+        execution = self.execution_guard.observe_command_status(
+            command_envelope.status.value
+        )
+
+        command["execution_state"] = execution.state.value
+        command["requires_human_attention"] = execution.requires_human_attention
+        command["execution_reason"] = execution.reason
+
+        if command_envelope.error is not None:
+            command["command_error"] = command_envelope.error
 
         if recovery_plan is not None:
             command["recovery_plan"] = [
@@ -110,6 +239,7 @@ class AegisLandAgent:
             telemetry=telemetry,
             evidence=evidence,
             decision=decision,
+            raw_decision=raw_decision,
             command=command,
         )
         self.trace_sink.write(event)

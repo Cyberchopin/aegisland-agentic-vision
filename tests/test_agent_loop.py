@@ -103,3 +103,247 @@ def test_critical_battery_and_collision_flows_through_agent() -> None:
     ]
 
     assert len(traces.events) == 1
+
+
+class SequencedPerception:
+    def __init__(self) -> None:
+        self.index = 0
+
+    def observe(self, frame, frame_index, *, active_perception=False):
+        obstacle = 0.91 if self.index == 0 else 0.05
+
+        evidence = VisionEvidence(
+            evidence_id=f"sequence-{self.index}",
+            frame_index=frame_index,
+            confidence=0.90,
+            obstacle_risk=obstacle,
+            motion_risk=0.02,
+            candidates=(candidate(),),
+        )
+
+        self.index += 1
+        return evidence, frame
+
+    def enhance_for_active_perception(self, frame):
+        return frame
+
+
+def test_emergency_action_does_not_flap_after_one_safe_frame() -> None:
+    perception = SequencedPerception()
+    traces = MemoryTraceStore()
+
+    agent = AegisLandAgent(
+        perception,
+        SafetyPlanner(),
+        traces,
+    )
+
+    telemetry = Telemetry(
+        battery_percent=2,
+        altitude_m=10,
+    )
+
+    first, _ = agent.step(object(), telemetry, 0)
+    second, _ = agent.step(object(), telemetry, 1)
+
+    assert first.raw_decision is not None
+    assert second.raw_decision is not None
+
+    assert first.raw_decision.action == Action.EMERGENCY_RECOVERY
+    assert first.decision.action == Action.EMERGENCY_RECOVERY
+
+    assert second.raw_decision.action == Action.EMERGENCY_LAND
+
+    # Stabilizer prevents one clear frame from immediately cancelling
+    # the critical recovery state.
+    assert second.decision.action == Action.EMERGENCY_RECOVERY
+
+
+class ApprovalPerception:
+    def observe(self, frame, frame_index, *, active_perception=False):
+        evidence = VisionEvidence(
+            evidence_id="approval-integration",
+            frame_index=frame_index,
+            confidence=0.90,
+            obstacle_risk=0.05,
+            motion_risk=0.02,
+            candidates=(candidate(),),
+        )
+        return evidence, frame
+
+    def enhance_for_active_perception(self, frame):
+        return frame
+
+
+def test_human_review_creates_pending_approval_request() -> None:
+    traces = MemoryTraceStore()
+
+    agent = AegisLandAgent(
+        ApprovalPerception(),
+        SafetyPlanner(),
+        traces,
+    )
+
+    event, _ = agent.step(
+        object(),
+        Telemetry(
+            battery_percent=11,
+            altitude_m=10,
+            gps_available=False,
+            home_link_available=False,
+        ),
+        0,
+    )
+
+    assert event.decision.action == Action.REQUEST_HUMAN_APPROVAL
+    assert event.command["approval_id"]
+    assert event.command["approval_status"] == "pending"
+
+
+def test_pending_human_approval_blocks_command_execution() -> None:
+    traces = MemoryTraceStore()
+
+    agent = AegisLandAgent(
+        ApprovalPerception(),
+        SafetyPlanner(),
+        traces,
+    )
+
+    event, _ = agent.step(
+        object(),
+        Telemetry(
+            battery_percent=11,
+            altitude_m=10,
+            gps_available=False,
+            home_link_available=False,
+        ),
+        0,
+    )
+
+    assert event.decision.action == Action.REQUEST_HUMAN_APPROVAL
+    assert event.command["approval_status"] == "pending"
+    assert event.command["status"] == "awaiting_human_approval"
+    assert event.command["hardware_command_sent"] is False
+    assert event.command["command_status"] == "planned"
+
+
+def test_approved_action_can_dispatch() -> None:
+    traces = MemoryTraceStore()
+
+    agent = AegisLandAgent(
+        ApprovalPerception(),
+        SafetyPlanner(),
+        traces,
+    )
+
+    first, _ = agent.step(
+        object(),
+        Telemetry(
+            battery_percent=11,
+            altitude_m=10,
+            gps_available=False,
+            home_link_available=False,
+        ),
+        0,
+    )
+
+    approval_id = first.command["approval_id"]
+
+    assert first.command["approval_status"] == "pending"
+    assert first.command["command_status"] == "planned"
+
+    assert agent.approve_action(approval_id)
+
+    second, _ = agent.step(
+        object(),
+        Telemetry(
+            battery_percent=11,
+            altitude_m=10,
+            gps_available=False,
+            home_link_available=False,
+        ),
+        1,
+    )
+
+    assert second.command["approval_status"] == "approved"
+    assert second.command["command_status"] == "completed"
+
+
+def test_rejected_action_remains_blocked() -> None:
+    traces = MemoryTraceStore()
+
+    agent = AegisLandAgent(
+        ApprovalPerception(),
+        SafetyPlanner(),
+        traces,
+    )
+
+    first, _ = agent.step(
+        object(),
+        Telemetry(
+            battery_percent=11,
+            altitude_m=10,
+            gps_available=False,
+            home_link_available=False,
+        ),
+        0,
+    )
+
+    approval_id = first.command["approval_id"]
+
+    assert agent.reject_action(approval_id)
+
+    second, _ = agent.step(
+        object(),
+        Telemetry(
+            battery_percent=11,
+            altitude_m=10,
+            gps_available=False,
+            home_link_available=False,
+        ),
+        1,
+    )
+
+    assert second.command["approval_status"] == "rejected"
+    assert second.command["status"] == "approval_rejected"
+    assert second.command["command_status"] == "planned"
+
+
+def test_expired_action_remains_blocked() -> None:
+    traces = MemoryTraceStore()
+
+    agent = AegisLandAgent(
+        ApprovalPerception(),
+        SafetyPlanner(),
+        traces,
+    )
+
+    first, _ = agent.step(
+        object(),
+        Telemetry(
+            battery_percent=11,
+            altitude_m=10,
+            gps_available=False,
+            home_link_available=False,
+        ),
+        0,
+    )
+
+    approval_id = first.command["approval_id"]
+
+    assert agent.expire_action(approval_id)
+
+    second, _ = agent.step(
+        object(),
+        Telemetry(
+            battery_percent=11,
+            altitude_m=10,
+            gps_available=False,
+            home_link_available=False,
+        ),
+        1,
+    )
+
+    assert second.command["approval_status"] == "expired"
+    assert second.command["status"] == "approval_expired"
+    assert second.command["command_status"] == "planned"

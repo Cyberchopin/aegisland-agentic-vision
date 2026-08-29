@@ -92,6 +92,7 @@ class TraceEvent:
     telemetry: Telemetry
     evidence: VisionEvidence
     decision: Decision
+    raw_decision: Decision | None = None
     command: dict[str, Any] = field(default_factory=dict)
 
 
