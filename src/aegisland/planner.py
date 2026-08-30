@@ -39,7 +39,35 @@ class SafetyPlanner:
         zone_safe = bool(best and best.safe and best.score >= policy.safe_zone_score)
 
         battery_risk = max(0.0, min(1.0, (policy.return_battery - telemetry.battery_percent) / 15))
-        gps_risk = 0.18 if not telemetry.gps_available else 0.0
+        navigation_mode = evidence.navigation_mode
+
+        # Compatibility path for direct planner tests or legacy evidence
+        # that has not passed through DynamicConfidenceFusion yet.
+        if navigation_mode == "unknown":
+            if telemetry.gps_available:
+                navigation_mode = "gps_primary"
+            elif (
+                evidence.visual_localization_valid
+                and evidence.visual_localization_confidence >= 0.55
+            ):
+                navigation_mode = "visual_fallback"
+            else:
+                navigation_mode = "degraded"
+
+        visual_navigation_available = navigation_mode in {
+            "visual_fallback",
+            "visual_inertial_fallback",
+        }
+
+        if navigation_mode == "gps_primary":
+            gps_risk = 0.0
+        elif navigation_mode == "visual_inertial_fallback":
+            gps_risk = 0.05
+        elif navigation_mode == "visual_fallback":
+            gps_risk = 0.08
+        else:
+            gps_risk = 0.18
+
         risk_score = min(
             1.0,
             0.34 * battery_risk
@@ -182,6 +210,28 @@ class SafetyPlanner:
                 Action.HOLD_AND_SCAN,
                 SafetyLevel.HIGH,
                 ("Return-to-home is unavailable and no safe contingency zone is confirmed.",),
+            )
+
+        if not telemetry.gps_available:
+            if visual_navigation_available:
+                return result(
+                    Action.CONTINUE_MISSION,
+                    SafetyLevel.CAUTION,
+                    (
+                        "GPS is unavailable.",
+                        "Visual dead reckoning remains above the localization confidence gate.",
+                        "Only bounded local autonomy is permitted while GPS-denied.",
+                    ),
+                    target=best.zone_id if best else None,
+                )
+
+            return result(
+                Action.HOLD_AND_SCAN,
+                SafetyLevel.HIGH,
+                (
+                    "GPS is unavailable and visual localization is not reliable enough for bounded autonomy.",
+                    "The vehicle holds position while perception attempts to recover localization.",
+                ),
             )
 
         if risk_score >= policy.human_review_risk:

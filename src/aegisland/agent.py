@@ -13,6 +13,9 @@ from .recovery import RecoveryPlanner
 from .targeting import LandingTargetManager
 from .stability import ActionStabilizer
 from .temporal import TemporalRiskAssessor
+from .fusion import DynamicConfidenceFusion
+from .sensor_sync import SensorSynchronizer
+from .sensor_health import SensorHealthMonitor, SensorHealthState
 
 
 class PerceptionTool(Protocol):
@@ -55,6 +58,9 @@ class AegisLandAgent:
         execution_guard: ExecutionSafetyGuard | None = None,
         approval_manager: ApprovalManager | None = None,
         temporal_risk_assessor: TemporalRiskAssessor | None = None,
+        confidence_fusion: DynamicConfidenceFusion | None = None,
+        sensor_synchronizer: SensorSynchronizer | None = None,
+        sensor_health_monitor: SensorHealthMonitor | None = None,
         *,
         active_perception_trigger: float = 0.62,
     ) -> None:
@@ -71,9 +77,35 @@ class AegisLandAgent:
         self.temporal_risk_assessor = (
             temporal_risk_assessor or TemporalRiskAssessor()
         )
+        self.confidence_fusion = (
+            confidence_fusion or DynamicConfidenceFusion()
+        )
+        self.sensor_synchronizer = (
+            sensor_synchronizer or SensorSynchronizer()
+        )
+        self.sensor_health_monitor = (
+            sensor_health_monitor or SensorHealthMonitor()
+        )
         self.active_perception_trigger = active_perception_trigger
         self.trace_id = uuid.uuid4().hex
         self.sequence = 0
+
+    def ingest_imu(
+        self,
+        *,
+        timestamp_s: float,
+        yaw_rad: float,
+        yaw_rate_rad_s: float,
+        ax: float,
+        ay: float,
+    ) -> None:
+        self.sensor_synchronizer.add_imu(
+            timestamp_s=timestamp_s,
+            yaw_rad=yaw_rad,
+            yaw_rate_rad_s=yaw_rate_rad_s,
+            ax=ax,
+            ay=ay,
+        )
 
     def approve_action(self, approval_id: str) -> bool:
         request = self.approval_manager.get(approval_id)
@@ -129,6 +161,104 @@ class AegisLandAgent:
             )
             if retry.confidence >= evidence.confidence:
                 evidence, annotated = retry, retry_annotated
+
+        sensor_timestamp_s = (
+            telemetry.timestamp_s
+            if telemetry.timestamp_s > 0.0
+            else frame_index / 30.0
+        )
+
+        if evidence.visual_localization_valid:
+            self.sensor_synchronizer.add_visual(
+                timestamp_s=sensor_timestamp_s,
+                x=evidence.visual_relative_x,
+                y=evidence.visual_relative_y,
+                confidence=evidence.visual_localization_confidence,
+            )
+
+        synchronized = self.sensor_synchronizer.snapshot(
+            sensor_timestamp_s
+        )
+
+        if synchronized.imu_valid:
+            if synchronized.imu_sync_method.value == "exact":
+                imu_confidence = 0.95
+            elif synchronized.imu_sync_method.value == "interpolated":
+                imu_confidence = 0.90
+            elif synchronized.imu_sync_method.value == "extrapolated":
+                imu_confidence = 0.75
+            else:
+                imu_confidence = 0.0
+        else:
+            imu_confidence = 0.0
+
+        gps_health = self.sensor_health_monitor.assess(
+            "gps",
+            confidence=(
+                1.0 if telemetry.gps_available else 0.0
+            ),
+            valid=telemetry.gps_available,
+        )
+
+        visual_health = self.sensor_health_monitor.assess(
+            "visual",
+            confidence=evidence.visual_localization_confidence,
+            valid=evidence.visual_localization_valid,
+        )
+
+        imu_health = self.sensor_health_monitor.assess(
+            "imu",
+            confidence=imu_confidence,
+            valid=synchronized.imu_valid,
+        )
+
+        fusion = self.confidence_fusion.fuse(
+            gps_confidence=gps_health.effective_confidence,
+            visual_confidence=visual_health.effective_confidence,
+            visual_valid=(
+                visual_health.state
+                != SensorHealthState.FAILED
+            ),
+            imu_confidence=imu_health.effective_confidence,
+            imu_valid=(
+                imu_health.state
+                != SensorHealthState.FAILED
+            ),
+        )
+
+        evidence = dataclasses.replace(
+            evidence,
+            navigation_mode=fusion.mode.value,
+            fused_navigation_confidence=(
+                fusion.fused_confidence
+            ),
+            navigation_gps_weight=fusion.gps_weight,
+            navigation_visual_weight=fusion.visual_weight,
+            navigation_imu_weight=fusion.imu_weight,
+            healthy_navigation_sources=(
+                fusion.healthy_sources
+            ),
+            degraded_navigation_sources=(
+                fusion.degraded_sources
+            ),
+            imu_sync_valid=synchronized.imu_valid,
+            imu_sync_method=synchronized.imu_sync_method.value,
+            imu_confidence=imu_confidence,
+
+            gps_health_state=gps_health.state.value,
+            visual_health_state=visual_health.state.value,
+            imu_health_state=imu_health.state.value,
+
+            gps_effective_confidence=(
+                gps_health.effective_confidence
+            ),
+            visual_effective_confidence=(
+                visual_health.effective_confidence
+            ),
+            imu_effective_confidence=(
+                imu_health.effective_confidence
+            ),
+        )
 
         target = self.target_manager.select(evidence)
 

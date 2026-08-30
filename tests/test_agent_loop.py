@@ -1,3 +1,4 @@
+from aegisland.domain import SafetyLevel
 from aegisland.agent import AegisLandAgent
 from aegisland.domain import Action, Telemetry, VisionEvidence, ZoneCandidate
 from aegisland.planner import SafetyPlanner
@@ -420,3 +421,257 @@ def test_agent_computes_temporal_risk_for_approaching_object() -> None:
     assert last_event is not None
     assert last_event.evidence.temporal_risk > 0.0
     assert last_event.evidence.ttc_frames is not None
+
+
+class VisualFallbackPerception:
+    def observe(
+        self,
+        frame,
+        frame_index,
+        active_perception=False,
+    ):
+        from aegisland.domain import VisionEvidence
+
+        evidence = VisionEvidence(
+            evidence_id=f"visual-fallback-{frame_index}",
+            frame_index=frame_index,
+            confidence=0.95,
+            obstacle_risk=0.0,
+            motion_risk=0.0,
+            visual_localization_valid=True,
+            visual_localization_confidence=0.82,
+        )
+
+        return evidence, frame
+
+    def enhance_for_active_perception(self, frame):
+        return frame
+
+
+def test_agent_uses_visual_navigation_when_gps_is_lost() -> None:
+    traces = MemoryTraceStore()
+
+    agent = AegisLandAgent(
+        VisualFallbackPerception(),
+        SafetyPlanner(),
+        traces,
+    )
+
+    event, _ = agent.step(
+        object(),
+        Telemetry(
+            battery_percent=80,
+            altitude_m=10,
+            gps_available=False,
+            home_link_available=True,
+        ),
+        0,
+    )
+
+    assert event.evidence.navigation_mode == "visual_fallback"
+
+    # The visual sensor is still in health-monitor recovery on the
+    # first observation, so fusion consumes degraded effective
+    # confidence rather than the raw 0.82 measurement.
+    assert event.evidence.visual_localization_confidence == 0.82
+    assert event.evidence.visual_health_state == "degraded"
+    assert event.evidence.visual_effective_confidence == 0.574
+    assert (
+        event.evidence.fused_navigation_confidence
+        == event.evidence.visual_effective_confidence
+    )
+
+    assert "visual" in event.evidence.healthy_navigation_sources
+    assert "gps" in event.evidence.degraded_navigation_sources
+
+    assert event.decision.action == Action.CONTINUE_MISSION
+    assert event.decision.safety_level == SafetyLevel.CAUTION
+
+
+def test_gps_loss_uses_time_aligned_visual_inertial_fallback() -> None:
+    traces = MemoryTraceStore()
+
+    agent = AegisLandAgent(
+        VisualFallbackPerception(),
+        SafetyPlanner(),
+        traces,
+    )
+
+    agent.ingest_imu(
+        timestamp_s=0.995,
+        yaw_rad=0.10,
+        yaw_rate_rad_s=0.02,
+        ax=0.10,
+        ay=0.00,
+    )
+
+    agent.ingest_imu(
+        timestamp_s=1.005,
+        yaw_rad=0.12,
+        yaw_rate_rad_s=0.02,
+        ax=0.12,
+        ay=0.00,
+    )
+
+    event, _ = agent.step(
+        object(),
+        Telemetry(
+            battery_percent=80,
+            altitude_m=10,
+            gps_available=False,
+            home_link_available=True,
+            timestamp_s=1.0,
+        ),
+        30,
+    )
+
+    assert event.evidence.imu_sync_valid
+    assert event.evidence.imu_sync_method == "interpolated"
+    assert event.evidence.imu_confidence == 0.90
+
+    assert (
+        event.evidence.navigation_mode
+        == "visual_inertial_fallback"
+    )
+
+    assert "visual" in event.evidence.healthy_navigation_sources
+    assert "imu" in event.evidence.healthy_navigation_sources
+    assert "gps" in event.evidence.degraded_navigation_sources
+
+    assert event.decision.action == Action.CONTINUE_MISSION
+    assert event.decision.safety_level == SafetyLevel.CAUTION
+
+
+class FailedVisualPerception:
+    def observe(
+        self,
+        frame,
+        frame_index,
+        active_perception=False,
+    ):
+        from aegisland.domain import VisionEvidence
+
+        return (
+            VisionEvidence(
+                evidence_id=f"failed-visual-{frame_index}",
+                frame_index=frame_index,
+                confidence=0.95,
+                obstacle_risk=0.0,
+                motion_risk=0.0,
+                visual_localization_valid=False,
+                visual_localization_confidence=0.05,
+            ),
+            frame,
+        )
+
+    def enhance_for_active_perception(self, frame):
+        return frame
+
+
+def test_sensor_health_filters_visual_and_imu_before_fusion() -> None:
+    agent = AegisLandAgent(
+        VisualFallbackPerception(),
+        SafetyPlanner(),
+        MemoryTraceStore(),
+    )
+
+    agent.ingest_imu(
+        timestamp_s=0.995,
+        yaw_rad=0.1,
+        yaw_rate_rad_s=0.02,
+        ax=0.0,
+        ay=0.0,
+    )
+    agent.ingest_imu(
+        timestamp_s=1.005,
+        yaw_rad=0.12,
+        yaw_rate_rad_s=0.02,
+        ax=0.0,
+        ay=0.0,
+    )
+
+    event, _ = agent.step(
+        object(),
+        Telemetry(
+            battery_percent=80,
+            altitude_m=10,
+            gps_available=False,
+            home_link_available=True,
+            timestamp_s=1.0,
+        ),
+        30,
+    )
+
+    assert event.evidence.gps_health_state == "failed"
+    assert event.evidence.visual_health_state == "degraded"
+    assert event.evidence.imu_health_state == "degraded"
+
+    assert (
+        event.evidence.navigation_mode
+        == "visual_inertial_fallback"
+    )
+
+
+def test_failed_camera_with_gps_loss_enters_safe_degraded_mode() -> None:
+    agent = AegisLandAgent(
+        FailedVisualPerception(),
+        SafetyPlanner(),
+        MemoryTraceStore(),
+    )
+
+    agent.ingest_imu(
+        timestamp_s=1.0,
+        yaw_rad=0.1,
+        yaw_rate_rad_s=0.01,
+        ax=0.0,
+        ay=0.0,
+    )
+
+    event, _ = agent.step(
+        object(),
+        Telemetry(
+            battery_percent=80,
+            altitude_m=10,
+            gps_available=False,
+            home_link_available=True,
+            timestamp_s=1.0,
+        ),
+        30,
+    )
+
+    assert event.evidence.visual_health_state == "failed"
+    assert event.evidence.navigation_mode == "degraded"
+    assert event.decision.action == Action.HOLD_AND_SCAN
+
+
+def test_visual_sensor_requires_sustained_recovery_before_healthy() -> None:
+    agent = AegisLandAgent(
+        VisualFallbackPerception(),
+        SafetyPlanner(),
+        MemoryTraceStore(),
+    )
+
+    states = []
+
+    for frame_index in range(3):
+        timestamp = 2.0 + frame_index / 30.0
+
+        event, _ = agent.step(
+            object(),
+            Telemetry(
+                battery_percent=80,
+                altitude_m=10,
+                gps_available=True,
+                home_link_available=True,
+                timestamp_s=timestamp,
+            ),
+            frame_index,
+        )
+
+        states.append(
+            event.evidence.visual_health_state
+        )
+
+    assert states[0] == "degraded"
+    assert states[1] == "degraded"
+    assert states[2] == "healthy"

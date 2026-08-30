@@ -153,3 +153,57 @@ def test_temporal_risk_plus_critical_battery_triggers_recovery() -> None:
     )
 
     assert decision.action == Action.EMERGENCY_RECOVERY
+
+
+def test_gps_loss_uses_visual_localization_fallback_when_confident() -> None:
+    evidence = VisionEvidence(
+        evidence_id="gps-visual-good",
+        frame_index=20,
+        confidence=0.95,
+        obstacle_risk=0.05,
+        motion_risk=0.05,
+        visual_localization_valid=True,
+        visual_localization_confidence=0.80,
+    )
+
+    telemetry = Telemetry(
+        battery_percent=80,
+        altitude_m=10,
+        gps_available=False,
+        home_link_available=True,
+    )
+
+    decision = SafetyPlanner().decide(
+        telemetry,
+        evidence,
+    )
+
+    assert decision.action == Action.CONTINUE_MISSION
+    assert decision.safety_level == SafetyLevel.CAUTION
+
+
+def test_gps_loss_holds_when_visual_localization_is_unreliable() -> None:
+    evidence = VisionEvidence(
+        evidence_id="gps-visual-bad",
+        frame_index=21,
+        confidence=0.95,
+        obstacle_risk=0.05,
+        motion_risk=0.05,
+        visual_localization_valid=False,
+        visual_localization_confidence=0.10,
+    )
+
+    telemetry = Telemetry(
+        battery_percent=80,
+        altitude_m=10,
+        gps_available=False,
+        home_link_available=True,
+    )
+
+    decision = SafetyPlanner().decide(
+        telemetry,
+        evidence,
+    )
+
+    assert decision.action == Action.HOLD_AND_SCAN
+    assert decision.safety_level == SafetyLevel.HIGH

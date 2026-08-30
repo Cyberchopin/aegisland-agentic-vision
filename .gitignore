@@ -11,3 +11,4 @@ runs/
 .env
 *.pem
 tmp/
+/aegisland-agentic-vision/

@@ -9,6 +9,7 @@ from typing import Any
 
 from .domain import VisionEvidence, ZoneCandidate
 from .motion_compensation import CameraMotionCompensator
+from .gps_denied import VisualDeadReckoner
 
 try:
     import cv2
@@ -47,6 +48,7 @@ class OpenCVLandingPerception:
         self.previous_gray: Any | None = None
         self._active_reference_gray: Any | None = None
         self.motion_compensator = CameraMotionCompensator()
+        self.visual_dead_reckoner = VisualDeadReckoner()
 
     def observe(
         self,
@@ -136,6 +138,30 @@ class OpenCVLandingPerception:
                 motion_metrics["suppression_ratio"]
             ),
             motion_object_center=motion_object_center,
+            visual_localization_valid=bool(
+                motion_metrics.get(
+                    "visual_localization_valid",
+                    False,
+                )
+            ),
+            visual_localization_confidence=float(
+                motion_metrics.get(
+                    "visual_localization_confidence",
+                    0.0,
+                )
+            ),
+            visual_relative_x=float(
+                motion_metrics.get("visual_relative_x", 0.0)
+            ),
+            visual_relative_y=float(
+                motion_metrics.get("visual_relative_y", 0.0)
+            ),
+            visual_velocity_x=float(
+                motion_metrics.get("visual_velocity_x", 0.0)
+            ),
+            visual_velocity_y=float(
+                motion_metrics.get("visual_velocity_y", 0.0)
+            ),
             notes=notes,
         )
         annotated = self._annotate(frame.copy(), evidence, motion_boxes)
@@ -204,6 +230,16 @@ class OpenCVLandingPerception:
         compensation = self.motion_compensator.compensate(
             reference_gray,
             gray,
+        )
+
+        visual_pose = self.visual_dead_reckoner.update(
+            homography=(
+                compensation.homography
+                if compensation.success
+                else None
+            ),
+            image_shape=gray.shape,
+            inlier_ratio=compensation.inlier_ratio,
         )
 
         aligned_reference = (
@@ -286,6 +322,15 @@ class OpenCVLandingPerception:
             "inlier_ratio": round(compensation.inlier_ratio, 4),
             "raw_motion_risk": round(raw_mean, 4),
             "suppression_ratio": round(suppression_ratio, 4),
+            "visual_localization_valid": visual_pose.valid,
+            "visual_localization_confidence": round(
+                visual_pose.confidence,
+                4,
+            ),
+            "visual_relative_x": round(visual_pose.x, 6),
+            "visual_relative_y": round(visual_pose.y, 6),
+            "visual_velocity_x": round(visual_pose.vx, 6),
+            "visual_velocity_y": round(visual_pose.vy, 6),
         }
 
         return mask, boxes, metrics

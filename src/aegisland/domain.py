@@ -75,6 +75,31 @@ class VisionEvidence:
     motion_object_center: tuple[float, float] | None = None
     temporal_risk: float = 0.0
     ttc_frames: float | None = None
+    visual_localization_valid: bool = False
+    visual_localization_confidence: float = 0.0
+    visual_relative_x: float = 0.0
+    visual_relative_y: float = 0.0
+    visual_velocity_x: float = 0.0
+    visual_velocity_y: float = 0.0
+    navigation_mode: str = "unknown"
+    fused_navigation_confidence: float = 0.0
+    navigation_gps_weight: float = 0.0
+    navigation_visual_weight: float = 0.0
+    navigation_imu_weight: float = 0.0
+    healthy_navigation_sources: tuple[str, ...] = ()
+    degraded_navigation_sources: tuple[str, ...] = ()
+    imu_sync_valid: bool = False
+    imu_sync_method: str = "unavailable"
+    imu_confidence: float = 0.0
+
+    gps_health_state: str = "unknown"
+    visual_health_state: str = "unknown"
+    imu_health_state: str = "unknown"
+
+    gps_effective_confidence: float = 0.0
+    visual_effective_confidence: float = 0.0
+    imu_effective_confidence: float = 0.0
+
     notes: tuple[str, ...] = ()
 
     @property

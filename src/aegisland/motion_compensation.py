@@ -39,6 +39,7 @@ class CameraMotionCompensator:
         minimum_inliers: int = 12,
         minimum_inlier_ratio: float = 0.30,
         maximum_corner_displacement_ratio: float = 0.35,
+        enabled: bool = True,
     ) -> None:
         require_opencv()
 
@@ -47,6 +48,7 @@ class CameraMotionCompensator:
         self.minimum_inliers = minimum_inliers
         self.minimum_inlier_ratio = minimum_inlier_ratio
         self.maximum_corner_displacement_ratio = maximum_corner_displacement_ratio
+        self.enabled = enabled
 
         self.orb = cv2.ORB_create(
             nfeatures=max_features,
@@ -62,6 +64,8 @@ class CameraMotionCompensator:
         previous_gray: Any,
         current_gray: Any,
     ) -> MotionCompensationResult:
+        if not self.enabled:
+            return self._failure(previous_gray)
         if previous_gray is None:
             return MotionCompensationResult(
                 aligned_previous=current_gray,
@@ -247,5 +251,6 @@ class CameraMotionCompensator:
             homography=None,
             match_count=0,
             inlier_count=0,
+            inlier_ratio=0.0,
             success=False,
         )
