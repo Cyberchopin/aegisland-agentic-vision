@@ -8,6 +8,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from .domain import VisionEvidence, ZoneCandidate
+from .motion_compensation import CameraMotionCompensator
 
 try:
     import cv2
@@ -45,6 +46,7 @@ class OpenCVLandingPerception:
         self.config = config or PerceptionConfig()
         self.previous_gray: Any | None = None
         self._active_reference_gray: Any | None = None
+        self.motion_compensator = CameraMotionCompensator()
 
     def observe(
         self,
@@ -65,7 +67,7 @@ class OpenCVLandingPerception:
         edges = cv2.morphologyEx(edges, cv2.MORPH_CLOSE, np.ones((3, 3), np.uint8))
         texture = cv2.convertScaleAbs(cv2.Laplacian(blurred, cv2.CV_32F))
         reference_gray = self._active_reference_gray if active_perception else self.previous_gray
-        motion_mask, motion_boxes = self._motion(gray, reference_gray)
+        motion_mask, motion_boxes, motion_metrics = self._motion(gray, reference_gray)
 
         candidates = self._score_grid(gray, edges, texture, motion_mask, motion_boxes)
         lower = slice(frame.shape[0] // 3, frame.shape[0])
@@ -91,6 +93,21 @@ class OpenCVLandingPerception:
             "CLAHE active-perception retry applied." if active_perception else "Base exposure pass.",
             f"Detected {len(motion_boxes)} moving regions.",
         )
+        motion_object_center = None
+
+        if motion_boxes:
+            dominant_box = max(
+                motion_boxes,
+                key=lambda box: box[2] * box[3],
+            )
+
+            box_x, box_y, box_w, box_h = dominant_box
+
+            motion_object_center = (
+                box_x + box_w / 2.0,
+                box_y + box_h / 2.0,
+            )
+
         evidence = VisionEvidence(
             evidence_id=evidence_id,
             frame_index=frame_index,
@@ -100,6 +117,25 @@ class OpenCVLandingPerception:
             candidates=tuple(candidates),
             active_perception_used=active_perception,
             processing_ms=round(elapsed_ms, 3),
+            camera_compensation_used=bool(
+                motion_metrics["compensation_used"]
+            ),
+            camera_match_count=int(
+                motion_metrics["match_count"]
+            ),
+            camera_inlier_count=int(
+                motion_metrics["inlier_count"]
+            ),
+            camera_inlier_ratio=float(
+                motion_metrics["inlier_ratio"]
+            ),
+            raw_motion_risk=float(
+                motion_metrics["raw_motion_risk"]
+            ),
+            motion_suppression_ratio=float(
+                motion_metrics["suppression_ratio"]
+            ),
+            motion_object_center=motion_object_center,
             notes=notes,
         )
         annotated = self._annotate(frame.copy(), evidence, motion_boxes)
@@ -125,11 +161,29 @@ class OpenCVLandingPerception:
         return cv2.resize(frame, (self.config.maximum_width, int(height * ratio)))
 
     def _motion(
-        self, gray: Any, reference_gray: Any | None
-    ) -> tuple[Any, list[tuple[int, int, int, int]]]:
+        self,
+        gray: Any,
+        reference_gray: Any | None,
+    ) -> tuple[
+        Any,
+        list[tuple[int, int, int, int]],
+        dict[str, float | int | bool],
+    ]:
         if reference_gray is None or reference_gray.shape != gray.shape:
-            return np.zeros_like(gray), []
-        flow = cv2.calcOpticalFlowFarneback(
+            return (
+                np.zeros_like(gray),
+                [],
+                {
+                    "compensation_used": False,
+                    "match_count": 0,
+                    "inlier_count": 0,
+                    "inlier_ratio": 0.0,
+                    "raw_motion_risk": 0.0,
+                    "suppression_ratio": 0.0,
+                },
+            )
+
+        raw_flow = cv2.calcOpticalFlowFarneback(
             reference_gray,
             gray,
             None,
@@ -141,15 +195,100 @@ class OpenCVLandingPerception:
             poly_sigma=1.2,
             flags=0,
         )
-        magnitude, _ = cv2.cartToPolar(flow[..., 0], flow[..., 1])
-        mask = np.uint8(magnitude > self.config.flow_threshold) * 255
-        kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7))
-        mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
-        mask = cv2.dilate(mask, kernel, iterations=2)
-        contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+        raw_magnitude, _ = cv2.cartToPolar(
+            raw_flow[..., 0],
+            raw_flow[..., 1],
+        )
+
+        compensation = self.motion_compensator.compensate(
+            reference_gray,
+            gray,
+        )
+
+        aligned_reference = (
+            compensation.aligned_previous
+            if compensation.success
+            else reference_gray
+        )
+
+        flow = cv2.calcOpticalFlowFarneback(
+            aligned_reference,
+            gray,
+            None,
+            pyr_scale=0.5,
+            levels=3,
+            winsize=17,
+            iterations=3,
+            poly_n=5,
+            poly_sigma=1.2,
+            flags=0,
+        )
+
+        magnitude, _ = cv2.cartToPolar(
+            flow[..., 0],
+            flow[..., 1],
+        )
+
+        raw_mean = float(np.mean(raw_magnitude))
+        compensated_mean = float(np.mean(magnitude))
+
+        suppression_ratio = (
+            1.0 - compensated_mean / raw_mean
+            if raw_mean > 1e-6
+            else 0.0
+        )
+
+        suppression_ratio = max(
+            0.0,
+            min(1.0, suppression_ratio),
+        )
+
+        mask = np.uint8(
+            magnitude > self.config.flow_threshold
+        ) * 255
+
+        kernel = cv2.getStructuringElement(
+            cv2.MORPH_ELLIPSE,
+            (7, 7),
+        )
+
+        mask = cv2.morphologyEx(
+            mask,
+            cv2.MORPH_OPEN,
+            kernel,
+        )
+
+        mask = cv2.dilate(
+            mask,
+            kernel,
+            iterations=2,
+        )
+
+        contours, _ = cv2.findContours(
+            mask,
+            cv2.RETR_EXTERNAL,
+            cv2.CHAIN_APPROX_SIMPLE,
+        )
+
         minimum_area = gray.size * 0.0015
-        boxes = [cv2.boundingRect(contour) for contour in contours if cv2.contourArea(contour) >= minimum_area]
-        return mask, boxes
+
+        boxes = [
+            cv2.boundingRect(contour)
+            for contour in contours
+            if cv2.contourArea(contour) >= minimum_area
+        ]
+
+        metrics = {
+            "compensation_used": compensation.success,
+            "match_count": compensation.match_count,
+            "inlier_count": compensation.inlier_count,
+            "inlier_ratio": round(compensation.inlier_ratio, 4),
+            "raw_motion_risk": round(raw_mean, 4),
+            "suppression_ratio": round(suppression_ratio, 4),
+        }
+
+        return mask, boxes, metrics
 
     def _score_grid(
         self,

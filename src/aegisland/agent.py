@@ -12,6 +12,7 @@ from .planner import SafetyPlanner
 from .recovery import RecoveryPlanner
 from .targeting import LandingTargetManager
 from .stability import ActionStabilizer
+from .temporal import TemporalRiskAssessor
 
 
 class PerceptionTool(Protocol):
@@ -53,6 +54,7 @@ class AegisLandAgent:
         command_runtime: CommandRuntime | None = None,
         execution_guard: ExecutionSafetyGuard | None = None,
         approval_manager: ApprovalManager | None = None,
+        temporal_risk_assessor: TemporalRiskAssessor | None = None,
         *,
         active_perception_trigger: float = 0.62,
     ) -> None:
@@ -66,6 +68,9 @@ class AegisLandAgent:
         self.command_runtime = command_runtime or CommandRuntime()
         self.execution_guard = execution_guard or ExecutionSafetyGuard()
         self.approval_manager = approval_manager or ApprovalManager()
+        self.temporal_risk_assessor = (
+            temporal_risk_assessor or TemporalRiskAssessor()
+        )
         self.active_perception_trigger = active_perception_trigger
         self.trace_id = uuid.uuid4().hex
         self.sequence = 0
@@ -126,6 +131,33 @@ class AegisLandAgent:
                 evidence, annotated = retry, retry_annotated
 
         target = self.target_manager.select(evidence)
+
+        if target is not None:
+            target_x, target_y, target_w, target_h = target.bbox_xywh
+
+            target_center = (
+                target_x + target_w / 2.0,
+                target_y + target_h / 2.0,
+            )
+
+            temporal = self.temporal_risk_assessor.observe(
+                object_center=evidence.motion_object_center,
+                target_center=target_center,
+            )
+
+            ttc_frames = None
+
+            if temporal.ttc is not None:
+                candidate_ttc = temporal.ttc.ttc_frames
+
+                if candidate_ttc != float("inf"):
+                    ttc_frames = round(candidate_ttc, 3)
+
+            evidence = dataclasses.replace(
+                evidence,
+                temporal_risk=round(temporal.risk, 4),
+                ttc_frames=ttc_frames,
+            )
 
         raw_decision = self.planner.decide(
             telemetry,

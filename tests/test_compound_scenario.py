@@ -42,6 +42,8 @@ def test_critical_battery_collision_triggers_emergency_recovery() -> None:
     command = recovery_events[0].command
 
     assert command["hardware_command_sent"] is False
+    assert command["command_id"]
+    assert command["command_status"] == "completed"
     assert "recovery_plan" in command
 
     maneuvers = [

@@ -103,3 +103,53 @@ def test_collision_and_critical_battery_needs_emergency_recovery() -> None:
     assert decision.safety_level == SafetyLevel.CRITICAL
     assert decision.action == Action.EMERGENCY_RECOVERY
     assert decision.target_zone_id == "Z2-1"
+
+
+def test_high_temporal_risk_triggers_preemptive_evasion() -> None:
+    evidence = VisionEvidence(
+        evidence_id="temporal-danger",
+        frame_index=10,
+        confidence=0.95,
+        obstacle_risk=0.05,
+        motion_risk=0.10,
+        temporal_risk=0.8,
+    )
+
+    telemetry = Telemetry(
+        battery_percent=80,
+        altitude_m=10,
+        gps_available=True,
+        home_link_available=True,
+    )
+
+    decision = SafetyPlanner().decide(
+        telemetry,
+        evidence,
+    )
+
+    assert decision.action == Action.EVADE_AND_HOLD
+
+
+def test_temporal_risk_plus_critical_battery_triggers_recovery() -> None:
+    evidence = VisionEvidence(
+        evidence_id="temporal-compound",
+        frame_index=11,
+        confidence=0.95,
+        obstacle_risk=0.05,
+        motion_risk=0.10,
+        temporal_risk=0.8,
+    )
+
+    telemetry = Telemetry(
+        battery_percent=2,
+        altitude_m=10,
+        gps_available=True,
+        home_link_available=True,
+    )
+
+    decision = SafetyPlanner().decide(
+        telemetry,
+        evidence,
+    )
+
+    assert decision.action == Action.EMERGENCY_RECOVERY

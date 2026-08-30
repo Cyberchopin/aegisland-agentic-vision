@@ -87,10 +87,13 @@ class SafetyPlanner:
             )
         )
 
+        temporal_collision_risk = evidence.temporal_risk >= 0.8
+
         collision_critical = (
             evidence.obstacle_risk >= policy.collision_risk
             or evidence.motion_risk >= 0.85
             or landing_zone_intrusion
+            or temporal_collision_risk
         )
 
         battery_critical = (

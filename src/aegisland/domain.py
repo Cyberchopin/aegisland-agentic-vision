@@ -66,6 +66,15 @@ class VisionEvidence:
     candidates: tuple[ZoneCandidate, ...] = ()
     active_perception_used: bool = False
     processing_ms: float = 0.0
+    camera_compensation_used: bool = False
+    camera_match_count: int = 0
+    camera_inlier_count: int = 0
+    camera_inlier_ratio: float = 0.0
+    raw_motion_risk: float = 0.0
+    motion_suppression_ratio: float = 0.0
+    motion_object_center: tuple[float, float] | None = None
+    temporal_risk: float = 0.0
+    ttc_frames: float | None = None
     notes: tuple[str, ...] = ()
 
     @property

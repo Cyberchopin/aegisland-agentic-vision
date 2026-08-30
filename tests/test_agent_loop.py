@@ -347,3 +347,76 @@ def test_expired_action_remains_blocked() -> None:
     assert second.command["approval_status"] == "expired"
     assert second.command["status"] == "approval_expired"
     assert second.command["command_status"] == "planned"
+
+
+class ApproachingMotionPerception:
+    def __init__(self) -> None:
+        self.positions = iter(
+            [
+                (40.0, 100.0),
+                (60.0, 100.0),
+                (80.0, 100.0),
+                (100.0, 100.0),
+                (120.0, 100.0),
+            ]
+        )
+
+    def observe(self, frame, frame_index, active_perception=False):
+        from aegisland.domain import VisionEvidence, ZoneCandidate
+
+        object_center = next(self.positions)
+
+        zone = ZoneCandidate(
+            zone_id="TARGET",
+            bbox_xywh=(160, 80, 80, 40),
+            score=0.9,
+            edge_density=0.01,
+            motion_occupancy=0.0,
+            texture_risk=0.05,
+            appearance_occupancy=0.0,
+            clearance=0.9,
+            safe=True,
+        )
+
+        evidence = VisionEvidence(
+            evidence_id=f"approach-{frame_index}",
+            frame_index=frame_index,
+            confidence=0.95,
+            obstacle_risk=0.0,
+            motion_risk=0.1,
+            candidates=(zone,),
+            motion_object_center=object_center,
+        )
+
+        return evidence, frame
+
+    def enhance_for_active_perception(self, frame):
+        return frame
+
+
+def test_agent_computes_temporal_risk_for_approaching_object() -> None:
+    traces = MemoryTraceStore()
+
+    agent = AegisLandAgent(
+        ApproachingMotionPerception(),
+        SafetyPlanner(),
+        traces,
+    )
+
+    last_event = None
+
+    for frame_index in range(5):
+        last_event, _ = agent.step(
+            object(),
+            Telemetry(
+                battery_percent=80,
+                altitude_m=10,
+                gps_available=True,
+                home_link_available=True,
+            ),
+            frame_index,
+        )
+
+    assert last_event is not None
+    assert last_event.evidence.temporal_risk > 0.0
+    assert last_event.evidence.ttc_frames is not None
