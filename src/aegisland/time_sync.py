@@ -52,10 +52,15 @@ class TimeSyncBuffer:
         self.max_samples = max_samples
         self.max_extrapolation_s = max_extrapolation_s
         self._samples: list[TimedVectorSample] = []
+        self._out_of_order_insertions = 0
 
     @property
     def samples(self) -> tuple[TimedVectorSample, ...]:
         return tuple(self._samples)
+
+    @property
+    def out_of_order_insertions(self) -> int:
+        return self._out_of_order_insertions
 
     def add(
         self,
@@ -66,6 +71,13 @@ class TimeSyncBuffer:
             timestamp_s=float(timestamp_s),
             values=tuple(float(value) for value in values),
         )
+
+        if (
+            self._samples
+            and sample.timestamp_s
+            < self._samples[-1].timestamp_s
+        ):
+            self._out_of_order_insertions += 1
 
         timestamps = [
             existing.timestamp_s

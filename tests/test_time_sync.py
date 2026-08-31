@@ -94,3 +94,13 @@ def test_buffer_is_bounded() -> None:
         sample.timestamp_s
         for sample in buffer.samples
     ] == [1.0, 2.0, 3.0]
+
+
+def test_out_of_order_insertions_are_counted() -> None:
+    buffer = TimeSyncBuffer()
+
+    buffer.add(2.0, (20.0,))
+    buffer.add(1.0, (10.0,))
+    buffer.add(3.0, (30.0,))
+
+    assert buffer.out_of_order_insertions == 1

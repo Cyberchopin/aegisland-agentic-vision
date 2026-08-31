@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from .domain import Telemetry
+from .sensor_faults import CameraFault, CameraFaultInjector
 from .perception import cv2, np, require_opencv
 
 
@@ -18,6 +19,10 @@ class Scenario:
     gps_loss_frame: int | None = None
     intrusion_frame: int | None = None
     low_light_frame: int | None = None
+    camera_fault: CameraFault = CameraFault.NONE
+    camera_fault_start_frame: int | None = None
+    camera_fault_end_frame: int | None = None
+    camera_fault_severity: float = 1.0
 
 
 SCENARIOS = {
@@ -49,6 +54,21 @@ SCENARIOS = {
         gps_loss_frame=22,
         low_light_frame=30,
     ),
+    "gps_denied_camera_failure": Scenario(
+        name="gps_denied_camera_failure",
+        description=(
+            "GPS is lost before severe camera overexposure, "
+            "testing visual localization failure and graceful degradation."
+        ),
+        frame_count=80,
+        start_battery=82,
+        end_battery=72,
+        gps_loss_frame=20,
+        camera_fault=CameraFault.OVEREXPOSURE,
+        camera_fault_start_frame=40,
+        camera_fault_end_frame=56,
+        camera_fault_severity=0.96,
+    ),
     "nominal": Scenario(
         name="nominal",
         description="Healthy mission with stable telemetry and clear ground.",
@@ -62,6 +82,8 @@ SCENARIOS = {
 def generate(scenario: Scenario, size: tuple[int, int] = (960, 540)) -> Iterator[tuple[Any, Telemetry]]:
     require_opencv()
     width, height = size
+    camera_fault_injector = CameraFaultInjector()
+
     for index in range(scenario.frame_count):
         progress = index / max(1, scenario.frame_count - 1)
         battery = scenario.start_battery + progress * (scenario.end_battery - scenario.start_battery)
@@ -88,6 +110,23 @@ def generate(scenario: Scenario, size: tuple[int, int] = (960, 540)) -> Iterator
         if scenario.low_light_frame is not None and index >= scenario.low_light_frame:
             factor = 0.34 + 0.08 * ((index // 8) % 2)
             frame = cv2.convertScaleAbs(frame, alpha=factor, beta=0)
+
+        camera_fault_active = (
+            scenario.camera_fault != CameraFault.NONE
+            and scenario.camera_fault_start_frame is not None
+            and index >= scenario.camera_fault_start_frame
+            and (
+                scenario.camera_fault_end_frame is None
+                or index < scenario.camera_fault_end_frame
+            )
+        )
+
+        if camera_fault_active:
+            frame = camera_fault_injector.apply(
+                frame,
+                scenario.camera_fault,
+                severity=scenario.camera_fault_severity,
+            ).frame
 
         gps_available = scenario.gps_loss_frame is None or index < scenario.gps_loss_frame
         telemetry = Telemetry(

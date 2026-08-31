@@ -69,7 +69,11 @@ class OpenCVLandingPerception:
         edges = cv2.morphologyEx(edges, cv2.MORPH_CLOSE, np.ones((3, 3), np.uint8))
         texture = cv2.convertScaleAbs(cv2.Laplacian(blurred, cv2.CV_32F))
         reference_gray = self._active_reference_gray if active_perception else self.previous_gray
-        motion_mask, motion_boxes, motion_metrics = self._motion(gray, reference_gray)
+        motion_mask, motion_boxes, motion_metrics = self._motion(
+            gray,
+            reference_gray,
+            update_visual_state=not active_perception,
+        )
 
         candidates = self._score_grid(gray, edges, texture, motion_mask, motion_boxes)
         lower = slice(frame.shape[0] // 3, frame.shape[0])
@@ -190,6 +194,8 @@ class OpenCVLandingPerception:
         self,
         gray: Any,
         reference_gray: Any | None,
+        *,
+        update_visual_state: bool = True,
     ) -> tuple[
         Any,
         list[tuple[int, int, int, int]],
@@ -232,15 +238,21 @@ class OpenCVLandingPerception:
             gray,
         )
 
-        visual_pose = self.visual_dead_reckoner.update(
-            homography=(
-                compensation.homography
-                if compensation.success
-                else None
-            ),
-            image_shape=gray.shape,
-            inlier_ratio=compensation.inlier_ratio,
-        )
+        if update_visual_state:
+            visual_pose = self.visual_dead_reckoner.update(
+                homography=(
+                    compensation.homography
+                    if compensation.success
+                    else None
+                ),
+                image_shape=gray.shape,
+                inlier_ratio=compensation.inlier_ratio,
+            )
+        else:
+            # Active-perception is a second interpretation of the same
+            # physical frame. It must not integrate or decay localization
+            # state a second time.
+            visual_pose = self.visual_dead_reckoner.current()
 
         aligned_reference = (
             compensation.aligned_previous
