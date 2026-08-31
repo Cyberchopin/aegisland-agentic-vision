@@ -113,6 +113,11 @@ class VisionEvidence:
     perception_geometry_score: float = 0.0
     perception_failure_reasons: tuple[str, ...] = ()
 
+    visual_localization_authority: str = "unknown"
+    visual_localization_trusted: bool = False
+    visual_trust_confidence: float = 0.0
+    visual_trust_reason: str = ""
+
     notes: tuple[str, ...] = ()
 
     @property
