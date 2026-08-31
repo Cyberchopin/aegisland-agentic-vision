@@ -9,6 +9,7 @@ from .commands import CommandRuntime
 from .domain import Action, Decision, Telemetry, TraceEvent, VisionEvidence
 from .execution import ExecutionSafetyGuard
 from .fusion import DynamicConfidenceFusion
+from .perception_trust import PerceptionTrustGate
 from .planner import SafetyPlanner
 from .recovery import RecoveryPlanner
 from .sensor_health import SensorHealthMonitor, SensorHealthState
@@ -61,6 +62,7 @@ class AegisLandAgent:
         confidence_fusion: DynamicConfidenceFusion | None = None,
         sensor_synchronizer: SensorSynchronizer | None = None,
         sensor_health_monitor: SensorHealthMonitor | None = None,
+        perception_trust_gate: PerceptionTrustGate | None = None,
         *,
         active_perception_trigger: float = 0.62,
     ) -> None:
@@ -85,6 +87,9 @@ class AegisLandAgent:
         )
         self.sensor_health_monitor = (
             sensor_health_monitor or SensorHealthMonitor()
+        )
+        self.perception_trust_gate = (
+            perception_trust_gate or PerceptionTrustGate()
         )
         self.active_perception_trigger = active_perception_trigger
         self.trace_id = uuid.uuid4().hex
@@ -168,12 +173,25 @@ class AegisLandAgent:
             else frame_index / 30.0
         )
 
-        if evidence.visual_localization_valid:
+        visual_trust = self.perception_trust_gate.evaluate(
+            failure_type=evidence.perception_failure_type,
+            quality_score=evidence.perception_quality_score,
+            localization_confidence=(
+                evidence.visual_localization_confidence
+            ),
+            localization_valid=(
+                evidence.visual_localization_valid
+            ),
+        )
+
+        if visual_trust.localization_trusted:
             self.sensor_synchronizer.add_visual(
                 timestamp_s=sensor_timestamp_s,
                 x=evidence.visual_relative_x,
                 y=evidence.visual_relative_y,
-                confidence=evidence.visual_localization_confidence,
+                confidence=(
+                    visual_trust.effective_confidence
+                ),
             )
 
         synchronized = self.sensor_synchronizer.snapshot(
@@ -202,8 +220,12 @@ class AegisLandAgent:
 
         visual_health = self.sensor_health_monitor.assess(
             "visual",
-            confidence=evidence.visual_localization_confidence,
-            valid=evidence.visual_localization_valid,
+            confidence=(
+                visual_trust.effective_confidence
+            ),
+            valid=(
+                visual_trust.localization_trusted
+            ),
         )
 
         imu_health = self.sensor_health_monitor.assess(
@@ -257,6 +279,19 @@ class AegisLandAgent:
             ),
             imu_effective_confidence=(
                 imu_health.effective_confidence
+            ),
+
+            visual_localization_authority=(
+                visual_trust.authority.value
+            ),
+            visual_localization_trusted=(
+                visual_trust.localization_trusted
+            ),
+            visual_trust_confidence=(
+                visual_trust.effective_confidence
+            ),
+            visual_trust_reason=(
+                visual_trust.reason
             ),
         )
 
