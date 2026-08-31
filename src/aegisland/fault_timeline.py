@@ -235,8 +235,8 @@ def main() -> None:
 
         print(
             f"{row.frame:3d} "
-            f"{str(row.gps_available):5} "
-            f"{str(row.camera_fault_active):5} "
+            f"{row.gps_available!s:5} "
+            f"{row.camera_fault_active!s:5} "
             f"{row.camera_match_count:7d} "
             f"{row.camera_inlier_ratio:6.2f} "
             f"{row.visual_health_state:9} "

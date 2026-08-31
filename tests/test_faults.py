@@ -3,7 +3,6 @@ from aegisland.domain import Action, Telemetry
 from aegisland.faults import FaultInjectingCommandAdapter, FaultMode
 from aegisland.planner import SafetyPlanner
 from aegisland.trace import MemoryTraceStore
-
 from tests.test_agent_loop import CriticalRecoveryPerception
 
 

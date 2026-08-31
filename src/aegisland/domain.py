@@ -100,6 +100,19 @@ class VisionEvidence:
     visual_effective_confidence: float = 0.0
     imu_effective_confidence: float = 0.0
 
+    perception_quality_score: float = 1.0
+    perception_failure_type: str = "unknown"
+
+    perception_mean_brightness: float = 0.0
+    perception_bright_ratio: float = 0.0
+    perception_dark_ratio: float = 0.0
+    perception_sharpness: float = 0.0
+    perception_entropy_bits: float = 0.0
+    perception_feature_count: int = 0
+    perception_largest_dark_region_ratio: float = 0.0
+    perception_geometry_score: float = 0.0
+    perception_failure_reasons: tuple[str, ...] = ()
+
     notes: tuple[str, ...] = ()
 
     @property

@@ -8,8 +8,9 @@ from dataclasses import dataclass
 from typing import Any
 
 from .domain import VisionEvidence, ZoneCandidate
-from .motion_compensation import CameraMotionCompensator
 from .gps_denied import VisualDeadReckoner
+from .motion_compensation import CameraMotionCompensator
+from .perception_quality import PerceptionQualityMonitor
 
 try:
     import cv2
@@ -49,6 +50,7 @@ class OpenCVLandingPerception:
         self._active_reference_gray: Any | None = None
         self.motion_compensator = CameraMotionCompensator()
         self.visual_dead_reckoner = VisualDeadReckoner()
+        self.perception_quality_monitor = PerceptionQualityMonitor()
 
     def observe(
         self,
@@ -73,6 +75,26 @@ class OpenCVLandingPerception:
             gray,
             reference_gray,
             update_visual_state=not active_perception,
+        )
+
+        perception_quality = (
+            self.perception_quality_monitor.analyze(
+                gray,
+                has_reference=(
+                    reference_gray is not None
+                ),
+                match_count=int(
+                    motion_metrics["match_count"]
+                ),
+                inlier_ratio=float(
+                    motion_metrics["inlier_ratio"]
+                ),
+                compensation_used=bool(
+                    motion_metrics[
+                        "compensation_used"
+                    ]
+                ),
+            )
         )
 
         candidates = self._score_grid(gray, edges, texture, motion_mask, motion_boxes)
@@ -166,7 +188,51 @@ class OpenCVLandingPerception:
             visual_velocity_y=float(
                 motion_metrics.get("visual_velocity_y", 0.0)
             ),
-            notes=notes,
+
+            perception_quality_score=(
+                perception_quality.quality_score
+            ),
+            perception_failure_type=(
+                perception_quality.failure_type.value
+            ),
+
+            perception_mean_brightness=(
+                perception_quality.mean_brightness
+            ),
+            perception_bright_ratio=(
+                perception_quality.bright_ratio
+            ),
+            perception_dark_ratio=(
+                perception_quality.dark_ratio
+            ),
+            perception_sharpness=(
+                perception_quality.sharpness
+            ),
+            perception_entropy_bits=(
+                perception_quality.entropy_bits
+            ),
+            perception_feature_count=(
+                perception_quality.feature_count
+            ),
+            perception_largest_dark_region_ratio=(
+                perception_quality
+                .largest_dark_region_ratio
+            ),
+            perception_geometry_score=(
+                perception_quality.geometry_score
+            ),
+            perception_failure_reasons=(
+                perception_quality.reasons
+            ),
+
+            notes=notes + (
+                (
+                    "Perception self-diagnosis: "
+                    f"{perception_quality.failure_type.value}; "
+                    f"quality="
+                    f"{perception_quality.quality_score:.2f}."
+                ),
+            ),
         )
         annotated = self._annotate(frame.copy(), evidence, motion_boxes)
         if not active_perception:

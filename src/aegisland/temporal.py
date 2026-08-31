@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from math import inf
 
 from .tracking import KalmanTracker2D, TrackEstimate
 from .ttc import TTCResult, estimate_ttc

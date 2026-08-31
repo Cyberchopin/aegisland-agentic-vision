@@ -5,8 +5,8 @@ from dataclasses import dataclass
 from typing import Any
 
 from .domain import Telemetry
-from .sensor_faults import CameraFault, CameraFaultInjector
 from .perception import cv2, np, require_opencv
+from .sensor_faults import CameraFault, CameraFaultInjector
 
 
 @dataclass(frozen=True, slots=True)

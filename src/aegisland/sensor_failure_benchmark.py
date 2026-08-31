@@ -300,7 +300,7 @@ def main() -> None:
     for row in recovery:
         print(
             f"frame={row['frame']} "
-            f"gps={str(row['gps_available']):5} "
+            f"gps={row['gps_available']!s:5} "
             f"mode={row['navigation_mode']:28} "
             f"Wgps={row['gps_weight']:.3f} "
             f"Wvis={row['visual_weight']:.3f} "

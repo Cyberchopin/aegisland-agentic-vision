@@ -7,9 +7,9 @@ from pathlib import Path
 from .agent import AegisLandAgent
 from .perception import OpenCVLandingPerception
 from .planner import SafetyPlanner
+from .simulated_sensors import ingest_out_of_order_imu
 from .simulator import SCENARIOS, generate
 from .trace import MemoryTraceStore
-from .simulated_sensors import ingest_out_of_order_imu
 
 
 @dataclass(frozen=True, slots=True)
@@ -200,7 +200,7 @@ def main() -> None:
 
         print(
             f"{row.frame:3d} "
-            f"{str(row.gps_available):5} "
+            f"{row.gps_available!s:5} "
             f"{row.imu_transport_state:22} "
             f"{row.imu_sync_method:12} "
             f"{row.imu_health_state:9} "

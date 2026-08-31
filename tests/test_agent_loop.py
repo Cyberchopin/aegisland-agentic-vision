@@ -1,6 +1,5 @@
-from aegisland.domain import SafetyLevel
 from aegisland.agent import AegisLandAgent
-from aegisland.domain import Action, Telemetry, VisionEvidence, ZoneCandidate
+from aegisland.domain import Action, SafetyLevel, Telemetry, VisionEvidence, ZoneCandidate
 from aegisland.planner import SafetyPlanner
 from aegisland.trace import MemoryTraceStore
 

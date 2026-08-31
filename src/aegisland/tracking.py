@@ -117,7 +117,7 @@ class KalmanTracker2D:
                 measured_y,
             )
 
-        predicted_x, predicted_y = self.predict()
+        self.predict()
 
         measurement = np.array(
             [

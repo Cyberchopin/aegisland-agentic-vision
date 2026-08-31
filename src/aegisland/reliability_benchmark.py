@@ -11,7 +11,6 @@ from .simulated_sensors import ingest_out_of_order_imu
 from .simulator import SCENARIOS, generate
 from .trace import MemoryTraceStore
 
-
 IMU_STALE_START = 32
 IMU_STALE_END = 45
 
@@ -453,8 +452,8 @@ def main() -> None:
 
         print(
             f"{row.frame:3d} "
-            f"gps={str(row.gps_available):5} "
-            f"cam={str(row.camera_fault_active):5} "
+            f"gps={row.gps_available!s:5} "
+            f"cam={row.camera_fault_active!s:5} "
             f"imu={row.imu_health_state:9} "
             f"vis={row.visual_health_state:9} "
             f"mode={row.navigation_mode:28} "

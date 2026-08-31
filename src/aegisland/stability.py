@@ -4,7 +4,6 @@ from dataclasses import dataclass
 
 from .domain import Action, Decision, SafetyLevel
 
-
 ACTION_PRIORITY = {
     Action.CONTINUE_MISSION: 0,
     Action.RETURN_HOME: 1,

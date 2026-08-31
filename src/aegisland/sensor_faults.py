@@ -146,7 +146,7 @@ class CameraFaultInjector:
     ) -> tuple[np.ndarray, float]:
         corrupted = frame.copy()
 
-        height, width = corrupted.shape[:2]
+        _, width = corrupted.shape[:2]
 
         fraction = 0.15 + 0.75 * severity
         fraction = min(

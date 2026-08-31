@@ -4,18 +4,18 @@ import dataclasses
 import uuid
 from typing import Any, Protocol
 
-from .domain import Action, Decision, Telemetry, TraceEvent, VisionEvidence
-from .commands import CommandRuntime
 from .approval import ApprovalManager
+from .commands import CommandRuntime
+from .domain import Action, Decision, Telemetry, TraceEvent, VisionEvidence
 from .execution import ExecutionSafetyGuard
+from .fusion import DynamicConfidenceFusion
 from .planner import SafetyPlanner
 from .recovery import RecoveryPlanner
-from .targeting import LandingTargetManager
-from .stability import ActionStabilizer
-from .temporal import TemporalRiskAssessor
-from .fusion import DynamicConfidenceFusion
-from .sensor_sync import SensorSynchronizer
 from .sensor_health import SensorHealthMonitor, SensorHealthState
+from .sensor_sync import SensorSynchronizer
+from .stability import ActionStabilizer
+from .targeting import LandingTargetManager
+from .temporal import TemporalRiskAssessor
 
 
 class PerceptionTool(Protocol):
