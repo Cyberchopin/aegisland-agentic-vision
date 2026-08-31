@@ -1,9 +1,51 @@
 from aegisland.agent import AegisLandAgent
-from aegisland.domain import Action, Telemetry
+from aegisland.domain import (
+    Action,
+    Telemetry,
+    VisionEvidence,
+    ZoneCandidate,
+)
 from aegisland.faults import FaultInjectingCommandAdapter, FaultMode
 from aegisland.planner import SafetyPlanner
 from aegisland.trace import MemoryTraceStore
-from tests.test_agent_loop import CriticalRecoveryPerception
+
+
+def _critical_candidate() -> ZoneCandidate:
+    return ZoneCandidate(
+        zone_id="Z2-1",
+        bbox_xywh=(0, 0, 10, 10),
+        score=0.8,
+        edge_density=0.02,
+        motion_occupancy=0.01,
+        texture_risk=0.05,
+        appearance_occupancy=0.02,
+        clearance=0.9,
+        safe=True,
+    )
+
+
+class CriticalRecoveryPerception:
+    def observe(
+        self,
+        frame,
+        frame_index,
+        *,
+        active_perception=False,
+    ):
+        evidence = VisionEvidence(
+            evidence_id="critical-recovery",
+            frame_index=frame_index,
+            confidence=0.90,
+            obstacle_risk=0.91,
+            motion_risk=0.20,
+            candidates=(_critical_candidate(),),
+            active_perception_used=active_perception,
+        )
+        return evidence, frame
+
+    def enhance_for_active_perception(self, frame):
+        return frame
+
 
 
 def make_agent(mode: FaultMode) -> AegisLandAgent:
