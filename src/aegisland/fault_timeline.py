@@ -28,6 +28,14 @@ class FaultTimelineRow:
 
     visual_localization_valid: bool
     visual_raw_confidence: float
+
+    perception_failure_type: str
+    perception_quality_score: float
+
+    visual_localization_authority: str
+    visual_localization_trusted: bool
+    visual_trust_confidence: float
+
     visual_health_state: str
     visual_effective_confidence: float
 
@@ -124,6 +132,24 @@ def run_fault_timeline(
                 visual_raw_confidence=(
                     evidence.visual_localization_confidence
                 ),
+
+                perception_failure_type=(
+                    evidence.perception_failure_type
+                ),
+                perception_quality_score=(
+                    evidence.perception_quality_score
+                ),
+
+                visual_localization_authority=(
+                    evidence.visual_localization_authority
+                ),
+                visual_localization_trusted=(
+                    evidence.visual_localization_trusted
+                ),
+                visual_trust_confidence=(
+                    evidence.visual_trust_confidence
+                ),
+
                 visual_health_state=(
                     evidence.visual_health_state
                 ),
