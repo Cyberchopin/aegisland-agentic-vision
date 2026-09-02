@@ -8,7 +8,11 @@ from pathlib import Path
 from .agent import AegisLandAgent
 from .perception import OpenCVLandingPerception
 from .planner import SafetyPlanner
-from .simulator import SCENARIOS, generate
+from .simulator import (
+    SCENARIOS,
+    camera_fault_active,
+    generate,
+)
 from .trace import MemoryTraceStore
 
 
@@ -95,13 +99,9 @@ def run_fault_timeline(
 
         evidence = event.evidence
 
-        fault_active = (
-            scenario.camera_fault_start_frame is not None
-            and frame_index >= scenario.camera_fault_start_frame
-            and (
-                scenario.camera_fault_end_frame is None
-                or frame_index < scenario.camera_fault_end_frame
-            )
+        fault_active = camera_fault_active(
+            scenario,
+            frame_index,
         )
 
         rows.append(
