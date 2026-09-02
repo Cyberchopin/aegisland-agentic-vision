@@ -148,3 +148,74 @@ def test_repeated_fusion_ticks_continue_fading_failed_gps_weight() -> None:
 
     assert later.gps_weight < first_fallback.gps_weight
     assert later.imu_weight > first_fallback.imu_weight
+
+
+def test_degraded_visual_cannot_establish_gps_denied_fallback() -> None:
+    fusion = DynamicConfidenceFusion()
+
+    result = fusion.fuse(
+        gps_confidence=0.0,
+        visual_confidence=0.70,
+        visual_valid=True,
+        imu_confidence=0.95,
+        imu_valid=True,
+        visual_health_state="degraded",
+        imu_health_state="healthy",
+    )
+
+    assert result.mode == NavigationMode.DEGRADED
+    assert "visual" in result.degraded_sources
+    assert result.visual_weight == 0.0
+    assert result.imu_weight == 0.0
+    assert result.fused_confidence == 0.0
+
+
+def test_degraded_visual_can_assist_healthy_gps_primary() -> None:
+    fusion = DynamicConfidenceFusion()
+
+    result = fusion.fuse(
+        gps_confidence=1.0,
+        visual_confidence=0.70,
+        visual_valid=True,
+        imu_confidence=0.95,
+        imu_valid=True,
+        gps_health_state="healthy",
+        visual_health_state="degraded",
+        imu_health_state="healthy",
+    )
+
+    assert result.mode == NavigationMode.GPS_PRIMARY
+    assert "visual" in result.degraded_sources
+    assert result.visual_weight > 0.0
+
+
+def test_degraded_mode_clears_stale_authority_weights() -> None:
+    fusion = DynamicConfidenceFusion()
+
+    healthy = fusion.fuse(
+        gps_confidence=0.0,
+        visual_confidence=1.0,
+        visual_valid=True,
+        imu_confidence=0.95,
+        imu_valid=True,
+    )
+
+    degraded = fusion.fuse(
+        gps_confidence=0.0,
+        visual_confidence=0.0,
+        visual_valid=False,
+        imu_confidence=0.95,
+        imu_valid=True,
+        visual_health_state="failed",
+        imu_health_state="healthy",
+    )
+
+    assert (
+        healthy.mode
+        == NavigationMode.VISUAL_INERTIAL_FALLBACK
+    )
+    assert degraded.mode == NavigationMode.DEGRADED
+    assert degraded.gps_weight == 0.0
+    assert degraded.visual_weight == 0.0
+    assert degraded.imu_weight == 0.0
+    assert degraded.fused_confidence == 0.0

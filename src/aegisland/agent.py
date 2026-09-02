@@ -246,6 +246,9 @@ class AegisLandAgent:
                 imu_health.state
                 != SensorHealthState.FAILED
             ),
+            gps_health_state=gps_health.state.value,
+            visual_health_state=visual_health.state.value,
+            imu_health_state=imu_health.state.value,
         )
 
         evidence = dataclasses.replace(

@@ -81,21 +81,47 @@ class DynamicConfidenceFusion:
         visual_valid: bool,
         imu_confidence: float = 0.0,
         imu_valid: bool = False,
+        gps_health_state: str = "healthy",
+        visual_health_state: str = "healthy",
+        imu_health_state: str = "healthy",
     ) -> FusionResult:
         gps_confidence = self._clamp(gps_confidence)
         visual_confidence = self._clamp(visual_confidence)
         imu_confidence = self._clamp(imu_confidence)
 
-        gps_healthy = gps_confidence >= self.gps_gate
+        gps_support_usable = (
+            gps_health_state != "failed"
+            and gps_confidence >= self.gps_gate
+        )
 
-        visual_healthy = (
+        visual_support_usable = (
             visual_valid
+            and visual_health_state != "failed"
             and visual_confidence >= self.visual_gate
         )
 
-        imu_healthy = (
+        imu_support_usable = (
             imu_valid
+            and imu_health_state != "failed"
             and imu_confidence >= self.imu_gate
+        )
+
+        # Navigation authority is stricter than support usability.
+        # A recovering/degraded sensor may assist a healthy primary
+        # source, but it cannot establish GPS-denied fallback authority.
+        gps_healthy = (
+            gps_support_usable
+            and gps_health_state == "healthy"
+        )
+
+        visual_healthy = (
+            visual_support_usable
+            and visual_health_state == "healthy"
+        )
+
+        imu_healthy = (
+            imu_support_usable
+            and imu_health_state == "healthy"
         )
 
         healthy_sources: list[str] = []
@@ -116,8 +142,16 @@ class DynamicConfidenceFusion:
 
             target_weights = (
                 self.gps_weight,
-                self.visual_weight if visual_healthy else 0.0,
-                self.imu_weight if imu_healthy else 0.0,
+                (
+                    self.visual_weight
+                    if visual_support_usable
+                    else 0.0
+                ),
+                (
+                    self.imu_weight
+                    if imu_support_usable
+                    else 0.0
+                ),
             )
 
         elif visual_healthy and imu_healthy:
@@ -155,7 +189,18 @@ class DynamicConfidenceFusion:
                 for weight in target_weights
             )
 
-        if not self._initialized:
+        # Loss of navigation authority is fail-fast. Do not let
+        # transition smoothing preserve stale authority weights after
+        # the capability itself has become unavailable.
+        if mode == NavigationMode.DEGRADED:
+            self._current_weights = (
+                0.0,
+                0.0,
+                0.0,
+            )
+            self._initialized = True
+
+        elif not self._initialized:
             self._current_weights = target_weights
             self._initialized = True
 

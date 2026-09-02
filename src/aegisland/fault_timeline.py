@@ -6,6 +6,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 
 from .agent import AegisLandAgent
+from .fusion import DynamicConfidenceFusion
 from .perception import OpenCVLandingPerception
 from .planner import SafetyPlanner
 from .sensor_health import SensorHealthMonitor
@@ -65,6 +66,7 @@ def run_fault_timeline(
     scenario_name: str = "gps_denied_camera_failure",
     *,
     sensor_health_recovery_samples: int = 3,
+    confidence_fusion: DynamicConfidenceFusion | None = None,
 ) -> list[FaultTimelineRow]:
     scenario = SCENARIOS[scenario_name]
 
@@ -75,6 +77,7 @@ def run_fault_timeline(
         sensor_health_monitor=SensorHealthMonitor(
             recovery_samples=sensor_health_recovery_samples,
         ),
+        confidence_fusion=confidence_fusion,
     )
 
     rows: list[FaultTimelineRow] = []
