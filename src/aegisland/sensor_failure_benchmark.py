@@ -88,36 +88,46 @@ def run_case(
         visual_confidence=visual_confidence,
     )
 
-    timestamp = 1.0
+    event = None
 
-    if imu:
-        agent.ingest_imu(
-            timestamp_s=0.995,
-            yaw_rad=0.10,
-            yaw_rate_rad_s=0.02,
-            ax=0.10,
-            ay=0.00,
+    # Static matrix cases represent confirmed steady-state
+    # sensor health, not the transient startup/recovery window.
+    for warmup_index in range(3):
+        timestamp = (
+            1.0
+            + warmup_index / 30.0
         )
 
-        agent.ingest_imu(
-            timestamp_s=1.005,
-            yaw_rad=0.12,
-            yaw_rate_rad_s=0.02,
-            ax=0.12,
-            ay=0.00,
+        if imu:
+            agent.ingest_imu(
+                timestamp_s=timestamp - 0.005,
+                yaw_rad=0.10,
+                yaw_rate_rad_s=0.02,
+                ax=0.10,
+                ay=0.00,
+            )
+
+            agent.ingest_imu(
+                timestamp_s=timestamp + 0.005,
+                yaw_rad=0.12,
+                yaw_rate_rad_s=0.02,
+                ax=0.12,
+                ay=0.00,
+            )
+
+        event, _ = agent.step(
+            object(),
+            Telemetry(
+                battery_percent=80,
+                altitude_m=10,
+                gps_available=gps_available,
+                home_link_available=True,
+                timestamp_s=timestamp,
+            ),
+            30 + warmup_index,
         )
 
-    event, _ = agent.step(
-        object(),
-        Telemetry(
-            battery_percent=80,
-            altitude_m=10,
-            gps_available=gps_available,
-            home_link_available=True,
-            timestamp_s=timestamp,
-        ),
-        30,
-    )
+    assert event is not None
 
     evidence = event.evidence
 
@@ -126,13 +136,26 @@ def run_case(
         expected_mode=expected_mode,
         actual_mode=evidence.navigation_mode,
         action=event.decision.action.value,
-        safety_level=event.decision.safety_level.value,
-        fused_confidence=evidence.fused_navigation_confidence,
-        gps_weight=evidence.navigation_gps_weight,
-        visual_weight=evidence.navigation_visual_weight,
-        imu_weight=evidence.navigation_imu_weight,
+        safety_level=(
+            event.decision.safety_level.value
+        ),
+        fused_confidence=(
+            evidence.fused_navigation_confidence
+        ),
+        gps_weight=(
+            evidence.navigation_gps_weight
+        ),
+        visual_weight=(
+            evidence.navigation_visual_weight
+        ),
+        imu_weight=(
+            evidence.navigation_imu_weight
+        ),
         imu_sync_method=evidence.imu_sync_method,
-        passed=evidence.navigation_mode == expected_mode,
+        passed=(
+            evidence.navigation_mode
+            == expected_mode
+        ),
     )
 
 
@@ -182,7 +205,19 @@ def run_recovery_sequence() -> list[dict[str, object]]:
     rows: list[dict[str, object]] = []
 
     for frame_index, gps_available in enumerate(
-        [True, True, False, False, False, True, True, True]
+        [
+            True,
+            True,
+            True,
+            False,
+            False,
+            False,
+            True,
+            True,
+            True,
+            True,
+            True,
+        ]
     ):
         timestamp = 2.0 + frame_index / 30.0
 

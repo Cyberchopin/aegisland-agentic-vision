@@ -155,22 +155,34 @@ def test_healthy_visual_localization_remains_available_without_gps() -> None:
         MemoryTraceStore(),
     )
 
-    event, _ = agent.step(
-        object(),
-        Telemetry(
-            battery_percent=80,
-            altitude_m=10,
-            gps_available=False,
-        ),
-        0,
-    )
+    event = None
+
+    for frame_index in range(3):
+        event, _ = agent.step(
+            object(),
+            Telemetry(
+                battery_percent=80,
+                altitude_m=10,
+                gps_available=False,
+            ),
+            frame_index,
+        )
+
+    assert event is not None
 
     assert (
         event.evidence.visual_localization_authority
         == "full"
     )
 
-    assert event.evidence.visual_localization_trusted
+    assert (
+        event.evidence.visual_localization_trusted
+    )
+
+    assert (
+        event.evidence.visual_health_state
+        == "healthy"
+    )
 
     assert (
         event.evidence.navigation_mode

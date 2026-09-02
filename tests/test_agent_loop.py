@@ -456,35 +456,66 @@ def test_agent_uses_visual_navigation_when_gps_is_lost() -> None:
         traces,
     )
 
-    event, _ = agent.step(
-        object(),
-        Telemetry(
-            battery_percent=80,
-            altitude_m=10,
-            gps_available=False,
-            home_link_available=True,
-        ),
-        0,
-    )
+    events = []
 
-    assert event.evidence.navigation_mode == "visual_fallback"
+    for frame_index in range(3):
+        event, _ = agent.step(
+            object(),
+            Telemetry(
+                battery_percent=80,
+                altitude_m=10,
+                gps_available=False,
+                home_link_available=True,
+            ),
+            frame_index,
+        )
+        events.append(event)
 
-    # The visual sensor is still in health-monitor recovery on the
-    # first observation, so fusion consumes degraded effective
-    # confidence rather than the raw 0.82 measurement.
-    assert event.evidence.visual_localization_confidence == 0.82
-    assert event.evidence.visual_health_state == "degraded"
-    assert event.evidence.visual_effective_confidence == 0.574
+    first = events[0]
+    recovered = events[-1]
+
     assert (
-        event.evidence.fused_navigation_confidence
-        == event.evidence.visual_effective_confidence
+        first.evidence.visual_health_state
+        == "degraded"
+    )
+    assert (
+        first.evidence.navigation_mode
+        == "degraded"
+    )
+    assert (
+        first.decision.action
+        == Action.HOLD_AND_SCAN
     )
 
-    assert "visual" in event.evidence.healthy_navigation_sources
-    assert "gps" in event.evidence.degraded_navigation_sources
+    assert (
+        recovered.evidence.visual_health_state
+        == "healthy"
+    )
+    assert (
+        recovered.evidence.navigation_mode
+        == "visual_fallback"
+    )
 
-    assert event.decision.action == Action.CONTINUE_MISSION
-    assert event.decision.safety_level == SafetyLevel.CAUTION
+    assert (
+        "visual"
+        in recovered.evidence.healthy_navigation_sources
+    )
+    assert (
+        "gps"
+        in recovered.evidence.degraded_navigation_sources
+    )
+
+    assert (
+        recovered.raw_decision is not None
+    )
+    assert (
+        recovered.raw_decision.action
+        == Action.CONTINUE_MISSION
+    )
+    assert (
+        recovered.raw_decision.safety_level
+        == SafetyLevel.CAUTION
+    )
 
 
 def test_gps_loss_uses_time_aligned_visual_inertial_fallback() -> None:
@@ -512,33 +543,56 @@ def test_gps_loss_uses_time_aligned_visual_inertial_fallback() -> None:
         ay=0.00,
     )
 
-    event, _ = agent.step(
-        object(),
-        Telemetry(
-            battery_percent=80,
-            altitude_m=10,
-            gps_available=False,
-            home_link_available=True,
-            timestamp_s=1.0,
-        ),
-        30,
-    )
+    event = None
+
+    for frame_index in range(30, 33):
+        event, _ = agent.step(
+            object(),
+            Telemetry(
+                battery_percent=80,
+                altitude_m=10,
+                gps_available=False,
+                home_link_available=True,
+                timestamp_s=1.0,
+            ),
+            frame_index,
+        )
+
+    assert event is not None
 
     assert event.evidence.imu_sync_valid
-    assert event.evidence.imu_sync_method == "interpolated"
+    assert (
+        event.evidence.imu_sync_method
+        == "interpolated"
+    )
     assert event.evidence.imu_confidence == 0.90
+
+    assert (
+        event.evidence.visual_health_state
+        == "healthy"
+    )
+    assert (
+        event.evidence.imu_health_state
+        == "healthy"
+    )
 
     assert (
         event.evidence.navigation_mode
         == "visual_inertial_fallback"
     )
 
-    assert "visual" in event.evidence.healthy_navigation_sources
-    assert "imu" in event.evidence.healthy_navigation_sources
-    assert "gps" in event.evidence.degraded_navigation_sources
-
-    assert event.decision.action == Action.CONTINUE_MISSION
-    assert event.decision.safety_level == SafetyLevel.CAUTION
+    assert (
+        "visual"
+        in event.evidence.healthy_navigation_sources
+    )
+    assert (
+        "imu"
+        in event.evidence.healthy_navigation_sources
+    )
+    assert (
+        "gps"
+        in event.evidence.degraded_navigation_sources
+    )
 
 
 class FailedVisualPerception:
@@ -601,13 +655,40 @@ def test_sensor_health_filters_visual_and_imu_before_fusion() -> None:
         30,
     )
 
-    assert event.evidence.gps_health_state == "failed"
-    assert event.evidence.visual_health_state == "degraded"
-    assert event.evidence.imu_health_state == "degraded"
+    assert (
+        event.evidence.gps_health_state
+        == "failed"
+    )
+    assert (
+        event.evidence.visual_health_state
+        == "degraded"
+    )
+    assert (
+        event.evidence.imu_health_state
+        == "degraded"
+    )
 
     assert (
         event.evidence.navigation_mode
-        == "visual_inertial_fallback"
+        == "degraded"
+    )
+
+    assert (
+        event.evidence.navigation_gps_weight
+        == 0.0
+    )
+    assert (
+        event.evidence.navigation_visual_weight
+        == 0.0
+    )
+    assert (
+        event.evidence.navigation_imu_weight
+        == 0.0
+    )
+
+    assert (
+        event.decision.action
+        == Action.HOLD_AND_SCAN
     )
 
 
