@@ -8,6 +8,7 @@ from pathlib import Path
 from .agent import AegisLandAgent
 from .perception import OpenCVLandingPerception
 from .planner import SafetyPlanner
+from .sensor_health import SensorHealthMonitor
 from .simulator import (
     SCENARIOS,
     camera_fault_active,
@@ -62,6 +63,8 @@ class FaultTimelineRow:
 
 def run_fault_timeline(
     scenario_name: str = "gps_denied_camera_failure",
+    *,
+    sensor_health_recovery_samples: int = 3,
 ) -> list[FaultTimelineRow]:
     scenario = SCENARIOS[scenario_name]
 
@@ -69,6 +72,9 @@ def run_fault_timeline(
         OpenCVLandingPerception(),
         SafetyPlanner(),
         MemoryTraceStore(),
+        sensor_health_monitor=SensorHealthMonitor(
+            recovery_samples=sensor_health_recovery_samples,
+        ),
     )
 
     rows: list[FaultTimelineRow] = []
