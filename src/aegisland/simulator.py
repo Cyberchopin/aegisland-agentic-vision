@@ -23,6 +23,29 @@ class Scenario:
     camera_fault_start_frame: int | None = None
     camera_fault_end_frame: int | None = None
     camera_fault_severity: float = 1.0
+    camera_fault_frames: frozenset[int] = frozenset()
+
+
+def camera_fault_active(
+    scenario: Scenario,
+    frame_index: int,
+) -> bool:
+    if scenario.camera_fault == CameraFault.NONE:
+        return False
+
+    if frame_index in scenario.camera_fault_frames:
+        return True
+
+    if scenario.camera_fault_start_frame is None:
+        return False
+
+    return (
+        frame_index >= scenario.camera_fault_start_frame
+        and (
+            scenario.camera_fault_end_frame is None
+            or frame_index < scenario.camera_fault_end_frame
+        )
+    )
 
 
 SCENARIOS = {
@@ -69,6 +92,28 @@ SCENARIOS = {
         camera_fault_end_frame=56,
         camera_fault_severity=0.96,
     ),
+    "gps_denied_camera_flicker": Scenario(
+        name="gps_denied_camera_flicker",
+        description=(
+            "GPS is lost before camera overexposure. "
+            "During recovery, camera quality flickers between "
+            "healthy and failed states before stabilizing."
+        ),
+        frame_count=80,
+        start_battery=82,
+        end_battery=72,
+        gps_loss_frame=20,
+        camera_fault=CameraFault.OVEREXPOSURE,
+        camera_fault_start_frame=40,
+        camera_fault_end_frame=56,
+        camera_fault_severity=0.96,
+        camera_fault_frames=frozenset(
+            {
+                58,
+                61,
+            }
+        ),
+    ),
     "nominal": Scenario(
         name="nominal",
         description="Healthy mission with stable telemetry and clear ground.",
@@ -111,17 +156,12 @@ def generate(scenario: Scenario, size: tuple[int, int] = (960, 540)) -> Iterator
             factor = 0.34 + 0.08 * ((index // 8) % 2)
             frame = cv2.convertScaleAbs(frame, alpha=factor, beta=0)
 
-        camera_fault_active = (
-            scenario.camera_fault != CameraFault.NONE
-            and scenario.camera_fault_start_frame is not None
-            and index >= scenario.camera_fault_start_frame
-            and (
-                scenario.camera_fault_end_frame is None
-                or index < scenario.camera_fault_end_frame
-            )
+        fault_active = camera_fault_active(
+            scenario,
+            index,
         )
 
-        if camera_fault_active:
+        if fault_active:
             frame = camera_fault_injector.apply(
                 frame,
                 scenario.camera_fault,
