@@ -71,12 +71,34 @@ def run_demo(scenario_name: str, output: Path, display: bool = False) -> dict[st
     return summary
 
 
-def serve(directory: Path, port: int) -> None:
+def serve(
+    directory: Path,
+    port: int,
+    page: str = "report.html",
+) -> None:
     directory = directory.resolve()
-    handler = lambda *args, **kwargs: SimpleHTTPRequestHandler(*args, directory=str(directory), **kwargs)
-    server = ThreadingHTTPServer(("127.0.0.1", port), handler)
-    url = f"http://127.0.0.1:{port}/report.html"
-    print(f"Serving {directory} at {url}. Press Ctrl+C to stop.")
+
+    def handler(*args, **kwargs):
+        return SimpleHTTPRequestHandler(
+            *args,
+            directory=str(directory),
+            **kwargs,
+        )
+
+    server = ThreadingHTTPServer(
+        ("127.0.0.1", port),
+        handler,
+    )
+
+    url = (
+        f"http://127.0.0.1:{port}/{page}"
+    )
+
+    print(
+        f"Serving {directory} at {url}. "
+        "Press Ctrl+C to stop."
+    )
+
     webbrowser.open(url)
     server.serve_forever()
 
@@ -88,9 +110,24 @@ def build_parser() -> argparse.ArgumentParser:
     demo.add_argument("--scenario", choices=sorted(SCENARIOS), default="low_battery_intrusion")
     demo.add_argument("--output", type=Path, default=Path("runs/latest"))
     demo.add_argument("--display", action="store_true")
-    web = subcommands.add_parser("serve", help="Open the generated evidence report")
-    web.add_argument("--directory", type=Path, default=Path("runs/latest"))
-    web.add_argument("--port", type=int, default=8080)
+    web = subcommands.add_parser(
+        "serve",
+        help="Serve a generated evidence page",
+    )
+    web.add_argument(
+        "--directory",
+        type=Path,
+        default=Path("runs/latest"),
+    )
+    web.add_argument(
+        "--port",
+        type=int,
+        default=8080,
+    )
+    web.add_argument(
+        "--page",
+        default="report.html",
+    )
     evaluate = subcommands.add_parser("evaluate", help="Run all deterministic benchmark scenarios")
     evaluate.add_argument("--output", type=Path, default=Path("runs/evaluation"))
     return parser
@@ -101,7 +138,11 @@ def main() -> None:
     if args.command == "demo":
         print(json.dumps(run_demo(args.scenario, args.output, args.display), indent=2))
     elif args.command == "serve":
-        serve(args.directory, args.port)
+        serve(
+            args.directory,
+            args.port,
+            args.page,
+        )
     elif args.command == "evaluate":
         results = [run_demo(name, args.output / name) for name in SCENARIOS]
         (args.output / "benchmark.json").write_text(json.dumps(results, indent=2), encoding="utf-8")
