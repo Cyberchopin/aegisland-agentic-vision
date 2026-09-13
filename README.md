@@ -29,6 +29,31 @@ No large language model is allowed to bypass the safety policy. The current comm
 - CLAHE-based active perception on low-confidence frames
 - Annotated MP4 evidence and per-frame latency
 
+## CPU profiling and first CUDA kernel
+
+The standalone profiling harness records raw per-stage samples, caller graphs,
+p50/p95/p99, replay inputs and environment provenance without changing production
+perception. A first BGR8-to-gray CUDA kernel has been measured with Nsight Compute
+and checked against every BGR8 color plus the existing synthetic replay corpus.
+This is not yet an integrated GPU perception pipeline.
+
+- [CPU profiling protocol and actual call graph](docs/cpu-profiling.md)
+- [First CUDA kernel: implementation, measurements and limits](docs/first-cuda-kernel.md)
+- [Machine-readable measurement snapshot](benchmarks/results/first_cuda_gray/summary.json)
+
+After installing the existing development dependencies, run from the repository root:
+
+```powershell
+python -m aegisland.profiling --output runs/cpu-stage0 --warmup 3 --runs 20 --threads 1
+# Native Windows build script targets this measured machine's VS 2019 / CUDA / sm_89 setup.
+cmd /c cpp\cuda_gray\build_windows.cmd
+python -m aegisland.cuda_gray --exe work/cuda-build/gray_bench.exe --input runs/cpu-stage0/inputs.npz --output runs/cuda-gray --warmup 10 --iterations 100
+```
+
+Use fresh output directories. The documentation also provides a Linux nvcc build
+command. GPU integration tests are opt-in through `AEGISLAND_GRAY_EXE`; ordinary
+CPU tests do not require an NVIDIA GPU.
+
 ## Quick start on Windows PowerShell
 
 Python 3.11 or 3.12 is recommended.

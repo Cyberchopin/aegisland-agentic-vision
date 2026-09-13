@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "scope": "First standalone BGR8-to-gray CUDA kernel; no integrated GPU pipeline or speedup claim",
+  "cpu_base_revision": "54d4fb170e893929ea0a24cc4f90c347845464aa",
+  "gpu": "NVIDIA GeForce RTX 4060 Ti",
+  "compute_capability": "8.9",
+  "driver": "595.95",
+  "cuda_toolkit": "12.8",
+  "nsight_compute": "2025.1.0",
+  "opencv": "5.0.0",
+  "numpy": "2.5.2",
+  "input": {
+    "kind": "synthetic existing perception_scenes corpus",
+    "width": 320,
+    "height": 240,
+    "channels": "BGR uint8"
+  },
+  "launch": {
+    "block": [
+      32,
+      8,
+      1
+    ],
+    "grid": [
+      10,
+      30,
+      1
+    ],
+    "warmup": 10,
+    "profiled_launches": 1,
+    "replay_passes": 8
+  },
+  "ncu_settings": {
+    "replay_mode": "kernel",
+    "cache_control": "all",
+    "clock_control": "base"
+  },
+  "ncu_metrics": {
+    "sm__warps_active.avg.pct_of_peak_sustained_active": {
+      "value": 72.792803,
+      "unit": "%"
+    },
+    "sm__maximum_warps_per_active_cycle_pct": {
+      "value": 100.0,
+      "unit": "%"
+    },
+    "gpu__dram_throughput.avg.pct_of_peak_sustained_elapsed": {
+      "value": 32.368608,
+      "unit": "%"
+    },
+    "dram__bytes.sum.per_second": {
+      "value": 90.024691,
+      "unit": "Gbyte/s"
+    },
+    "gpu__time_duration.sum": {
+      "value": 2.592,
+      "unit": "us"
+    },
+    "launch__registers_per_thread": {
+      "value": 16.0,
+      "unit": "register/thread"
+    },
+    "launch__waves_per_multiprocessor": {
+      "value": 1.47,
+      "unit": ""
+    },
+    "launch__occupancy_limit_blocks": {
+      "value": 24.0,
+      "unit": "block"
+    },
+    "launch__occupancy_limit_registers": {
+      "value": 16.0,
+      "unit": "block"
+    },
+    "launch__occupancy_limit_shared_mem": {
+      "value": 16.0,
+      "unit": "block"
+    },
+    "launch__occupancy_limit_warps": {
+      "value": 6.0,
+      "unit": "block"
+    },
+    "provenance": {
+      "source_csv_sha256": "e54373042f36950e56a27ee709fe015b523d50fe550fda6e776ed3595653db38",
+      "profiled_kernel": "bgr_to_gray",
+      "profiled_output_exact": true,
+      "passes": 8,
+      "launches": 1
+    }
+  },
+  "correctness": {
+    "cases": 18,
+    "pixels": 17929593,
+    "exhaustive_bgr8_colors": 16777216,
+    "max_abs_error": 0,
+    "mae": 0,
+    "mismatch_fraction": 0,
+    "atol": 0,
+    "rtol": 0,
+    "downstream_gate_passed": true,
+    "sanitizer_memcheck_errors": 0
+  },
+  "isolated_frame_000": {
+    "warmup": 10,
+    "iterations": 100,
+    "kernel_event_p50_ns": 4096,
+    "transfer_kernel_wall_p50_ns": 74850,
+    "cpu_gray_wall_p50_ns": 17400,
+    "allocations": "GPU buffers reused; CPU cvtColor uses ordinary allocation",
+    "concurrent_agent_tests": false,
+    "desktop_apps_and_clocks_controlled": false
+  },
+  "tests": {
+    "existing_suite_passed": 201,
+    "existing_suite_seconds": 1188.23,
+    "additional_cuda_tests_passed": 3,
+    "ruff": "passed",
+    "warning": "pytest cache write denied; assertions completed"
+  },
+  "source_sha256": {
+    "cpp/cuda_gray/gray_bench.cu": "4f3bd5f1595929447e2f63fd79ed417f50a11d5b79c5a93696b30a330c578953",
+    "src/aegisland/cuda_gray.py": "e3d6e68440baf417282748774c30eb12e66290234b1715bf82d7ee5290dd01c7"
+  },
+  "original_report_sha256": "ba70b505931334b5de34b3b36c08efb9465e9136a8de9b7cbe691f4d89707c84",
+  "raw_artifacts": "Full reports, raw images and CSV samples retained locally; regenerate with documented commands"
+}
