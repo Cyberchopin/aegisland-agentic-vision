@@ -159,3 +159,93 @@ High occupancy alone does not establish better performance.
 References: [NVIDIA CLI](https://docs.nvidia.com/nsight-compute/NsightComputeCli/index.html)
 and [profiling metrics guide](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html).
 No Stage 5+ work, GPU speedup targets or measured GPU results are included.
+
+## CPU named-stage milestone (schema version 1)
+
+The default harness now executes three independent rounds, in this order:
+`baseline`, `stages`, `diagnostic` (cProfile). Each round has its own complete
+warmup sequences and fresh model/RNG state per sequence. Baseline and cProfile
+use the unchanged production methods. Baseline never constructs a stage collector.
+The stage round parses trusted local production method source and compiles
+statement spans into temporary instance methods. No alternate perception algorithm
+is maintained; production perception/compensation/quality files are unchanged.
+Compilation, installation and restoration of methods happen outside timed calls.
+All temporary instance overrides are restored in `finally`, including partial setup
+and perception failures. Thread and OpenCL settings are restored on failures too.
+
+`stage-schema.json` is the versioned boundary contract. Each stable semantic name
+lists the exact production statement(s) it covers; repeated branches retain all
+definitions. Source hashes in `environment.json` identify the implementation.
+`motion.raw_flow` and `motion.residual_flow` are separate Farneback calls;
+`motion.raw_magnitude` and `motion.residual_magnitude` are separate conversions.
+Compensation covers ORB on each image, matching, filtering, point construction,
+homography, validation and conditional warp. Quality covers exposure, texture,
+features, connected dark regions, scoring and classification. Grid scoring includes
+appearance masks, all candidate calculations and sorting. Enhancement, resize,
+CLAHE, blur, edges, texture conversion, evidence, frame copy, annotation and
+reference updates have named boundaries as well. Some Python operations remain
+intentionally grouped in a statement; these are not individual native-call timings.
+
+Only a taken branch body produces a sample. Untaken retry CLAHE, skipped flow,
+rejected-homography warp and no-op resize do not produce fake zero durations.
+Condition evaluation is included in the nearest enclosing span's residual rather
+than separately attributed. A no-reference result has its own executed span.
+First-frame/no-reference, shape mismatch and valid-reference observations are
+separate branch groups; a valid reference does not imply a continuous camera
+trajectory or successful compensation. Warmed sequence-first frames are not
+process cold-start measurements. Retry enhancement belongs to the retry total;
+retries retain the pre-frame image and reuse rather than integrate the pose.
+
+`stage-samples.csv` contains per-call spans, sample/parent IDs, run/frame/pass,
+reference and compensation status, localization operation and processed shape.
+IDs are local to one invocation. Inclusive durations overlap. Exclusive durations
+are inclusive minus direct child inclusive durations, including condition work,
+Python overhead and timing instrumentation. They are residual attribution, not
+pure native compute. Never add parent and child durations or subtract an assumed
+instrumentation cost. All samples stay in memory until timing ends. The independent
+baseline wall samples remain the comparison boundary, including annotation and
+state updates; `processing_ms` remains an incomplete internal boundary.
+
+`stage-summary.json` groups by stage, parent, pass, reference/compensation/localization
+branches and processed shape; it records counts and NumPy linear p50/p95/p99 for
+inclusive and exclusive nanoseconds. Recompute it with
+`profiling.summarize_branches(rows)` after parsing integer duration/shape columns
+from `stage-samples.csv`. The existing summary can be recomputed with
+`profiling.summarize(rows)` from `samples.csv`. Stage mode's `end_to_end` samples
+also remain in that file, explicitly labeled `mode=stages`; use `mode=baseline`
+for uninstrumented comparisons. No latency threshold is an acceptance test.
+
+Separate correctness passes compare baseline replays and an instrumented replay
+using the existing exact array/boxes/public-evidence contract (only `processing_ms`
+is excluded). `stage-correctness.json` preserves the instrumented comparison.
+`--reference PATH` additionally compares saved inputs/configuration and all outputs
+against an existing baseline, saving `before-after-equivalence.json`. Differences
+fail the command without changing tolerance. `SHA256SUMS` hashes every artifact
+except the manifest itself, including partial output on a failed benchmark.
+Installed distributions and available installer/direct-URL metadata are saved
+without requiring pip in a uv-created environment.
+
+Tests use controlled clocks for nested timing and exception unwinding, check
+baseline/stages/cProfile separation, resize and compensation branches, skipped
+flow, retry reference identity and single pose update, exact replay equivalence,
+artifact hashes, original-reference rejection and summary recomputation. No GPU
+backend or dependency installation is part of this milestone.
+
+Example using the preserved pre-instrumentation inputs (choose fresh output paths):
+
+```sh
+.venv/bin/python -m aegisland.profiling --input runs/original-baseline-20261016T233804473881Z/base/inputs.npz --reference runs/original-baseline-20261016T233804473881Z/base --output runs/cpu-stages-base --warmup 3 --runs 20 --threads 1
+.venv/bin/python -m aegisland.profiling --input runs/original-baseline-20261016T233804473881Z/base/inputs.npz --reference runs/original-baseline-20261016T233804473881Z/retry --output runs/cpu-stages-retry --warmup 3 --runs 20 --threads 1 --active
+```
+
+Earlier CUDA plan text in this document is historical; `first-cuda-kernel.md`
+supersedes its plan-only status. This milestone makes no performance claim.
+
+The CLI capture regression is covered by subprocess tests invoking the real
+`python -m aegisland.profiling` entry point for both base and retry workloads.
+Instrumentation obtains function bodies only from the explicit production classes
+(`OpenCVLandingPerception`, `CameraMotionCompensator`, `PerceptionQualityMonitor`).
+Snapshot replay explicitly selects `capture_grid=True`, which binds the compiled
+production grid method to `_stage_score_grid` while leaving the capture callback
+untouched. Module names, including `__main__`, play no role in selection. Other
+non-production overrides are rejected with cleanup of any earlier patches.
