@@ -1,0 +1,225 @@
+{
+  "tool": "benchmarks/gps_denied/fault_replay.py",
+  "control_output": "DISABLED",
+  "command_executed": false,
+  "cuvslam_run": "/home/shiyue1128/aegisland-agentic-vision/benchmarks/results/gps_denied/cuvslam-inertial-MH_05_difficult-20261024-102659-signals",
+  "trajectory_sha256": "9764ad43656fde72d8cebb63a2a9e749bf3a85020fc1d18ec74e62b4c1e1db5e",
+  "messages": 2273,
+  "tracked_messages": 2273,
+  "imu_samples": 22721,
+  "feature_match_frames": 2272,
+  "period_ns": 50000128,
+  "config": {
+    "expected_period_ns": 50000128,
+    "max_age_ns": 200000000,
+    "outage_timeout_ns": 400000000,
+    "gap_factor": 1.5,
+    "max_speed_mps": 5.0,
+    "max_angular_rate_rad_s": 10.0,
+    "imu_check_window_s": 5.0,
+    "imu_check_every": 20,
+    "imu_search_s": 0.15,
+    "imu_step_s": 0.0025,
+    "imu_max_offset_s": 0.02,
+    "imu_min_correlation": 0.9,
+    "imu_min_motion_rad_s": 0.05,
+    "imu_persistence": 2,
+    "rotation_residual_rad_s": 0.014,
+    "min_feature_matches": 597.0,
+    "degradation_smooth_frames": 10,
+    "gyro_bias_frames": 200,
+    "gyro_bias_min_frames": 20
+  },
+  "scenarios": {
+    "none": {
+      "spec": {
+        "kind": "none",
+        "start": 0,
+        "length": 1,
+        "magnitude": 0.0
+      },
+      "expected_reasons": [],
+      "window_ns": [
+        0,
+        0
+      ],
+      "false_alarms": 0,
+      "reason_counts": {
+        "low_texture": 232,
+        "rotation_inconsistent": 119
+      },
+      "degradation_warnings": 312,
+      "degradation_vs_groundtruth": {
+        "events": 10,
+        "detected": 10,
+        "miss_rate": 0.0,
+        "lead_s": [
+          0.0,
+          -0.8000001907348633,
+          0.5500001907348633,
+          -0.34999990463256836,
+          3.0,
+          -0.04999995231628418,
+          3.0,
+          2.0,
+          -0.8500001430511475,
+          2.249999761581421
+        ],
+        "lead_s_median": 0.27500009536743164,
+        "early_warnings": 5,
+        "clean_frames": 1151,
+        "false_alarm_frame_rate": 0.035621198957428324,
+        "false_alarm_episodes_per_min": 8.340581368620477
+      }
+    },
+    "dropped_frames": {
+      "spec": {
+        "kind": "dropped_frames",
+        "start": 757,
+        "length": 5,
+        "magnitude": 0.0
+      },
+      "expected_reasons": [
+        "dropped_frames"
+      ],
+      "window_ns": [
+        1403638555927829504,
+        1403638556177829376
+      ],
+      "detected": true,
+      "latency_ns": 251333572,
+      "false_alarms_outside_window": 0,
+      "reason_counts": {
+        "low_texture": 232,
+        "rotation_inconsistent": 118,
+        "dropped_frames": 1
+      },
+      "degradation_warnings": 311
+    },
+    "camera_outage": {
+      "spec": {
+        "kind": "camera_outage",
+        "start": 1136,
+        "length": 20,
+        "magnitude": 0.0
+      },
+      "expected_reasons": [
+        "no_messages"
+      ],
+      "window_ns": [
+        1403638574877829376,
+        1403638575877829376
+      ],
+      "detected": true,
+      "latency_ns": 375146368,
+      "false_alarms_outside_window": 0,
+      "reason_counts": {
+        "low_texture": 232,
+        "rotation_inconsistent": 119,
+        "no_messages": 13,
+        "dropped_frames": 1
+      },
+      "degradation_warnings": 312
+    },
+    "pose_jump": {
+      "spec": {
+        "kind": "pose_jump",
+        "start": 1515,
+        "length": 1,
+        "magnitude": 1.0
+      },
+      "expected_reasons": [
+        "pose_jump"
+      ],
+      "window_ns": [
+        1403638593827829504,
+        1403638631679170976
+      ],
+      "detected": true,
+      "latency_ns": 6452800,
+      "false_alarms_outside_window": 0,
+      "reason_counts": {
+        "low_texture": 232,
+        "rotation_inconsistent": 118,
+        "pose_jump": 1
+      },
+      "degradation_warnings": 311
+    },
+    "stale_delivery": {
+      "spec": {
+        "kind": "stale_delivery",
+        "start": 568,
+        "length": 5,
+        "magnitude": 0.3
+      },
+      "expected_reasons": [
+        "stale"
+      ],
+      "window_ns": [
+        1403638546477829376,
+        1403638546727829504
+      ],
+      "detected": true,
+      "latency_ns": 327926100,
+      "false_alarms_outside_window": 0,
+      "reason_counts": {
+        "low_texture": 232,
+        "rotation_inconsistent": 119,
+        "dropped_frames": 1,
+        "stale": 5,
+        "capture_time_not_increasing": 5
+      },
+      "degradation_warnings": 312
+    },
+    "out_of_order": {
+      "spec": {
+        "kind": "out_of_order",
+        "start": 454,
+        "length": 1,
+        "magnitude": 0.0
+      },
+      "expected_reasons": [
+        "capture_time_not_increasing"
+      ],
+      "window_ns": [
+        1403638540777829376,
+        1403638540829038004
+      ],
+      "detected": true,
+      "latency_ns": 51208628,
+      "false_alarms_outside_window": 0,
+      "reason_counts": {
+        "low_texture": 232,
+        "rotation_inconsistent": 119,
+        "contract:publish_time_ns must not precede capture_time_ns": 1,
+        "dropped_frames": 1,
+        "capture_time_not_increasing": 1
+      },
+      "degradation_warnings": 312
+    },
+    "imu_time_offset": {
+      "spec": {
+        "kind": "imu_time_offset",
+        "start": 0,
+        "length": 1,
+        "magnitude": 0.05
+      },
+      "expected_reasons": [
+        "imu_time_offset"
+      ],
+      "window_ns": [
+        1403638518077829376,
+        1403638631679170976
+      ],
+      "detected": true,
+      "latency_ns": 5950731928,
+      "false_alarms_outside_window": 0,
+      "reason_counts": {
+        "rotation_inconsistent": 2082,
+        "low_texture": 232,
+        "imu_time_offset": 1560
+      },
+      "degradation_warnings": 2082
+    }
+  }
+}

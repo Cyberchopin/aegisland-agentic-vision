@@ -1,3 +1,5 @@
+import itertools
+
 import numpy as np
 
 from aegisland.motion_compensation import CameraMotionCompensator
@@ -182,3 +184,65 @@ def test_compensation_preserves_independent_foreground_motion() -> None:
     )
 
     assert foreground_motion > background_motion
+
+
+def _shifted_sequence(count: int = 4) -> list[np.ndarray]:
+    base = textured_frame()
+    return [
+        cv2.warpAffine(base, np.float32([[1, 0, 3 * i], [0, 1, 2 * i]]), (480, 360))
+        for i in range(count)
+    ]
+
+
+class _CountingOrb:
+    def __init__(self, orb) -> None:
+        self.orb = orb
+        self.calls = 0
+
+    def detectAndCompute(self, image, mask):
+        self.calls += 1
+        return self.orb.detectAndCompute(image, mask)
+
+
+def test_feature_cache_gives_identical_results_to_fresh_compensators() -> None:
+    frames = _shifted_sequence()
+    cached = CameraMotionCompensator()
+
+    for previous, current in itertools.pairwise(frames):
+        reused = cached.compensate(previous, current)
+        fresh = CameraMotionCompensator().compensate(previous, current)
+
+        assert reused.success == fresh.success
+        assert reused.match_count == fresh.match_count
+        assert reused.inlier_count == fresh.inlier_count
+        np.testing.assert_array_equal(reused.homography, fresh.homography)
+        np.testing.assert_array_equal(reused.aligned_previous, fresh.aligned_previous)
+
+
+def test_feature_cache_skips_recomputing_previous_frame() -> None:
+    frames = _shifted_sequence()
+    compensator = CameraMotionCompensator()
+    counter = _CountingOrb(compensator.orb)
+    compensator.orb = counter
+
+    for previous, current in itertools.pairwise(frames):
+        compensator.compensate(previous, current)
+
+    # 3 frame pairs: 2 detections for the first, 1 new frame for each later pair.
+    assert counter.calls == 4
+
+
+def test_feature_cache_is_not_fooled_by_in_place_mutation() -> None:
+    frames = _shifted_sequence(3)
+    compensator = CameraMotionCompensator()
+    counter = _CountingOrb(compensator.orb)
+    compensator.orb = counter
+    current = frames[1].copy()
+
+    compensator.compensate(frames[0], current)
+    current[:] = frames[2]  # caller reuses its buffer for a different image
+    result = compensator.compensate(current, frames[2])
+
+    assert counter.calls == 3  # mutated buffer had to be recomputed
+    fresh = CameraMotionCompensator().compensate(frames[2], frames[2])
+    assert result.match_count == fresh.match_count

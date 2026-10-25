@@ -1,0 +1,43 @@
+{
+  "estimate": "/home/shiyue1128/aegisland-agentic-vision/benchmarks/results/gps_denied/cuvslam-inertial-MH_01_easy-20261024-030838-asyncsba-run1/trajectory_body.tum",
+  "estimate_sha256": "a91398a756d1e8cb5f03afe2a5e4e2361bdf5e071a8eab7bfcc646f67eb49fd6",
+  "groundtruth": "/home/shiyue1128/aegisland-data/euroc/MH_01_easy/mav0/state_groundtruth_estimate0/data.csv",
+  "groundtruth_sha256": "aae2d7c5684724c8afe364d2fd8499a6ed77a9169adf03736531f67d8e7b2117",
+  "estimate_poses": 3682,
+  "groundtruth_poses": 36382,
+  "max_time_difference_s": 0.005,
+  "ate_se3": {
+    "metric": "ate_position",
+    "alignment": "se3",
+    "unit": "m",
+    "pairs": 3638,
+    "rmse": 0.04106835946178945,
+    "mean": 0.03713141752705221,
+    "median": 0.03195508892465508,
+    "max": 0.08894514960749576,
+    "scale": 1.0
+  },
+  "ate_sim3_scale_diagnostic": {
+    "metric": "ate_position",
+    "alignment": "sim3",
+    "unit": "m (after scale correction; not a metric-scale result)",
+    "pairs": 3638,
+    "rmse": 0.039404179513381175,
+    "mean": 0.03508017370398145,
+    "median": 0.030603704893395506,
+    "max": 0.09428228648318139,
+    "scale": 1.0026939121009963
+  },
+  "rpe": {
+    "metric": "rpe",
+    "delta_frames": 20,
+    "pairs": 3618,
+    "translation_unit": "m",
+    "rotation_unit": "deg",
+    "translation_rmse_m": 0.011827003520896225,
+    "translation_median_m": 0.007643621113505601,
+    "rotation_rmse_deg": 0.09280206107125899,
+    "rotation_median_deg": 0.06566262818355575
+  },
+  "notes": "Dataset replay accuracy only; does not imply field-camera or flight performance."
+}

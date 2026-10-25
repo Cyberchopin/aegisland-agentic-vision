@@ -1,0 +1,48 @@
+{
+  "tool": "benchmarks/gps_denied/run_cuvslam_euroc.py",
+  "claims": "Offline dataset replay only. Not field-camera integration, not flight-ready, no control output.",
+  "cuvslam_version": [
+    "17.0.1+51631ba",
+    17,
+    0,
+    1
+  ],
+  "cuvslam_examples_revision": "51631ba358ea51262342f9ae649820d639363eb9",
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "gpu": "NVIDIA GeForce RTX 4060 Ti, 610.60, 8188 MiB, 8.9",
+  "sequence": "/home/shiyue1128/aegisland-data/synthetic-euroc/20261024-synthetic-s7/mav0",
+  "mode": "stereo",
+  "odometry_config": {
+    "async_sba": false,
+    "rectified_stereo_camera": false,
+    "odometry_mode": "OdometryMode.Multicamera"
+  },
+  "max_frames": null,
+  "input_sha256": {
+    "cam0/data.csv": "8ee79c9b8361dab4ec9ff544a0d046fb9fb775a9d86d5a0eee18b064548447fb",
+    "cam1/data.csv": "8ee79c9b8361dab4ec9ff544a0d046fb9fb775a9d86d5a0eee18b064548447fb",
+    "cam0/sensor_recalibrated.yaml": "cc2450f7d67f1a81690855df8503a24e6beee173ed8cd8c88e383b813c62b49a",
+    "cam1/sensor_recalibrated.yaml": "c10c6b661a31026e27674eb81bfb9c700550051f728ade7f907d088043d7e9e0",
+    "imu0/sensor_recalibrated.yaml": "a92db669a452bcf9bb2334d5310663c27f35737369a631cefaa4dd81f7c3d0d1",
+    "state_groundtruth_estimate0/data.csv": "cda344bc52e9e0e281d706f4eefee1cc087fe34c723738252894ea81726f9aab"
+  },
+  "counts": {
+    "stereo_frames": 200,
+    "tracked_frames": 200,
+    "untracked_frames": 0,
+    "imu_samples": 0
+  },
+  "timing": {
+    "note": "Host wall time around Tracker.track(), synchronous; includes upload. Excludes PNG decode. Development GPU, not Orin.",
+    "first_call_ms": 18.203628000037497,
+    "warm_track_ms": {
+      "count": 199,
+      "mean": 0.9025086532605128,
+      "p50": 0.8872460000475257,
+      "p95": 1.1167748999241667,
+      "max": 1.4372629998433695
+    },
+    "total_wall_s": 1.2863271690000602
+  }
+}

@@ -1,0 +1,741 @@
+{
+  "tool": "benchmarks/gps_denied/check_groundtruth_continuity.py",
+  "step_tolerance_m": 0.01,
+  "sequences": {
+    "MH_01_easy": {
+      "samples": 36382,
+      "dt_ms": {
+        "min": 4.999680000000001,
+        "median": 4.999936,
+        "max": 5.000191999999999,
+        "non_increasing": 0
+      },
+      "loader_vs_raw_dt_max_error_s": 1.9602233886691772e-07,
+      "residual_m": {
+        "median": 6.917615890833733e-07,
+        "p99": 0.00017648071590075187
+      },
+      "discontinuities": []
+    },
+    "MH_02_easy": {
+      "samples": 29993,
+      "dt_ms": {
+        "min": 4.999680000000001,
+        "median": 4.999936,
+        "max": 5.000191999999999,
+        "non_increasing": 0
+      },
+      "loader_vs_raw_dt_max_error_s": 1.9602233886691772e-07,
+      "residual_m": {
+        "median": 6.971196386066077e-07,
+        "p99": 0.0001695032981799885
+      },
+      "discontinuities": []
+    },
+    "MH_03_medium": {
+      "samples": 26302,
+      "dt_ms": {
+        "min": 4.999680000000001,
+        "median": 4.999936,
+        "max": 5.000191999999999,
+        "non_increasing": 0
+      },
+      "loader_vs_raw_dt_max_error_s": 1.9602233886691772e-07,
+      "residual_m": {
+        "median": 6.973745272643415e-07,
+        "p99": 0.00028913237834883305
+      },
+      "discontinuities": [
+        {
+          "sample_index": 5959,
+          "t_rel_s": 29.795000064,
+          "timestamp_ns": [
+            1403637162683319040,
+            1403637162688318976
+          ],
+          "dt_ms": 4.999936,
+          "unexplained_step_m": [
+            -0.03462152314995153,
+            -0.03442310998272009,
+            -0.005090229851392025
+          ],
+          "unexplained_step_norm_m": 0.049086768136077936,
+          "finite_difference_speed_mps": 9.146520788401531,
+          "reported_speed_mps": 1.1682317059222456,
+          "offset_persists_after_0p1s_m": 0.0457145079991256,
+          "leica_raw": {
+            "samples": 7,
+            "speed_mps_min": 1.0504178623447815,
+            "speed_mps_max": 1.786737262869033,
+            "note": "prism position, not body; only the speed profile is compared"
+          }
+        },
+        {
+          "sample_index": 6129,
+          "t_rel_s": 30.644999936,
+          "timestamp_ns": [
+            1403637163533318912,
+            1403637163538319104
+          ],
+          "dt_ms": 5.000191999999999,
+          "unexplained_step_m": [
+            0.013424177071103513,
+            0.005267289063424049,
+            -0.004459846232063995
+          ],
+          "unexplained_step_norm_m": 0.015094472250716926,
+          "finite_difference_speed_mps": 3.5724464042040127,
+          "reported_speed_mps": 1.1947260458096658,
+          "offset_persists_after_0p1s_m": 0.017822038729257715,
+          "leica_raw": {
+            "samples": 10,
+            "speed_mps_min": 1.084544705831441,
+            "speed_mps_max": 1.3205510906192286,
+            "note": "prism position, not body; only the speed profile is compared"
+          }
+        },
+        {
+          "sample_index": 6329,
+          "t_rel_s": 31.644999936,
+          "timestamp_ns": [
+            1403637164533318912,
+            1403637164538319104
+          ],
+          "dt_ms": 5.000191999999999,
+          "unexplained_step_m": [
+            -0.001427457225214675,
+            0.0054065214197757915,
+            0.00857205762816008
+          ],
+          "unexplained_step_norm_m": 0.010234660716057442,
+          "finite_difference_speed_mps": 2.0257267929923732,
+          "reported_speed_mps": 1.8483368784355843,
+          "offset_persists_after_0p1s_m": 0.010128984919148874,
+          "leica_raw": {
+            "samples": 2
+          }
+        },
+        {
+          "sample_index": 7079,
+          "t_rel_s": 35.395000064,
+          "timestamp_ns": [
+            1403637168283319040,
+            1403637168288319232
+          ],
+          "dt_ms": 5.000191999999999,
+          "unexplained_step_m": [
+            -0.059883128946688034,
+            0.026089345654783998,
+            0.04824349206272001
+          ],
+          "unexplained_step_norm_m": 0.08120392610918632,
+          "finite_difference_speed_mps": 16.950972460965556,
+          "reported_speed_mps": 1.4276848151584438,
+          "offset_persists_after_0p1s_m": 0.08475801052857325,
+          "leica_raw": {
+            "samples": 1
+          }
+        },
+        {
+          "sample_index": 9239,
+          "t_rel_s": 46.195000064,
+          "timestamp_ns": [
+            1403637179083319040,
+            1403637179088318976
+          ],
+          "dt_ms": 4.999936,
+          "unexplained_step_m": [
+            0.05618641551910432,
+            0.009494986995328017,
+            -0.0002014810620159567
+          ],
+          "unexplained_step_norm_m": 0.05698340689661549,
+          "finite_difference_speed_mps": 12.09156879360846,
+          "reported_speed_mps": 1.116163732165671,
+          "offset_persists_after_0p1s_m": 0.06045729590599601,
+          "leica_raw": {
+            "samples": 5,
+            "speed_mps_min": 0.9984329831031344,
+            "speed_mps_max": 1.1846414021845502,
+            "note": "prism position, not body; only the speed profile is compared"
+          }
+        },
+        {
+          "sample_index": 9469,
+          "t_rel_s": 47.345000192,
+          "timestamp_ns": [
+            1403637180233319168,
+            1403637180238318848
+          ],
+          "dt_ms": 4.999680000000001,
+          "unexplained_step_m": [
+            0.005366464163839656,
+            0.004595212760319964,
+            0.009355616535040042
+          ],
+          "unexplained_step_norm_m": 0.011723586425880833,
+          "finite_difference_speed_mps": 2.7077648909715677,
+          "reported_speed_mps": 1.3867477236375765,
+          "offset_persists_after_0p1s_m": 0.013567208836955705,
+          "leica_raw": {
+            "samples": 9,
+            "speed_mps_min": 1.0644643690269295,
+            "speed_mps_max": 1.4114021130289494,
+            "note": "prism position, not body; only the speed profile is compared"
+          }
+        },
+        {
+          "sample_index": 9769,
+          "t_rel_s": 48.845000192,
+          "timestamp_ns": [
+            1403637181733319168,
+            1403637181738318848
+          ],
+          "dt_ms": 4.999680000000001,
+          "unexplained_step_m": [
+            -0.0021999505331208938,
+            -0.011100335088639963,
+            -0.004420832362239984
+          ],
+          "unexplained_step_norm_m": 0.012149114379381687,
+          "finite_difference_speed_mps": 1.458535172310765,
+          "reported_speed_mps": 1.9621837703375289,
+          "offset_persists_after_0p1s_m": 0.00729148563041261,
+          "leica_raw": {
+            "samples": 6,
+            "speed_mps_min": 1.8824911679739935,
+            "speed_mps_max": 2.0127236315268973,
+            "note": "prism position, not body; only the speed profile is compared"
+          }
+        },
+        {
+          "sample_index": 13099,
+          "t_rel_s": 65.494999808,
+          "timestamp_ns": [
+            1403637198383318784,
+            1403637198388318976
+          ],
+          "dt_ms": 5.000191999999999,
+          "unexplained_step_m": [
+            -0.00996934477465538,
+            0.0043740425861118854,
+            0.027487710284288067
+          ],
+          "unexplained_step_norm_m": 0.029565085835390786,
+          "finite_difference_speed_mps": 7.565499886342004,
+          "reported_speed_mps": 2.4504798286139797,
+          "offset_persists_after_0p1s_m": 0.037829275099132864,
+          "leica_raw": {
+            "samples": 5,
+            "speed_mps_min": 2.0243984387517253,
+            "speed_mps_max": 3.287376583729789,
+            "note": "prism position, not body; only the speed profile is compared"
+          }
+        },
+        {
+          "sample_index": 13249,
+          "t_rel_s": 66.244999936,
+          "timestamp_ns": [
+            1403637199133318912,
+            1403637199138319104
+          ],
+          "dt_ms": 5.000191999999999,
+          "unexplained_step_m": [
+            0.017571839878144334,
+            0.007291635678719999,
+            -0.001587412156416183
+          ],
+          "unexplained_step_norm_m": 0.019090767007343204,
+          "finite_difference_speed_mps": 2.5327999827706353,
+          "reported_speed_mps": 2.6465574902673095,
+          "offset_persists_after_0p1s_m": 0.01266462831077246,
+          "leica_raw": {
+            "samples": 13,
+            "speed_mps_min": 1.9377144913509985,
+            "speed_mps_max": 4.205442905063453,
+            "note": "prism position, not body; only the speed profile is compared"
+          }
+        },
+        {
+          "sample_index": 13499,
+          "t_rel_s": 67.494999808,
+          "timestamp_ns": [
+            1403637200383318784,
+            1403637200388318976
+          ],
+          "dt_ms": 5.000191999999999,
+          "unexplained_step_m": [
+            -0.009975595357695497,
+            -0.004276224225791924,
+            -0.002919508203008031
+          ],
+          "unexplained_step_norm_m": 0.011239311567758804,
+          "finite_difference_speed_mps": 4.301368744544572,
+          "reported_speed_mps": 2.0412381013115546,
+          "offset_persists_after_0p1s_m": 0.02150795510518009,
+          "leica_raw": {
+            "samples": 6,
+            "speed_mps_min": 1.0939931631089506,
+            "speed_mps_max": 2.717220372477192,
+            "note": "prism position, not body; only the speed profile is compared"
+          }
+        },
+        {
+          "sample_index": 15669,
+          "t_rel_s": 78.345000192,
+          "timestamp_ns": [
+            1403637211233319168,
+            1403637211238318848
+          ],
+          "dt_ms": 4.999680000000001,
+          "unexplained_step_m": [
+            -0.012106528061439989,
+            -0.00852573654144005,
+            0.006035738055680044
+          ],
+          "unexplained_step_norm_m": 0.01599019509428401,
+          "finite_difference_speed_mps": 3.641117484505672,
+          "reported_speed_mps": 1.9572907322401032,
+          "offset_persists_after_0p1s_m": 0.018204401510268725,
+          "leica_raw": {
+            "samples": 5,
+            "speed_mps_min": 1.9064407928107727,
+            "speed_mps_max": 1.9799129168495884,
+            "note": "prism position, not body; only the speed profile is compared"
+          }
+        },
+        {
+          "sample_index": 17149,
+          "t_rel_s": 85.744999936,
+          "timestamp_ns": [
+            1403637218633318912,
+            1403637218638319104
+          ],
+          "dt_ms": 5.000191999999999,
+          "unexplained_step_m": [
+            0.00341150438451188,
+            -0.013478037406719733,
+            0.008968585317376022
+          ],
+          "unexplained_step_norm_m": 0.01654482931605923,
+          "finite_difference_speed_mps": 4.86474636902555,
+          "reported_speed_mps": 2.174842054403492,
+          "offset_persists_after_0p1s_m": 0.02454938816019754,
+          "leica_raw": {
+            "samples": 7,
+            "speed_mps_min": 2.0233450280909433,
+            "speed_mps_max": 2.4004593206208833,
+            "note": "prism position, not body; only the speed profile is compared"
+          }
+        },
+        {
+          "sample_index": 21470,
+          "t_rel_s": 107.349999872,
+          "timestamp_ns": [
+            1403637240238318848,
+            1403637240243319040
+          ],
+          "dt_ms": 5.000191999999999,
+          "unexplained_step_m": [
+            0.002501600626175998,
+            -0.0007531508572159477,
+            -0.012217571412992024
+          ],
+          "unexplained_step_norm_m": 0.012493770173097038,
+          "finite_difference_speed_mps": 4.256785634734506,
+          "reported_speed_mps": 2.5296969893404233,
+          "offset_persists_after_0p1s_m": 0.02150769191553424,
+          "leica_raw": {
+            "samples": 8,
+            "speed_mps_min": 2.1578755123726108,
+            "speed_mps_max": 3.8508575662081976,
+            "note": "prism position, not body; only the speed profile is compared"
+          }
+        },
+        {
+          "sample_index": 22340,
+          "t_rel_s": 111.7,
+          "timestamp_ns": [
+            1403637244588318976,
+            1403637244593318912
+          ],
+          "dt_ms": 4.999936,
+          "unexplained_step_m": [
+            0.018373647421441,
+            0.0029243800428800314,
+            0.00642479015680007
+          ],
+          "unexplained_step_norm_m": 0.01968300908808243,
+          "finite_difference_speed_mps": 3.655115069376926,
+          "reported_speed_mps": 1.221319465334521,
+          "offset_persists_after_0p1s_m": 0.018322187719548057,
+          "leica_raw": {
+            "samples": 7,
+            "speed_mps_min": 1.0619754978292868,
+            "speed_mps_max": 1.4941351149716764,
+            "note": "prism position, not body; only the speed profile is compared"
+          }
+        }
+      ]
+    },
+    "MH_04_difficult": {
+      "samples": 19753,
+      "dt_ms": {
+        "min": 4.999680000000001,
+        "median": 4.999936,
+        "max": 5.000191999999999,
+        "non_increasing": 0
+      },
+      "loader_vs_raw_dt_max_error_s": 1.9602233886691772e-07,
+      "residual_m": {
+        "median": 7.002040291796114e-07,
+        "p99": 0.0002402651741216984
+      },
+      "discontinuities": [
+        {
+          "sample_index": 9000,
+          "t_rel_s": 45.0,
+          "timestamp_ns": [
+            1403638173940097024,
+            1403638173945096960
+          ],
+          "dt_ms": 4.999936,
+          "unexplained_step_m": [
+            -0.09644341931622354,
+            -0.08724229492723183,
+            -0.00170991732019186
+          ],
+          "unexplained_step_norm_m": 0.13005950549966316,
+          "finite_difference_speed_mps": 27.909088352596214,
+          "reported_speed_mps": 2.8703945618785585,
+          "offset_persists_after_0p1s_m": 0.13942771730502992,
+          "leica_raw": {
+            "samples": 3,
+            "speed_mps_min": 2.6063966250007704,
+            "speed_mps_max": 2.9096646050241266,
+            "note": "prism position, not body; only the speed profile is compared"
+          }
+        },
+        {
+          "sample_index": 13971,
+          "t_rel_s": 69.855000064,
+          "timestamp_ns": [
+            1403638198795097088,
+            1403638198800097024
+          ],
+          "dt_ms": 4.999936,
+          "unexplained_step_m": [
+            0.011763883049216418,
+            0.0007578846652159998,
+            0.0027590971848959504
+          ],
+          "unexplained_step_norm_m": 0.012106855530529459,
+          "finite_difference_speed_mps": 2.179703922008013,
+          "reported_speed_mps": 0.8045132052682541,
+          "offset_persists_after_0p1s_m": 0.010925834907623836,
+          "leica_raw": {
+            "samples": 7,
+            "speed_mps_min": 0.5209360407121446,
+            "speed_mps_max": 1.1279717724237825,
+            "note": "prism position, not body; only the speed profile is compared"
+          }
+        },
+        {
+          "sample_index": 14260,
+          "t_rel_s": 71.3,
+          "timestamp_ns": [
+            1403638200240097024,
+            1403638200245096960
+          ],
+          "dt_ms": 4.999936,
+          "unexplained_step_m": [
+            0.01359399742310493,
+            -0.008591947581695979,
+            -0.005159608505600179
+          ],
+          "unexplained_step_norm_m": 0.016889046424148894,
+          "finite_difference_speed_mps": 1.7642721908746317,
+          "reported_speed_mps": 2.039618459553649,
+          "offset_persists_after_0p1s_m": 0.008821339773656392,
+          "leica_raw": {
+            "samples": 1
+          }
+        },
+        {
+          "sample_index": 14351,
+          "t_rel_s": 71.755000064,
+          "timestamp_ns": [
+            1403638200695097088,
+            1403638200700097024
+          ],
+          "dt_ms": 4.999936,
+          "unexplained_step_m": [
+            -0.012914393875328764,
+            -0.004548279346944314,
+            0.0012121737134082378
+          ],
+          "unexplained_step_norm_m": 0.013745463953481063,
+          "finite_difference_speed_mps": 4.181190656431814,
+          "reported_speed_mps": 2.3767487637129423,
+          "offset_persists_after_0p1s_m": 0.020905107389211783,
+          "leica_raw": {
+            "samples": 3,
+            "speed_mps_min": 2.167601295403673,
+            "speed_mps_max": 2.5005326545956392,
+            "note": "prism position, not body; only the speed profile is compared"
+          }
+        },
+        {
+          "sample_index": 14511,
+          "t_rel_s": 72.554999808,
+          "timestamp_ns": [
+            1403638201495096832,
+            1403638201500097024
+          ],
+          "dt_ms": 5.000191999999999,
+          "unexplained_step_m": [
+            -0.01253487334707197,
+            -0.007588129360384327,
+            0.0034667805373443357
+          ],
+          "unexplained_step_norm_m": 0.01505726815565066,
+          "finite_difference_speed_mps": 4.313609659835863,
+          "reported_speed_mps": 2.5893584690853446,
+          "offset_persists_after_0p1s_m": 0.021568846562953114,
+          "leica_raw": {
+            "samples": 2
+          }
+        },
+        {
+          "sample_index": 14631,
+          "t_rel_s": 73.155000064,
+          "timestamp_ns": [
+            1403638202095097088,
+            1403638202100097024
+          ],
+          "dt_ms": 4.999936,
+          "unexplained_step_m": [
+            0.008602964862080077,
+            0.008465901380352185,
+            -0.005866993073023838
+          ],
+          "unexplained_step_norm_m": 0.013420286819548353,
+          "finite_difference_speed_mps": 3.763217562130077,
+          "reported_speed_mps": 2.642748872824279,
+          "offset_persists_after_0p1s_m": 0.01893204060671825,
+          "leica_raw": {
+            "samples": 7,
+            "speed_mps_min": 2.4975775042706445,
+            "speed_mps_max": 2.7012002773172576,
+            "note": "prism position, not body; only the speed profile is compared"
+          }
+        },
+        {
+          "sample_index": 15271,
+          "t_rel_s": 76.355000064,
+          "timestamp_ns": [
+            1403638205295097088,
+            1403638205300097024
+          ],
+          "dt_ms": 4.999936,
+          "unexplained_step_m": [
+            -0.00473206163110333,
+            0.0055230201803514786,
+            -0.007658656045183913
+          ],
+          "unexplained_step_norm_m": 0.01056177880906252,
+          "finite_difference_speed_mps": 2.985014254987376,
+          "reported_speed_mps": 1.1240814521648332,
+          "offset_persists_after_0p1s_m": 0.014924775586577933,
+          "leica_raw": {
+            "samples": 4,
+            "speed_mps_min": 1.0324885671869533,
+            "speed_mps_max": 1.0689456296181334,
+            "note": "prism position, not body; only the speed profile is compared"
+          }
+        },
+        {
+          "sample_index": 15471,
+          "t_rel_s": 77.355000064,
+          "timestamp_ns": [
+            1403638206295097088,
+            1403638206300097024
+          ],
+          "dt_ms": 4.999936,
+          "unexplained_step_m": [
+            0.0032862382149121934,
+            -0.005551875476480194,
+            0.016275762433792185
+          ],
+          "unexplained_step_norm_m": 0.017507801852680777,
+          "finite_difference_speed_mps": 3.851052705573907,
+          "reported_speed_mps": 1.6232241312508262,
+          "offset_persists_after_0p1s_m": 0.019348234857910422,
+          "leica_raw": {
+            "samples": 4,
+            "speed_mps_min": 1.548561185803136,
+            "speed_mps_max": 1.6274683135513426,
+            "note": "prism position, not body; only the speed profile is compared"
+          }
+        }
+      ]
+    },
+    "MH_05_difficult": {
+      "samples": 22212,
+      "dt_ms": {
+        "min": 4.999680000000001,
+        "median": 4.999936,
+        "max": 5.000191999999999,
+        "non_increasing": 0
+      },
+      "loader_vs_raw_dt_max_error_s": 1.9602233886691772e-07,
+      "residual_m": {
+        "median": 6.975987849896764e-07,
+        "p99": 0.00026301275737112916
+      },
+      "discontinuities": [
+        {
+          "sample_index": 8040,
+          "t_rel_s": 40.200000256,
+          "timestamp_ns": [
+            1403638559692829696,
+            1403638559697829376
+          ],
+          "dt_ms": 4.999680000000001,
+          "unexplained_step_m": [
+            0.004398896650239938,
+            0.016812464474880502,
+            0.006710382544640014
+          ],
+          "unexplained_step_norm_m": 0.018628969036262325,
+          "finite_difference_speed_mps": 4.756718549888954,
+          "reported_speed_mps": 1.1822401969329244,
+          "offset_persists_after_0p1s_m": 0.023838353786211422,
+          "leica_raw": {
+            "samples": 7,
+            "speed_mps_min": 0.9429066073492907,
+            "speed_mps_max": 1.2791105063407637,
+            "note": "prism position, not body; only the speed profile is compared"
+          }
+        },
+        {
+          "sample_index": 9319,
+          "t_rel_s": 46.595000064,
+          "timestamp_ns": [
+            1403638566087829504,
+            1403638566092829440
+          ],
+          "dt_ms": 4.999936,
+          "unexplained_step_m": [
+            0.003482152252672112,
+            -0.012342648079872096,
+            -0.010735549970047808
+          ],
+          "unexplained_step_norm_m": 0.01672478337957635,
+          "finite_difference_speed_mps": 5.345537087079943,
+          "reported_speed_mps": 2.214474634375386,
+          "offset_persists_after_0p1s_m": 0.026756462531414813,
+          "leica_raw": {
+            "samples": 3,
+            "speed_mps_min": 2.1293045715783108,
+            "speed_mps_max": 2.2354854309312597,
+            "note": "prism position, not body; only the speed profile is compared"
+          }
+        },
+        {
+          "sample_index": 11530,
+          "t_rel_s": 57.649999872,
+          "timestamp_ns": [
+            1403638577142829312,
+            1403638577147829504
+          ],
+          "dt_ms": 5.000191999999999,
+          "unexplained_step_m": [
+            0.01990613701120013,
+            -0.00849451753369572,
+            -0.0028481241354239265
+          ],
+          "unexplained_step_norm_m": 0.02182940516664895,
+          "finite_difference_speed_mps": 5.851972861221221,
+          "reported_speed_mps": 1.5593040803111495,
+          "offset_persists_after_0p1s_m": 0.029283346043834785,
+          "leica_raw": {
+            "samples": 8,
+            "speed_mps_min": 1.1858842382014942,
+            "speed_mps_max": 1.9197400037680596,
+            "note": "prism position, not body; only the speed profile is compared"
+          }
+        },
+        {
+          "sample_index": 15870,
+          "t_rel_s": 79.350000128,
+          "timestamp_ns": [
+            1403638598842829568,
+            1403638598847829504
+          ],
+          "dt_ms": 4.999936,
+          "unexplained_step_m": [
+            -0.046168583108479724,
+            0.012391703219072292,
+            0.023408517441280006
+          ],
+          "unexplained_step_norm_m": 0.05322641321480225,
+          "finite_difference_speed_mps": 12.840664694996596,
+          "reported_speed_mps": 2.798744731336533,
+          "offset_persists_after_0p1s_m": 0.06420236807161318,
+          "leica_raw": {
+            "samples": 3,
+            "speed_mps_min": 2.734119789028674,
+            "speed_mps_max": 2.7834438693966095,
+            "note": "prism position, not body; only the speed profile is compared"
+          }
+        },
+        {
+          "sample_index": 16539,
+          "t_rel_s": 82.695000064,
+          "timestamp_ns": [
+            1403638602187829504,
+            1403638602192829696
+          ],
+          "dt_ms": 5.000191999999999,
+          "unexplained_step_m": [
+            -0.001197602208255778,
+            0.02340474470553654,
+            0.021838606024191676
+          ],
+          "unexplained_step_norm_m": 0.03203343626369829,
+          "finite_difference_speed_mps": 7.716137122583446,
+          "reported_speed_mps": 1.6706284614605367,
+          "offset_persists_after_0p1s_m": 0.03864337541553977,
+          "leica_raw": {
+            "samples": 5,
+            "speed_mps_min": 1.4751327283954259,
+            "speed_mps_max": 2.0536825728416725,
+            "note": "prism position, not body; only the speed profile is compared"
+          }
+        },
+        {
+          "sample_index": 16849,
+          "t_rel_s": 84.244999936,
+          "timestamp_ns": [
+            1403638603737829376,
+            1403638603742829568
+          ],
+          "dt_ms": 5.000191999999999,
+          "unexplained_step_m": [
+            -0.023988206052352214,
+            -0.008301287136255187,
+            0.023970589426176015
+          ],
+          "unexplained_step_norm_m": 0.0349132432633659,
+          "finite_difference_speed_mps": 7.279815729177833,
+          "reported_speed_mps": 0.4893763844792676,
+          "offset_persists_after_0p1s_m": 0.03640038191089321,
+          "leica_raw": {
+            "samples": 2
+          }
+        }
+      ]
+    }
+  }
+}

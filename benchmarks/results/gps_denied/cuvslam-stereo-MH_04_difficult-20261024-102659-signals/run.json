@@ -1,0 +1,62 @@
+{
+  "tool": "benchmarks/gps_denied/run_cuvslam_euroc.py",
+  "claims": "Offline dataset replay only. Not field-camera integration, not flight-ready, no control output.",
+  "cuvslam_version": [
+    "17.0.1+51631ba",
+    17,
+    0,
+    1
+  ],
+  "cuvslam_examples_revision": "51631ba358ea51262342f9ae649820d639363eb9",
+  "aegisland_revision": "21f6ce8b56d6d68c4611f51bce8c474313db231e",
+  "aegisland_tracked_files_dirty": false,
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "gpu": "NVIDIA GeForce RTX 4060 Ti, 610.60, 8188 MiB, 8.9",
+  "sequence": "/home/shiyue1128/aegisland-data/euroc/MH_04_difficult/mav0",
+  "mode": "stereo",
+  "export_signals": true,
+  "odometry_config": {
+    "async_sba": false,
+    "rectified_stereo_camera": false,
+    "odometry_mode": "OdometryMode.Multicamera"
+  },
+  "max_frames": null,
+  "pair_by_timestamp": true,
+  "unpaired_camera_timestamps_ns": {
+    "cam0_only": [
+      1403638127245096960
+    ],
+    "cam1_only": []
+  },
+  "input_sha256": {
+    "cam0/data.csv": "d65a02647a3dd01e52e8bc0da432b2108915e98b4a51dc52c9a9e2e2ac489e89",
+    "cam1/data.csv": "5f798aa46bd11607673c840980db46f284680559f65cdbf446cb10be2eb005ea",
+    "imu0/data.csv": "330c25e4532c1f27853d0eeee06968d5c4c00c16be1187fdcfd909cfe060360c",
+    "cam0/sensor_recalibrated.yaml": "80324218a06be7b8479ea347dc7414b0fa123d70fb1829c9df342248d3b82faf",
+    "cam1/sensor_recalibrated.yaml": "db54b71bc718ed74ba313d63d5f2f89f671933d3b0e9d470a5aea8936c64049f",
+    "imu0/sensor_recalibrated.yaml": "845ef065835eb510fc6607644aa626077947f872573569ecd6c2d69a92642f98",
+    "cam0/sensor.yaml": "191748edddda5d1368188f5b0a3c4bed6c48842c178ef9d83c50cba17d66e819",
+    "cam1/sensor.yaml": "a469fd673f369881f37dd6b93d251e9444950360d70c6214bf909cf509ac9524",
+    "imu0/sensor.yaml": "91e6c408416f549f87e7405830b83849cca10521f3d3fc8bb3de862c2bc882d0",
+    "state_groundtruth_estimate0/data.csv": "c13de3d5ba9ead60688505d4773286c290fa642264943c88aa182d0eac9f4960"
+  },
+  "counts": {
+    "stereo_frames": 2032,
+    "tracked_frames": 2032,
+    "untracked_frames": 0,
+    "imu_samples": 0
+  },
+  "timing": {
+    "note": "Host wall time around Tracker.track(), synchronous; includes upload. Excludes PNG decode. Development GPU, not Orin.",
+    "first_call_ms": 10.864181000215467,
+    "warm_track_ms": {
+      "count": 2031,
+      "mean": 2.823212975389652,
+      "p50": 0.7913240042398684,
+      "p95": 7.703841001784895,
+      "max": 66.85360099800164
+    },
+    "total_wall_s": 14.373556943995936
+  }
+}

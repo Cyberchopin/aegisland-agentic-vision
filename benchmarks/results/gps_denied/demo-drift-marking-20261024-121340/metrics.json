@@ -1,0 +1,32 @@
+{
+ "ok": {
+  "error_at_end_of_drift_m": 0.9792172713240987,
+  "eph_max_m": 0.0512523353099823,
+  "xy_invalid_after_s": null
+ },
+ "var1": {
+  "error_at_end_of_drift_m": 1.0411403438054416,
+  "eph_max_m": 0.33338844776153564,
+  "xy_invalid_after_s": null
+ },
+ "var25": {
+  "error_at_end_of_drift_m": 1.3060860459595298,
+  "eph_max_m": 1.2777392864227295,
+  "xy_invalid_after_s": null
+ },
+ "var400": {
+  "error_at_end_of_drift_m": 2.959744200710238,
+  "eph_max_m": 3.959425687789917,
+  "xy_invalid_after_s": null
+ },
+ "untrusted": {
+  "error_at_end_of_drift_m": 10.033204632460203,
+  "eph_max_m": 17.89910316467285,
+  "xy_invalid_after_s": 4.57
+ },
+ "inputs": {
+  "run": "/home/shiyue1128/work/demo-runs/drift-marking-20261024-120655/ok",
+  "supervised_run": "None",
+  "ulog_sha256": "010ec8415f1dec8da5592b6ddd5b3f357d35796df371bc365882223df1bdbb54"
+ }
+}

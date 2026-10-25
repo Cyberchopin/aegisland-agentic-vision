@@ -1,0 +1,107 @@
+{
+ "tool": "benchmarks/gps_denied/reloc_probe.py",
+ "map": "/home/shiyue1128/aegisland-data/maps/MH_01-stereo-slam-sync-20261024-180215",
+ "sequence": "/home/shiyue1128/aegisland-data/euroc/MH_05_difficult/mav0",
+ "settings": {
+  "radius_m": 2.0,
+  "step_m": 0.25,
+  "angular_step_rad": 0.03,
+  "warmup": 1
+ },
+ "results": [
+  {
+   "guess": "/tmp/claude-1000/-home-shiyue1128/92c90bc8-2288-4cd0-9fa5-b55ed49bad10/scratchpad/mh05guess-40.json",
+   "frame": 40,
+   "perturbation": {
+    "position_m": 0.0,
+    "yaw_deg": 0.0
+   },
+   "success": false,
+   "message": "Can't localize in map using provided image and guess",
+   "duration_s": 28.474198550000438
+  },
+  {
+   "guess": "/tmp/claude-1000/-home-shiyue1128/92c90bc8-2288-4cd0-9fa5-b55ed49bad10/scratchpad/mh05guess-100.json",
+   "frame": 100,
+   "perturbation": {
+    "position_m": 0.0,
+    "yaw_deg": 0.0
+   },
+   "success": false,
+   "message": "Can't localize in map using provided image and guess",
+   "duration_s": 48.083289344998775
+  },
+  {
+   "guess": "/tmp/claude-1000/-home-shiyue1128/92c90bc8-2288-4cd0-9fa5-b55ed49bad10/scratchpad/mh05guess-300.json",
+   "frame": 300,
+   "perturbation": {
+    "position_m": 0.0,
+    "yaw_deg": 0.0
+   },
+   "success": false,
+   "message": "Can't localize in map using provided image and guess",
+   "duration_s": 27.93204470600176
+  },
+  {
+   "guess": "/tmp/claude-1000/-home-shiyue1128/92c90bc8-2288-4cd0-9fa5-b55ed49bad10/scratchpad/mh05guess-600.json",
+   "frame": 600,
+   "perturbation": {
+    "position_m": 0.0,
+    "yaw_deg": 0.0
+   },
+   "success": true,
+   "message": "",
+   "translation": [
+    4.109527111053467,
+    -2.0407776832580566,
+    4.464483737945557
+   ],
+   "duration_s": 1.594477079997887,
+   "distance_from_guess_m": 0.0488839699575944
+  },
+  {
+   "guess": "/tmp/claude-1000/-home-shiyue1128/92c90bc8-2288-4cd0-9fa5-b55ed49bad10/scratchpad/mh05guess-1000.json",
+   "frame": 1000,
+   "perturbation": {
+    "position_m": 0.0,
+    "yaw_deg": 0.0
+   },
+   "success": false,
+   "message": "Can't localize in map using provided image and guess",
+   "duration_s": 6.714218164997874
+  },
+  {
+   "guess": "/tmp/claude-1000/-home-shiyue1128/92c90bc8-2288-4cd0-9fa5-b55ed49bad10/scratchpad/mh05guess-1400.json",
+   "frame": 1400,
+   "perturbation": {
+    "position_m": 0.0,
+    "yaw_deg": 0.0
+   },
+   "success": false,
+   "message": "Can't localize in map using provided image and guess",
+   "duration_s": 6.538242472001002
+  },
+  {
+   "guess": "/tmp/claude-1000/-home-shiyue1128/92c90bc8-2288-4cd0-9fa5-b55ed49bad10/scratchpad/mh05guess-1800.json",
+   "frame": 1800,
+   "perturbation": {
+    "position_m": 0.0,
+    "yaw_deg": 0.0
+   },
+   "success": false,
+   "message": "Can't localize in map using provided image and guess",
+   "duration_s": 6.570119782001711
+  },
+  {
+   "guess": "/tmp/claude-1000/-home-shiyue1128/92c90bc8-2288-4cd0-9fa5-b55ed49bad10/scratchpad/mh05guess-2200.json",
+   "frame": 2200,
+   "perturbation": {
+    "position_m": 0.0,
+    "yaw_deg": 0.0
+   },
+   "success": false,
+   "message": "Can't localize in map using provided image and guess",
+   "duration_s": 30.251676006002526
+  }
+ ]
+}

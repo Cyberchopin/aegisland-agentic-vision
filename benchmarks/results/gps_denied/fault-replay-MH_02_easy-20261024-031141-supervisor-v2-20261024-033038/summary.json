@@ -1,0 +1,182 @@
+{
+  "tool": "benchmarks/gps_denied/fault_replay.py",
+  "control_output": "DISABLED",
+  "command_executed": false,
+  "cuvslam_run": "/home/shiyue1128/aegisland-agentic-vision/benchmarks/results/gps_denied/cuvslam-inertial-MH_02_easy-20261024-031141-run1",
+  "trajectory_sha256": "38e50f46a78e6525e200d6af1ee0d009a93e0524bca1dfd705bcd7576dba50ad",
+  "messages": 3040,
+  "tracked_messages": 3040,
+  "imu_samples": 30400,
+  "period_ns": 50000128,
+  "config": {
+    "expected_period_ns": 50000128,
+    "max_age_ns": 200000000,
+    "outage_timeout_ns": 400000000,
+    "gap_factor": 1.5,
+    "max_speed_mps": 5.0,
+    "max_angular_rate_rad_s": 10.0,
+    "imu_check_window_s": 5.0,
+    "imu_check_every": 20,
+    "imu_search_s": 0.15,
+    "imu_step_s": 0.0025,
+    "imu_max_offset_s": 0.02,
+    "imu_min_correlation": 0.9,
+    "imu_min_motion_rad_s": 0.05,
+    "imu_persistence": 2
+  },
+  "scenarios": {
+    "none": {
+      "spec": {
+        "kind": "none",
+        "start": 0,
+        "length": 1,
+        "magnitude": 0.0
+      },
+      "expected_reasons": [],
+      "window_ns": [
+        0,
+        0
+      ],
+      "false_alarms": 1,
+      "reason_counts": {
+        "pose_jump": 1
+      }
+    },
+    "dropped_frames": {
+      "spec": {
+        "kind": "dropped_frames",
+        "start": 1013,
+        "length": 5,
+        "magnitude": 0.0
+      },
+      "expected_reasons": [
+        "dropped_frames"
+      ],
+      "window_ns": [
+        1403636909301666560,
+        1403636909551666432
+      ],
+      "detected": true,
+      "latency_ns": 255357372,
+      "false_alarms_outside_window": 1,
+      "reason_counts": {
+        "pose_jump": 1,
+        "dropped_frames": 1
+      }
+    },
+    "camera_outage": {
+      "spec": {
+        "kind": "camera_outage",
+        "start": 1520,
+        "length": 20,
+        "magnitude": 0.0
+      },
+      "expected_reasons": [
+        "no_messages"
+      ],
+      "window_ns": [
+        1403636934651666432,
+        1403636935651666432
+      ],
+      "detected": true,
+      "latency_ns": 375195520,
+      "false_alarms_outside_window": 1,
+      "reason_counts": {
+        "pose_jump": 1,
+        "no_messages": 13,
+        "dropped_frames": 1
+      }
+    },
+    "pose_jump": {
+      "spec": {
+        "kind": "pose_jump",
+        "start": 2026,
+        "length": 1,
+        "magnitude": 1.0
+      },
+      "expected_reasons": [
+        "pose_jump"
+      ],
+      "window_ns": [
+        1403636959951666432,
+        1403637010611587260
+      ],
+      "detected": true,
+      "latency_ns": 9119100,
+      "false_alarms_outside_window": 1,
+      "reason_counts": {
+        "pose_jump": 2
+      }
+    },
+    "stale_delivery": {
+      "spec": {
+        "kind": "stale_delivery",
+        "start": 760,
+        "length": 5,
+        "magnitude": 0.3
+      },
+      "expected_reasons": [
+        "stale"
+      ],
+      "window_ns": [
+        1403636896651666432,
+        1403636896901666560
+      ],
+      "detected": true,
+      "latency_ns": 302887700,
+      "false_alarms_outside_window": 1,
+      "reason_counts": {
+        "pose_jump": 1,
+        "dropped_frames": 1,
+        "stale": 5,
+        "capture_time_not_increasing": 5
+      }
+    },
+    "out_of_order": {
+      "spec": {
+        "kind": "out_of_order",
+        "start": 608,
+        "length": 1,
+        "magnitude": 0.0
+      },
+      "expected_reasons": [
+        "capture_time_not_increasing"
+      ],
+      "window_ns": [
+        1403636889051666432,
+        1403636889103615760
+      ],
+      "detected": true,
+      "latency_ns": 51949328,
+      "false_alarms_outside_window": 1,
+      "reason_counts": {
+        "pose_jump": 1,
+        "contract:publish_time_ns must not precede capture_time_ns": 1,
+        "dropped_frames": 1,
+        "capture_time_not_increasing": 1
+      }
+    },
+    "imu_time_offset": {
+      "spec": {
+        "kind": "imu_time_offset",
+        "start": 0,
+        "length": 1,
+        "magnitude": 0.05
+      },
+      "expected_reasons": [
+        "imu_time_offset"
+      ],
+      "window_ns": [
+        1403636858651666432,
+        1403637010611587260
+      ],
+      "detected": true,
+      "latency_ns": 2950811828,
+      "false_alarms_outside_window": 0,
+      "reason_counts": {
+        "imu_time_offset": 1621,
+        "pose_jump": 1
+      }
+    }
+  }
+}

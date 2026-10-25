@@ -1,0 +1,9 @@
+cuvslam @ file:///home/shiyue1128/.cache/aegisland-dl/cuvslam-17.0.1-cu12/cuvslam-17.0.1+cu12-cp310-cp310-manylinux_2_35_x86_64.whl
+numpy==2.2.4
+nvidia-cublas-cu12==12.6.4.1
+nvidia-cusolver-cu12==11.7.1.2
+nvidia-cusparse-cu12==12.5.4.2
+nvidia-nvjitlink-cu12==12.6.85
+pillow==12.2.0
+pyyaml==6.0.2
+scipy==1.14.1

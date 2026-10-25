@@ -1,0 +1,92 @@
+{
+ "tool": "benchmarks/gps_denied/sitl_hil_replay.py",
+ "control_output": "DISABLED",
+ "command_executed": false,
+ "px4": "v1.17.0 none_iris (simulator_mavlink, lockstep), localhost only",
+ "args": {
+  "px4_build": "/home/shiyue1128/work/px4/PX4-Autopilot-v1.17.0/build/px4_sitl_default",
+  "sequence": "/home/shiyue1128/aegisland-data/euroc/MH_05_difficult/mav0",
+  "cuvslam_run": "/home/shiyue1128/aegisland-agentic-vision/benchmarks/results/gps_denied/cuvslam-inertial-MH_05_difficult-20261024-102659-signals",
+  "vdr_run": "/home/shiyue1128/aegisland-agentic-vision/benchmarks/results/gps_denied/vdr-MH_05_difficult-20261024-032023",
+  "start_s": "12.0",
+  "rest_s": "3.0",
+  "duration_s": "95.0",
+  "policy": "supervised",
+  "fault": "none",
+  "fault_at_s": "30.0",
+  "fault_length_s": "2.0",
+  "latency_ms": "30.0",
+  "speed": "4.0",
+  "output": "/home/shiyue1128/work/demo-runs/demo-b-20261024-115848/MH_05-supervised"
+ },
+ "params": {
+  "SYS_HAS_MAG": 0,
+  "SYS_HAS_GPS": 0,
+  "SYS_HAS_BARO": 0,
+  "EKF2_MAG_TYPE": 5,
+  "EKF2_GPS_CTRL": 0,
+  "EKF2_BARO_CTRL": 0,
+  "EKF2_HGT_REF": 3,
+  "EKF2_EV_CTRL": 11,
+  "EKF2_EV_DELAY": 30.0,
+  "EKF2_EV_QMIN": 1,
+  "EKF2_EV_NOISE_MD": 0,
+  "EKF2_MULTI_IMU": 0,
+  "SENS_IMU_MODE": 1,
+  "IMU_INTEG_RATE": 200,
+  "COM_ARM_WO_GPS": 1
+ },
+ "t0_dataset_s": 1403638531.4928293,
+ "counts": {
+  "hil_sensor": 19001,
+  "odometry": 1899,
+  "actuator_replies": 18993
+ },
+ "gyro_bias_removed_rad_s": [
+  -0.0018771727595493087,
+  0.01985086960887266,
+  0.07723938632469778
+ ],
+ "frd_from_world": [
+  [
+   0.1906326302227327,
+   -0.38217800062015006,
+   0.9042119088666923
+  ],
+  [
+   0.9815044202885792,
+   0.09067934302619686,
+   -0.1686010963852783
+  ],
+  [
+   -0.017557711933604198,
+   0.9196288558925945,
+   0.3923958386136819
+  ]
+ ],
+ "body_from_frd": [
+  [
+   0.4012391515546615,
+   -0.01856328546736148,
+   -0.915785208273399
+  ],
+  [
+   0.025842610761830937,
+   0.9996260464843134,
+   -0.008940171091974689
+  ],
+  [
+   0.9156087061232586,
+   -0.020079134015154293,
+   0.40156883052410025
+  ]
+ ],
+ "origin_frd_m": [
+  0.14075938977336078,
+  0.16138352839354342,
+  0.05156305015689665
+ ],
+ "ulog": "/home/shiyue1128/work/demo-runs/demo-b-20261024-115848/MH_05-supervised/rootfs/log/2026-10-24/18_59_14.ulg",
+ "ulog_sha256": "0821d9f64114e49f3329498f5aafdbf8829170223064af1da2ebbcd27e3ddf78",
+ "wall_s": 24.758186286002456
+}

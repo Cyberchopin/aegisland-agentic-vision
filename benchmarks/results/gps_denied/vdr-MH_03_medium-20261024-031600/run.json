@@ -1,0 +1,31 @@
+{
+  "tool": "benchmarks/gps_denied/run_vdr_euroc.py",
+  "units": "normalized image units per frame; NOT meters",
+  "core": {
+    "commit": "6ad06a2eaab561e7ba44ba424dd6e6ba1afe48bb",
+    "tracked_files_dirty": true
+  },
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "opencv": "5.0.0",
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "sequence": "/home/shiyue1128/aegisland-data/euroc/MH_03_medium/mav0",
+  "image_shape": [
+    480,
+    752
+  ],
+  "max_frames": null,
+  "input_sha256": {
+    "cam0/data.csv": "20adca753a13194a0d6f498bd3fe867252c8883fb6e3400e16ec704aa5c28aaf"
+  },
+  "counts": {
+    "frames": 2700,
+    "compensation_success": 2699,
+    "valid": 2699
+  },
+  "timing_ms": {
+    "note": "compensate + update per frame, 1 OpenCV thread, excludes PNG decode",
+    "count": 2699,
+    "p50": 13.155057000403758,
+    "p95": 16.15370899980917
+  }
+}

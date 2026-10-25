@@ -1,0 +1,144 @@
+{
+ "tool": "benchmarks/gps_denied/depth_sectors_euroc.py",
+ "claims": "SGBM stand-in for OAK depth on EuRoC; no depth ground truth -> proxy numbers only; development machine CPU (not Orin); no control output",
+ "sequence": "/home/shiyue1128/aegisland-data/euroc/MH_05_difficult/mav0",
+ "frames": 300,
+ "stride": 5,
+ "rectified_intrinsics": {
+  "fx": 415.0498836681906,
+  "fy": 415.0498836681906,
+  "cx": 368.2410728246323,
+  "cy": 255.0066263657065
+ },
+ "baseline_m": 0.10998606903486488,
+ "config": {
+  "sectors": 7,
+  "horizontal_fov_deg": 70.0,
+  "vertical_band_deg": 15.0,
+  "min_range_m": 0.48052321218991845,
+  "max_range_m": 10.0,
+  "percentile": 5.0,
+  "min_valid_fraction": 0.2,
+  "min_valid_pixels": 50,
+  "max_age_ms": 200.0
+ },
+ "frame_valid_fraction": {
+  "p10": 0.41863365198016245,
+  "p50": 0.9397541867318335
+ },
+ "timing_ms": {
+  "rectify_ms": {
+   "p50": 3.1989600029191934,
+   "p95": 3.783342848328175
+  },
+  "sgbm_ms": {
+   "p50": 45.625951999682,
+   "p95": 48.653171250771265
+  },
+  "sectors_ms": {
+   "p50": 7.896701503341319,
+   "p95": 8.993587155418936
+  }
+ },
+ "per_sector": [
+  {
+   "azimuth_deg": [
+    -35.0,
+    -25.0
+   ],
+   "valid_rate": 1.0,
+   "nearest_m_p10_p50": [
+    0.5403232591331429,
+    4.118623696486763
+   ],
+   "reasons": {
+    "ok": 300
+   }
+  },
+  {
+   "azimuth_deg": [
+    -25.0,
+    -15.0
+   ],
+   "valid_rate": 1.0,
+   "nearest_m_p10_p50": [
+    0.5038274894279201,
+    4.155614585134014
+   ],
+   "reasons": {
+    "ok": 300
+   }
+  },
+  {
+   "azimuth_deg": [
+    -15.0,
+    -5.0
+   ],
+   "valid_rate": 1.0,
+   "nearest_m_p10_p50": [
+    0.4856953886263646,
+    4.315447805281524
+   ],
+   "reasons": {
+    "ok": 300
+   }
+  },
+  {
+   "azimuth_deg": [
+    -5.0,
+    5.0
+   ],
+   "valid_rate": 0.9666666666666667,
+   "nearest_m_p10_p50": [
+    0.4822883806708352,
+    4.61018370112196
+   ],
+   "reasons": {
+    "ok": 290,
+    "returns inside min range (blind zone)": 10
+   }
+  },
+  {
+   "azimuth_deg": [
+    5.0,
+    15.0
+   ],
+   "valid_rate": 1.0,
+   "nearest_m_p10_p50": [
+    0.4864132059749669,
+    4.535823200375749
+   ],
+   "reasons": {
+    "ok": 300
+   }
+  },
+  {
+   "azimuth_deg": [
+    15.0,
+    25.0
+   ],
+   "valid_rate": 1.0,
+   "nearest_m_p10_p50": [
+    0.504277432022581,
+    4.55004445285685
+   ],
+   "reasons": {
+    "ok": 300
+   }
+  },
+  {
+   "azimuth_deg": [
+    25.0,
+    35.0
+   ],
+   "valid_rate": 1.0,
+   "nearest_m_p10_p50": [
+    0.5415214466853441,
+    4.6059427637537524
+   ],
+   "reasons": {
+    "ok": 300
+   }
+  }
+ ]
+}

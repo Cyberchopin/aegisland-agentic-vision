@@ -1,0 +1,43 @@
+{
+ "tool": "benchmarks/gps_denied/preflight_sitl_check.py",
+ "control_output": "DISABLED",
+ "command_executed": false,
+ "scope": "PX4 v1.17.0 SITL (SIH) on localhost; not a check of the real vehicle",
+ "all_pass": true,
+ "checks": {
+  "1_frames": {
+   "pass": true,
+   "heading_error_deg": 0.01630000000000109,
+   "bridge_refuses": {
+    "odom_dataset": true,
+    "odom_enu": true
+   },
+   "detail": "sent 35.0 deg FRD; EKF2 heading error 0.02 deg"
+  },
+  "2_timesync": {
+   "pass": true,
+   "timesync_replies": 880,
+   "latency_sent_ms": 150.0,
+   "latency_kept_ms": 159.65,
+   "detail": "PX4 must keep >= 50% of the capture latency once TIMESYNC converged"
+  },
+  "3_slow_drift": {
+   "pass": true,
+   "EKF2_EV_QMIN": 1,
+   "drift_sent_m": 1.0,
+   "drift_followed_by_ekf2_m": 0.00990000000000002,
+   "detail": "slow drift marked untrusted must not move the EKF2 position"
+  },
+  "4_quality0_failsafe": {
+   "pass": true,
+   "quality_for_degraded": 80,
+   "quality_for_untrusted": 0,
+   "untrusted_to_position_invalid_s": 4.360000000000001,
+   "expected_band_s": [
+    2.0,
+    15.0
+   ],
+   "detail": "quality 0 makes EKF2 dead-reckon; position goes invalid -> failsafe"
+  }
+ }
+}

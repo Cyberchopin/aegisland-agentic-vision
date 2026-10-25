@@ -1,0 +1,28 @@
+{
+ "tool": "benchmarks/gps_denied/preflight_sitl_check.py",
+ "control_output": "DISABLED",
+ "command_executed": false,
+ "scope": "PX4 v1.17.0 SITL (SIH) on localhost; not a check of the real vehicle",
+ "ekf2_ev_qmin_under_test": 0,
+ "all_pass": false,
+ "checks": {
+  "3_slow_drift": {
+   "pass": false,
+   "EKF2_EV_QMIN": 0,
+   "drift_sent_m": 1.0,
+   "drift_followed_by_ekf2_m": 0.9973000000000001,
+   "detail": "slow drift marked untrusted must not move the EKF2 position"
+  },
+  "4_quality0_failsafe": {
+   "pass": false,
+   "quality_for_degraded": 80,
+   "quality_for_untrusted": 0,
+   "untrusted_to_position_invalid_s": null,
+   "expected_band_s": [
+    2.0,
+    15.0
+   ],
+   "detail": "quality 0 makes EKF2 dead-reckon; position goes invalid -> failsafe"
+  }
+ }
+}

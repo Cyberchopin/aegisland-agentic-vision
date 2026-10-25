@@ -1,0 +1,209 @@
+{
+  "tool": "benchmarks/gps_denied/compare_motion_direction.py",
+  "limits": [
+    "VDR units are normalized image motion; no meter comparison is made.",
+    "Predicted center flow needs a depth assumption; results are given per depth.",
+    "VDR fits one homography to the distorted fisheye image; this is part of what is being measured, not corrected for.",
+    "Agreement in direction says nothing about accumulated drift or position error.",
+    "Single sequence; not representative of the competition camera or arena."
+  ],
+  "inputs": {
+    "sequence": "/home/shiyue1128/aegisland-data/synthetic-euroc/20261024-synthetic-s7/mav0",
+    "vdr_run": "/home/shiyue1128/aegisland-agentic-vision/benchmarks/results/gps_denied/vdr-20261024-synthetic-s7-run1",
+    "vdr_frames_sha256": "bf5546a122d592df8385fd411fbbe55faeb880bd30ee94b440f5ba4c65adb3b6",
+    "cuvslam_run": "/home/shiyue1128/aegisland-agentic-vision/benchmarks/results/gps_denied/cuvslam-stereo-20261024-synthetic-s7-run1",
+    "cuvslam_trajectory_sha256": "5eeb2c0a271fb6660979f1502f0b196bb7876635384363669f4be7816bfb51b4"
+  },
+  "extrinsics": {
+    "source": "imu0/sensor_recalibrated.yaml (cam0_from_imu), inverted"
+  },
+  "center_ray_cam0": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "frame_pairs": 199,
+  "direction_agreement": {
+    "inf_rotation_only": {
+      "vdr_vs_groundtruth": {
+        "used": 0,
+        "skipped_small_reference": 199,
+        "skipped_missing_estimate": 0,
+        "minimum_reference_px": 1.0,
+        "cosine_median": null,
+        "cosine_mean": null,
+        "fraction_same_half_plane": null,
+        "fraction_within_45_deg": null,
+        "magnitude_ratio_median": null
+      },
+      "cuvslam_vs_groundtruth": {
+        "used": 0,
+        "skipped_small_reference": 199,
+        "skipped_missing_estimate": 0,
+        "minimum_reference_px": 1.0,
+        "cosine_median": null,
+        "cosine_mean": null,
+        "fraction_same_half_plane": null,
+        "fraction_within_45_deg": null,
+        "magnitude_ratio_median": null
+      },
+      "vdr_vs_cuvslam": {
+        "used": 0,
+        "skipped_small_reference": 199,
+        "skipped_missing_estimate": 0,
+        "minimum_reference_px": 1.0,
+        "cosine_median": null,
+        "cosine_mean": null,
+        "fraction_same_half_plane": null,
+        "fraction_within_45_deg": null,
+        "magnitude_ratio_median": null
+      }
+    },
+    "2m": {
+      "vdr_vs_groundtruth": {
+        "used": 199,
+        "skipped_small_reference": 0,
+        "skipped_missing_estimate": 0,
+        "minimum_reference_px": 1.0,
+        "cosine_median": 0.9953055646409914,
+        "cosine_mean": 0.989441987409863,
+        "fraction_same_half_plane": 1.0,
+        "fraction_within_45_deg": 1.0,
+        "magnitude_ratio_median": 0.5779215466277534
+      },
+      "cuvslam_vs_groundtruth": {
+        "used": 199,
+        "skipped_small_reference": 0,
+        "skipped_missing_estimate": 0,
+        "minimum_reference_px": 1.0,
+        "cosine_median": 0.9999499949088211,
+        "cosine_mean": 0.9998601334256196,
+        "fraction_same_half_plane": 1.0,
+        "fraction_within_45_deg": 1.0,
+        "magnitude_ratio_median": 1.0153350314969138
+      },
+      "vdr_vs_cuvslam": {
+        "used": 199,
+        "skipped_small_reference": 0,
+        "skipped_missing_estimate": 0,
+        "minimum_reference_px": 1.0,
+        "cosine_median": 0.9944165093891353,
+        "cosine_mean": 0.9898214650625904,
+        "fraction_same_half_plane": 1.0,
+        "fraction_within_45_deg": 1.0,
+        "magnitude_ratio_median": 0.5726564999886168
+      }
+    },
+    "5m": {
+      "vdr_vs_groundtruth": {
+        "used": 137,
+        "skipped_small_reference": 62,
+        "skipped_missing_estimate": 0,
+        "minimum_reference_px": 1.0,
+        "cosine_median": 0.997779293764391,
+        "cosine_mean": 0.9954676303596557,
+        "fraction_same_half_plane": 1.0,
+        "fraction_within_45_deg": 1.0,
+        "magnitude_ratio_median": 1.1675902902178104
+      },
+      "cuvslam_vs_groundtruth": {
+        "used": 137,
+        "skipped_small_reference": 62,
+        "skipped_missing_estimate": 0,
+        "minimum_reference_px": 1.0,
+        "cosine_median": 0.999985053805065,
+        "cosine_mean": 0.9999612377029305,
+        "fraction_same_half_plane": 1.0,
+        "fraction_within_45_deg": 1.0,
+        "magnitude_ratio_median": 1.0104779893928098
+      },
+      "vdr_vs_cuvslam": {
+        "used": 138,
+        "skipped_small_reference": 61,
+        "skipped_missing_estimate": 0,
+        "minimum_reference_px": 1.0,
+        "cosine_median": 0.9977719957539724,
+        "cosine_mean": 0.9954866776841096,
+        "fraction_same_half_plane": 1.0,
+        "fraction_within_45_deg": 1.0,
+        "magnitude_ratio_median": 1.154689999488368
+      }
+    },
+    "10m": {
+      "vdr_vs_groundtruth": {
+        "used": 103,
+        "skipped_small_reference": 96,
+        "skipped_missing_estimate": 0,
+        "minimum_reference_px": 1.0,
+        "cosine_median": 0.9850512919348187,
+        "cosine_mean": 0.9800024529521635,
+        "fraction_same_half_plane": 1.0,
+        "fraction_within_45_deg": 1.0,
+        "magnitude_ratio_median": 1.673724690232203
+      },
+      "cuvslam_vs_groundtruth": {
+        "used": 103,
+        "skipped_small_reference": 96,
+        "skipped_missing_estimate": 0,
+        "minimum_reference_px": 1.0,
+        "cosine_median": 0.9998828241735979,
+        "cosine_mean": 0.9997100221116342,
+        "fraction_same_half_plane": 1.0,
+        "fraction_within_45_deg": 1.0,
+        "magnitude_ratio_median": 1.0084309991681537
+      },
+      "vdr_vs_cuvslam": {
+        "used": 106,
+        "skipped_small_reference": 93,
+        "skipped_missing_estimate": 0,
+        "minimum_reference_px": 1.0,
+        "cosine_median": 0.9854575949992035,
+        "cosine_mean": 0.9804804271495973,
+        "fraction_same_half_plane": 1.0,
+        "fraction_within_45_deg": 1.0,
+        "magnitude_ratio_median": 1.6678784486107512
+      }
+    }
+  },
+  "failure_behavior": {
+    "vdr_compensation_success_fraction": 1.0,
+    "vdr_valid_fraction": 1.0,
+    "vdr_invalid_by_groundtruth_angular_speed_rad_s": [
+      {
+        "low": 0.0,
+        "high": 0.25,
+        "frames": 199,
+        "invalid_fraction": 0.0
+      },
+      {
+        "low": 0.25,
+        "high": 0.5,
+        "frames": 0,
+        "invalid_fraction": null
+      },
+      {
+        "low": 0.5,
+        "high": 1.0,
+        "frames": 0,
+        "invalid_fraction": null
+      },
+      {
+        "low": 1.0,
+        "high": 2.0,
+        "frames": 0,
+        "invalid_fraction": null
+      },
+      {
+        "low": 2.0,
+        "high": 100.0,
+        "frames": 0,
+        "invalid_fraction": null
+      }
+    ],
+    "cuvslam_tracked_fraction": 1.0,
+    "cuvslam_untracked_gaps_frames": []
+  },
+  "clock_alignment": {
+    "skipped": "/home/shiyue1128/aegisland-data/synthetic-euroc/20261024-synthetic-s7/mav0/imu0/data.csv not found"
+  }
+}

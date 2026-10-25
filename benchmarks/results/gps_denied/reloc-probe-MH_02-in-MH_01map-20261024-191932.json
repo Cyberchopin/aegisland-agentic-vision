@@ -1,0 +1,143 @@
+{
+ "tool": "benchmarks/gps_denied/reloc_probe.py",
+ "map": "/home/shiyue1128/aegisland-data/maps/MH_01-stereo-slam-sync-20261024-180215",
+ "sequence": "/home/shiyue1128/aegisland-data/euroc/MH_02_easy/mav0",
+ "settings": {
+  "radius_m": 2.0,
+  "step_m": 0.25,
+  "angular_step_rad": 0.03,
+  "warmup": 1
+ },
+ "results": [
+  {
+   "guess": "/tmp/claude-1000/-home-shiyue1128/92c90bc8-2288-4cd0-9fa5-b55ed49bad10/scratchpad/mh02guess-40.json",
+   "frame": 40,
+   "perturbation": {
+    "position_m": 0.0,
+    "yaw_deg": 0.0
+   },
+   "success": true,
+   "message": "",
+   "translation": [
+    -0.05463586747646332,
+    0.2283625602722168,
+    0.11594729125499725
+   ],
+   "duration_s": 0.33559868500015,
+   "distance_from_guess_m": 0.011089699307522157
+  },
+  {
+   "guess": "/tmp/claude-1000/-home-shiyue1128/92c90bc8-2288-4cd0-9fa5-b55ed49bad10/scratchpad/mh02guess-300.json",
+   "frame": 300,
+   "perturbation": {
+    "position_m": 0.0,
+    "yaw_deg": 0.0
+   },
+   "success": false,
+   "message": "Can't localize in map using provided image and guess",
+   "duration_s": 26.49486440900364
+  },
+  {
+   "guess": "/tmp/claude-1000/-home-shiyue1128/92c90bc8-2288-4cd0-9fa5-b55ed49bad10/scratchpad/mh02guess-600.json",
+   "frame": 600,
+   "perturbation": {
+    "position_m": 0.0,
+    "yaw_deg": 0.0
+   },
+   "success": true,
+   "message": "",
+   "translation": [
+    0.007446736097335815,
+    0.29550015926361084,
+    0.29154741764068604
+   ],
+   "duration_s": 0.43539086500095436,
+   "distance_from_guess_m": 0.01098863828832189
+  },
+  {
+   "guess": "/tmp/claude-1000/-home-shiyue1128/92c90bc8-2288-4cd0-9fa5-b55ed49bad10/scratchpad/mh02guess-1000.json",
+   "frame": 1000,
+   "perturbation": {
+    "position_m": 0.0,
+    "yaw_deg": 0.0
+   },
+   "success": true,
+   "message": "",
+   "translation": [
+    2.569110870361328,
+    -1.5084612369537354,
+    3.43477201461792
+   ],
+   "duration_s": 0.40385062099812785,
+   "distance_from_guess_m": 0.02419691825236421
+  },
+  {
+   "guess": "/tmp/claude-1000/-home-shiyue1128/92c90bc8-2288-4cd0-9fa5-b55ed49bad10/scratchpad/mh02guess-1400.json",
+   "frame": 1400,
+   "perturbation": {
+    "position_m": 0.0,
+    "yaw_deg": 0.0
+   },
+   "success": true,
+   "message": "",
+   "translation": [
+    7.255768775939941,
+    -2.8359553813934326,
+    9.522462844848633
+   ],
+   "duration_s": 0.3165824129973771,
+   "distance_from_guess_m": 0.02214029553898836
+  },
+  {
+   "guess": "/tmp/claude-1000/-home-shiyue1128/92c90bc8-2288-4cd0-9fa5-b55ed49bad10/scratchpad/mh02guess-1800.json",
+   "frame": 1800,
+   "perturbation": {
+    "position_m": 0.0,
+    "yaw_deg": 0.0
+   },
+   "success": true,
+   "message": "",
+   "translation": [
+    4.300467014312744,
+    -0.3526274561882019,
+    4.311916351318359
+   ],
+   "duration_s": 1.3491579900000943,
+   "distance_from_guess_m": 0.01465516395695539
+  },
+  {
+   "guess": "/tmp/claude-1000/-home-shiyue1128/92c90bc8-2288-4cd0-9fa5-b55ed49bad10/scratchpad/mh02guess-2200.json",
+   "frame": 2200,
+   "perturbation": {
+    "position_m": 0.0,
+    "yaw_deg": 0.0
+   },
+   "success": true,
+   "message": "",
+   "translation": [
+    4.474720478057861,
+    -1.3285083770751953,
+    6.693787574768066
+   ],
+   "duration_s": 0.23042133900162298,
+   "distance_from_guess_m": 0.021083062734498274
+  },
+  {
+   "guess": "/tmp/claude-1000/-home-shiyue1128/92c90bc8-2288-4cd0-9fa5-b55ed49bad10/scratchpad/mh02guess-2600.json",
+   "frame": 2600,
+   "perturbation": {
+    "position_m": 0.0,
+    "yaw_deg": 0.0
+   },
+   "success": true,
+   "message": "",
+   "translation": [
+    7.110308647155762,
+    -1.7581682205200195,
+    9.756389617919922
+   ],
+   "duration_s": 0.19791108899516985,
+   "distance_from_guess_m": 0.0523620729505428
+  }
+ ]
+}

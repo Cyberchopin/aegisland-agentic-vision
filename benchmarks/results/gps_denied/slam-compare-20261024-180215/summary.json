@@ -1,0 +1,1125 @@
+{
+ "tool": "benchmarks/gps_denied/slam_compare.py",
+ "tag": "20261024-180215",
+ "claims": "EuRoC replay at 20 fps on the development GPU (not Orin)",
+ "groups": {
+  "MH_04_difficult/inertial/noslam": {
+   "runs": 2,
+   "ate_trajectory_body": [
+    0.1677,
+    0.1677
+   ],
+   "track_ms_p50": [
+    8.6958,
+    8.7016
+   ],
+   "track_ms_p95": [
+    38.0551,
+    39.595
+   ]
+  },
+  "MH_04_difficult/inertial/slam-async": {
+   "runs": 2,
+   "ate_trajectory_body": [
+    0.1677,
+    0.1677
+   ],
+   "ate_trajectory_slam_body": [
+    0.1093,
+    0.109
+   ],
+   "ate_trajectory_slam_smoothed_body": [
+    0.0775,
+    0.0809
+   ],
+   "track_ms_p50": [
+    8.7136,
+    8.589
+   ],
+   "track_ms_p95": [
+    46.78,
+    47.2573
+   ],
+   "loop_closures": [
+    27,
+    25
+   ],
+   "peak_rss_mib": [
+    547.0938,
+    547.957
+   ]
+  },
+  "MH_04_difficult/inertial/slam-sync": {
+   "runs": 2,
+   "ate_trajectory_body": [
+    0.1677,
+    0.1677
+   ],
+   "ate_trajectory_slam_body": [
+    0.1134,
+    0.1134
+   ],
+   "ate_trajectory_slam_smoothed_body": [
+    0.0721,
+    0.0721
+   ],
+   "track_ms_p50": [
+    8.3257,
+    8.4156
+   ],
+   "track_ms_p95": [
+    47.4889,
+    47.2941
+   ],
+   "loop_closures": [
+    28,
+    28
+   ],
+   "peak_rss_mib": [
+    540.375,
+    541.0938
+   ]
+  },
+  "MH_05_difficult/inertial/noslam": {
+   "runs": 2,
+   "ate_trajectory_body": [
+    0.1748,
+    0.1599
+   ],
+   "track_ms_p50": [
+    8.5728,
+    8.6348
+   ],
+   "track_ms_p95": [
+    36.4764,
+    36.5085
+   ]
+  },
+  "MH_05_difficult/inertial/slam-async": {
+   "runs": 2,
+   "ate_trajectory_body": [
+    0.1599,
+    0.1599
+   ],
+   "ate_trajectory_slam_body": [
+    0.1448,
+    0.1485
+   ],
+   "ate_trajectory_slam_smoothed_body": [
+    0.0809,
+    0.0862
+   ],
+   "track_ms_p50": [
+    8.434,
+    8.3217
+   ],
+   "track_ms_p95": [
+    46.1268,
+    46.4212
+   ],
+   "loop_closures": [
+    28,
+    28
+   ],
+   "peak_rss_mib": [
+    550.8477,
+    551.5117
+   ]
+  },
+  "MH_05_difficult/inertial/slam-sync": {
+   "runs": 2,
+   "ate_trajectory_body": [
+    0.1599,
+    0.1599
+   ],
+   "ate_trajectory_slam_body": [
+    0.1431,
+    0.1431
+   ],
+   "ate_trajectory_slam_smoothed_body": [
+    0.0825,
+    0.0825
+   ],
+   "track_ms_p50": [
+    8.4574,
+    8.6492
+   ],
+   "track_ms_p95": [
+    44.3641,
+    47.0637
+   ],
+   "loop_closures": [
+    27,
+    27
+   ],
+   "peak_rss_mib": [
+    544.5742,
+    543.707
+   ]
+  },
+  "MH_04_difficult/stereo/noslam": {
+   "runs": 2,
+   "ate_trajectory_body": [
+    0.097,
+    0.097
+   ],
+   "track_ms_p50": [
+    7.7789,
+    7.9896
+   ],
+   "track_ms_p95": [
+    52.0674,
+    50.6765
+   ]
+  },
+  "MH_04_difficult/stereo/slam-async": {
+   "runs": 2,
+   "ate_trajectory_body": [
+    0.097,
+    0.097
+   ],
+   "ate_trajectory_slam_body": [
+    0.0745,
+    0.1097
+   ],
+   "ate_trajectory_slam_smoothed_body": [
+    0.1089,
+    0.0899
+   ],
+   "track_ms_p50": [
+    7.3121,
+    7.5985
+   ],
+   "track_ms_p95": [
+    51.7304,
+    54.9398
+   ],
+   "loop_closures": [
+    29,
+    29
+   ],
+   "peak_rss_mib": [
+    527.6328,
+    527.8242
+   ]
+  },
+  "MH_04_difficult/stereo/slam-sync": {
+   "runs": 2,
+   "ate_trajectory_body": [
+    0.097,
+    0.097
+   ],
+   "ate_trajectory_slam_body": [
+    0.078,
+    0.078
+   ],
+   "ate_trajectory_slam_smoothed_body": [
+    0.0894,
+    0.0894
+   ],
+   "track_ms_p50": [
+    7.7308,
+    7.6908
+   ],
+   "track_ms_p95": [
+    60.0073,
+    58.9858
+   ],
+   "loop_closures": [
+    31,
+    31
+   ],
+   "peak_rss_mib": [
+    525.5,
+    524.707
+   ]
+  },
+  "MH_05_difficult/stereo/noslam": {
+   "runs": 2,
+   "ate_trajectory_body": [
+    0.1545,
+    0.1485
+   ],
+   "track_ms_p50": [
+    6.75,
+    7.6086
+   ],
+   "track_ms_p95": [
+    28.8364,
+    48.8238
+   ]
+  },
+  "MH_05_difficult/stereo/slam-async": {
+   "runs": 2,
+   "ate_trajectory_body": [
+    0.1485,
+    0.1545
+   ],
+   "ate_trajectory_slam_body": [
+    0.0989,
+    0.1062
+   ],
+   "ate_trajectory_slam_smoothed_body": [
+    0.0923,
+    0.1
+   ],
+   "track_ms_p50": [
+    7.3477,
+    7.7375
+   ],
+   "track_ms_p95": [
+    50.3071,
+    52.8879
+   ],
+   "loop_closures": [
+    29,
+    25
+   ],
+   "peak_rss_mib": [
+    528.8281,
+    528.8594
+   ]
+  },
+  "MH_05_difficult/stereo/slam-sync": {
+   "runs": 2,
+   "ate_trajectory_body": [
+    0.1485,
+    0.1485
+   ],
+   "ate_trajectory_slam_body": [
+    0.1064,
+    0.1064
+   ],
+   "ate_trajectory_slam_smoothed_body": [
+    0.0913,
+    0.0913
+   ],
+   "track_ms_p50": [
+    7.7968,
+    7.9781
+   ],
+   "track_ms_p95": [
+    55.0672,
+    58.0842
+   ],
+   "loop_closures": [
+    29,
+    29
+   ],
+   "peak_rss_mib": [
+    525.3359,
+    525.6211
+   ]
+  }
+ },
+ "runs": [
+  {
+   "run": "cuvslam-inertial-MH_04_difficult-20261024-180215-noslam-run1",
+   "mode": "inertial",
+   "sequence": "MH_04_difficult",
+   "config": "noslam",
+   "repeat": 1,
+   "track_ms_p50": 8.695804994204082,
+   "track_ms_p95": 38.05510549864266,
+   "track_ms_max": 173.89369000011357,
+   "sm_clock_mhz": {
+    "min": 210.0,
+    "median": 210.0,
+    "max": 2535.0
+   },
+   "valid_for_performance": true,
+   "ate_trajectory_body": 0.16768528881091965,
+   "dark_segment_rel_s": [
+    54.704999923706055,
+    68.60499978065491
+   ],
+   "window_rms_trajectory_body": {
+    "before_dark_20s": 0.1386458993260676,
+    "dark": 0.16414703344200818,
+    "after_dark_20s": 0.2219072974913597,
+    "last_10s": 0.18342233480608577
+   }
+  },
+  {
+   "run": "cuvslam-inertial-MH_04_difficult-20261024-180215-noslam-run2",
+   "mode": "inertial",
+   "sequence": "MH_04_difficult",
+   "config": "noslam",
+   "repeat": 2,
+   "track_ms_p50": 8.70163499348564,
+   "track_ms_p95": 39.5950285019353,
+   "track_ms_max": 163.18795300321653,
+   "sm_clock_mhz": {
+    "min": 210.0,
+    "median": 210.0,
+    "max": 2535.0
+   },
+   "valid_for_performance": true,
+   "ate_trajectory_body": 0.16768528881091965,
+   "dark_segment_rel_s": [
+    54.704999923706055,
+    68.60499978065491
+   ],
+   "window_rms_trajectory_body": {
+    "before_dark_20s": 0.1386458993260676,
+    "dark": 0.16414703344200818,
+    "after_dark_20s": 0.2219072974913597,
+    "last_10s": 0.18342233480608577
+   }
+  },
+  {
+   "run": "cuvslam-inertial-MH_04_difficult-20261024-180215-slam-async-run1",
+   "mode": "inertial",
+   "sequence": "MH_04_difficult",
+   "config": "slam-async",
+   "repeat": 1,
+   "track_ms_p50": 8.713636998436414,
+   "track_ms_p95": 46.78002199943876,
+   "track_ms_max": 162.28201599733438,
+   "sm_clock_mhz": {
+    "min": 210.0,
+    "median": 210.0,
+    "max": 2535.0
+   },
+   "valid_for_performance": true,
+   "loop_closures": 27,
+   "peak_rss_mib": 547.09375,
+   "ate_trajectory_body": 0.16768528881091965,
+   "ate_trajectory_slam_body": 0.10929249438866664,
+   "ate_trajectory_slam_smoothed_body": 0.07745784853568646,
+   "dark_segment_rel_s": [
+    54.704999923706055,
+    68.60499978065491
+   ],
+   "window_rms_trajectory_body": {
+    "before_dark_20s": 0.1386458993260676,
+    "dark": 0.16414703344200818,
+    "after_dark_20s": 0.2219072974913597,
+    "last_10s": 0.18342233480608577
+   },
+   "window_rms_trajectory_slam_body": {
+    "before_dark_20s": 0.10442988461850748,
+    "dark": 0.15027357631053273,
+    "after_dark_20s": 0.12389924436338837,
+    "last_10s": 0.08224626060542457
+   }
+  },
+  {
+   "run": "cuvslam-inertial-MH_04_difficult-20261024-180215-slam-async-run2",
+   "mode": "inertial",
+   "sequence": "MH_04_difficult",
+   "config": "slam-async",
+   "repeat": 2,
+   "track_ms_p50": 8.589004995883442,
+   "track_ms_p95": 47.25732149745454,
+   "track_ms_max": 163.7573119951412,
+   "sm_clock_mhz": {
+    "min": 210.0,
+    "median": 210.0,
+    "max": 2535.0
+   },
+   "valid_for_performance": true,
+   "loop_closures": 25,
+   "peak_rss_mib": 547.95703125,
+   "ate_trajectory_body": 0.16768528881091965,
+   "ate_trajectory_slam_body": 0.10896570556974626,
+   "ate_trajectory_slam_smoothed_body": 0.08086518060983428,
+   "dark_segment_rel_s": [
+    54.704999923706055,
+    68.60499978065491
+   ],
+   "window_rms_trajectory_body": {
+    "before_dark_20s": 0.1386458993260676,
+    "dark": 0.16414703344200818,
+    "after_dark_20s": 0.2219072974913597,
+    "last_10s": 0.18342233480608577
+   },
+   "window_rms_trajectory_slam_body": {
+    "before_dark_20s": 0.10531193128110021,
+    "dark": 0.15065775827585282,
+    "after_dark_20s": 0.12223312466147314,
+    "last_10s": 0.08219647760100735
+   }
+  },
+  {
+   "run": "cuvslam-inertial-MH_04_difficult-20261024-180215-slam-sync-run1",
+   "mode": "inertial",
+   "sequence": "MH_04_difficult",
+   "config": "slam-sync",
+   "repeat": 1,
+   "track_ms_p50": 8.325733004312497,
+   "track_ms_p95": 47.488853000686504,
+   "track_ms_max": 251.469326998631,
+   "sm_clock_mhz": {
+    "min": 210.0,
+    "median": 210.0,
+    "max": 2535.0
+   },
+   "valid_for_performance": true,
+   "loop_closures": 28,
+   "peak_rss_mib": 540.375,
+   "ate_trajectory_body": 0.16768528881091965,
+   "ate_trajectory_slam_body": 0.11343183922932949,
+   "ate_trajectory_slam_smoothed_body": 0.07214772875534557,
+   "dark_segment_rel_s": [
+    54.704999923706055,
+    68.60499978065491
+   ],
+   "window_rms_trajectory_body": {
+    "before_dark_20s": 0.1386458993260676,
+    "dark": 0.16414703344200818,
+    "after_dark_20s": 0.2219072974913597,
+    "last_10s": 0.18342233480608577
+   },
+   "window_rms_trajectory_slam_body": {
+    "before_dark_20s": 0.10795489957640875,
+    "dark": 0.15054819863524338,
+    "after_dark_20s": 0.13952715086723275,
+    "last_10s": 0.08111725653283236
+   }
+  },
+  {
+   "run": "cuvslam-inertial-MH_04_difficult-20261024-180215-slam-sync-run2",
+   "mode": "inertial",
+   "sequence": "MH_04_difficult",
+   "config": "slam-sync",
+   "repeat": 2,
+   "track_ms_p50": 8.415618001890834,
+   "track_ms_p95": 47.294055999373086,
+   "track_ms_max": 244.52282099809963,
+   "sm_clock_mhz": {
+    "min": 210.0,
+    "median": 210.0,
+    "max": 2535.0
+   },
+   "valid_for_performance": true,
+   "loop_closures": 28,
+   "peak_rss_mib": 541.09375,
+   "ate_trajectory_body": 0.16768528881091965,
+   "ate_trajectory_slam_body": 0.11343183922932949,
+   "ate_trajectory_slam_smoothed_body": 0.07214772875534557,
+   "dark_segment_rel_s": [
+    54.704999923706055,
+    68.60499978065491
+   ],
+   "window_rms_trajectory_body": {
+    "before_dark_20s": 0.1386458993260676,
+    "dark": 0.16414703344200818,
+    "after_dark_20s": 0.2219072974913597,
+    "last_10s": 0.18342233480608577
+   },
+   "window_rms_trajectory_slam_body": {
+    "before_dark_20s": 0.10795489957640875,
+    "dark": 0.15054819863524338,
+    "after_dark_20s": 0.13952715086723275,
+    "last_10s": 0.08111725653283236
+   }
+  },
+  {
+   "run": "cuvslam-inertial-MH_05_difficult-20261024-180215-noslam-run1",
+   "mode": "inertial",
+   "sequence": "MH_05_difficult",
+   "config": "noslam",
+   "repeat": 1,
+   "track_ms_p50": 8.572798502427759,
+   "track_ms_p95": 36.47635505149081,
+   "track_ms_max": 135.70608900045045,
+   "sm_clock_mhz": {
+    "min": 210.0,
+    "median": 210.0,
+    "max": 2535.0
+   },
+   "valid_for_performance": true,
+   "ate_trajectory_body": 0.17483022497677553,
+   "dark_segment_rel_s": [
+    57.235000133514404,
+    71.7350001335144
+   ],
+   "window_rms_trajectory_body": {
+    "before_dark_20s": 0.0920478792374155,
+    "dark": 0.1566970612776973,
+    "after_dark_20s": 0.21303262859251795,
+    "last_10s": 0.12422895989450058
+   }
+  },
+  {
+   "run": "cuvslam-inertial-MH_05_difficult-20261024-180215-noslam-run2",
+   "mode": "inertial",
+   "sequence": "MH_05_difficult",
+   "config": "noslam",
+   "repeat": 2,
+   "track_ms_p50": 8.634786998300115,
+   "track_ms_p95": 36.50847294957199,
+   "track_ms_max": 146.36211399920285,
+   "sm_clock_mhz": {
+    "min": 210.0,
+    "median": 210.0,
+    "max": 2535.0
+   },
+   "valid_for_performance": true,
+   "ate_trajectory_body": 0.15990253495890736,
+   "dark_segment_rel_s": [
+    57.235000133514404,
+    71.7350001335144
+   ],
+   "window_rms_trajectory_body": {
+    "before_dark_20s": 0.0880212225663699,
+    "dark": 0.15075054901828902,
+    "after_dark_20s": 0.18875946266479599,
+    "last_10s": 0.10610126596830567
+   }
+  },
+  {
+   "run": "cuvslam-inertial-MH_05_difficult-20261024-180215-slam-async-run1",
+   "mode": "inertial",
+   "sequence": "MH_05_difficult",
+   "config": "slam-async",
+   "repeat": 1,
+   "track_ms_p50": 8.433957496890798,
+   "track_ms_p95": 46.126833954258466,
+   "track_ms_max": 161.58901200105902,
+   "sm_clock_mhz": {
+    "min": 210.0,
+    "median": 210.0,
+    "max": 2535.0
+   },
+   "valid_for_performance": true,
+   "loop_closures": 28,
+   "peak_rss_mib": 550.84765625,
+   "ate_trajectory_body": 0.15990253495890736,
+   "ate_trajectory_slam_body": 0.14482972015598083,
+   "ate_trajectory_slam_smoothed_body": 0.08090492998664583,
+   "dark_segment_rel_s": [
+    57.235000133514404,
+    71.7350001335144
+   ],
+   "window_rms_trajectory_body": {
+    "before_dark_20s": 0.0880212225663699,
+    "dark": 0.15075054901828902,
+    "after_dark_20s": 0.18875946266479599,
+    "last_10s": 0.10610126596830567
+   },
+   "window_rms_trajectory_slam_body": {
+    "before_dark_20s": 0.10082400930314903,
+    "dark": 0.14335489950864186,
+    "after_dark_20s": 0.16362948448090534,
+    "last_10s": 0.1282938031753112
+   }
+  },
+  {
+   "run": "cuvslam-inertial-MH_05_difficult-20261024-180215-slam-async-run2",
+   "mode": "inertial",
+   "sequence": "MH_05_difficult",
+   "config": "slam-async",
+   "repeat": 2,
+   "track_ms_p50": 8.321718996739946,
+   "track_ms_p95": 46.421214546353355,
+   "track_ms_max": 158.15996699529933,
+   "sm_clock_mhz": {
+    "min": 210.0,
+    "median": 210.0,
+    "max": 2535.0
+   },
+   "valid_for_performance": true,
+   "loop_closures": 28,
+   "peak_rss_mib": 551.51171875,
+   "ate_trajectory_body": 0.15990253495890736,
+   "ate_trajectory_slam_body": 0.14848457923660716,
+   "ate_trajectory_slam_smoothed_body": 0.08621290015324833,
+   "dark_segment_rel_s": [
+    57.235000133514404,
+    71.7350001335144
+   ],
+   "window_rms_trajectory_body": {
+    "before_dark_20s": 0.0880212225663699,
+    "dark": 0.15075054901828902,
+    "after_dark_20s": 0.18875946266479599,
+    "last_10s": 0.10610126596830567
+   },
+   "window_rms_trajectory_slam_body": {
+    "before_dark_20s": 0.10273134275360654,
+    "dark": 0.14240141974314402,
+    "after_dark_20s": 0.16383723890738475,
+    "last_10s": 0.1218627789363755
+   }
+  },
+  {
+   "run": "cuvslam-inertial-MH_05_difficult-20261024-180215-slam-sync-run1",
+   "mode": "inertial",
+   "sequence": "MH_05_difficult",
+   "config": "slam-sync",
+   "repeat": 1,
+   "track_ms_p50": 8.457374497083947,
+   "track_ms_p95": 44.36412845279839,
+   "track_ms_max": 220.09516799880657,
+   "sm_clock_mhz": {
+    "min": 210.0,
+    "median": 210.0,
+    "max": 2535.0
+   },
+   "valid_for_performance": true,
+   "loop_closures": 27,
+   "peak_rss_mib": 544.57421875,
+   "ate_trajectory_body": 0.15990253495890736,
+   "ate_trajectory_slam_body": 0.14311946180274368,
+   "ate_trajectory_slam_smoothed_body": 0.08251442691616521,
+   "dark_segment_rel_s": [
+    57.235000133514404,
+    71.7350001335144
+   ],
+   "window_rms_trajectory_body": {
+    "before_dark_20s": 0.0880212225663699,
+    "dark": 0.15075054901828902,
+    "after_dark_20s": 0.18875946266479599,
+    "last_10s": 0.10610126596830567
+   },
+   "window_rms_trajectory_slam_body": {
+    "before_dark_20s": 0.1080791828623621,
+    "dark": 0.13800247351559478,
+    "after_dark_20s": 0.16921286211563538,
+    "last_10s": 0.11972409234920105
+   }
+  },
+  {
+   "run": "cuvslam-inertial-MH_05_difficult-20261024-180215-slam-sync-run2",
+   "mode": "inertial",
+   "sequence": "MH_05_difficult",
+   "config": "slam-sync",
+   "repeat": 2,
+   "track_ms_p50": 8.649184001114918,
+   "track_ms_p95": 47.06371215543182,
+   "track_ms_max": 222.09112299606204,
+   "sm_clock_mhz": {
+    "min": 210.0,
+    "median": 210.0,
+    "max": 2535.0
+   },
+   "valid_for_performance": true,
+   "loop_closures": 27,
+   "peak_rss_mib": 543.70703125,
+   "ate_trajectory_body": 0.15990253495890736,
+   "ate_trajectory_slam_body": 0.14311946180274368,
+   "ate_trajectory_slam_smoothed_body": 0.08251442691616521,
+   "dark_segment_rel_s": [
+    57.235000133514404,
+    71.7350001335144
+   ],
+   "window_rms_trajectory_body": {
+    "before_dark_20s": 0.0880212225663699,
+    "dark": 0.15075054901828902,
+    "after_dark_20s": 0.18875946266479599,
+    "last_10s": 0.10610126596830567
+   },
+   "window_rms_trajectory_slam_body": {
+    "before_dark_20s": 0.1080791828623621,
+    "dark": 0.13800247351559478,
+    "after_dark_20s": 0.16921286211563538,
+    "last_10s": 0.11972409234920105
+   }
+  },
+  {
+   "run": "cuvslam-stereo-MH_04_difficult-20261024-180215-noslam-run1",
+   "mode": "stereo",
+   "sequence": "MH_04_difficult",
+   "config": "noslam",
+   "repeat": 1,
+   "track_ms_p50": 7.778929000778589,
+   "track_ms_p95": 52.067381500819465,
+   "track_ms_max": 71.63843099988298,
+   "sm_clock_mhz": {
+    "min": 210.0,
+    "median": 210.0,
+    "max": 2535.0
+   },
+   "valid_for_performance": true,
+   "ate_trajectory_body": 0.09698951548649153,
+   "dark_segment_rel_s": [
+    54.704999923706055,
+    68.60499978065491
+   ],
+   "window_rms_trajectory_body": {
+    "before_dark_20s": 0.06566161596739975,
+    "dark": 0.09344257601841122,
+    "after_dark_20s": 0.10723633878366041,
+    "last_10s": 0.16450863607449925
+   }
+  },
+  {
+   "run": "cuvslam-stereo-MH_04_difficult-20261024-180215-noslam-run2",
+   "mode": "stereo",
+   "sequence": "MH_04_difficult",
+   "config": "noslam",
+   "repeat": 2,
+   "track_ms_p50": 7.989639998413622,
+   "track_ms_p95": 50.67648849944817,
+   "track_ms_max": 78.92383600119501,
+   "sm_clock_mhz": {
+    "min": 210.0,
+    "median": 210.0,
+    "max": 2535.0
+   },
+   "valid_for_performance": true,
+   "ate_trajectory_body": 0.09698951548649153,
+   "dark_segment_rel_s": [
+    54.704999923706055,
+    68.60499978065491
+   ],
+   "window_rms_trajectory_body": {
+    "before_dark_20s": 0.06566161596739975,
+    "dark": 0.09344257601841122,
+    "after_dark_20s": 0.10723633878366041,
+    "last_10s": 0.16450863607449925
+   }
+  },
+  {
+   "run": "cuvslam-stereo-MH_04_difficult-20261024-180215-slam-async-run1",
+   "mode": "stereo",
+   "sequence": "MH_04_difficult",
+   "config": "slam-async",
+   "repeat": 1,
+   "track_ms_p50": 7.312070003536064,
+   "track_ms_p95": 51.73042949900264,
+   "track_ms_max": 155.6504109976231,
+   "sm_clock_mhz": {
+    "min": 210.0,
+    "median": 210.0,
+    "max": 2535.0
+   },
+   "valid_for_performance": true,
+   "loop_closures": 29,
+   "peak_rss_mib": 527.6328125,
+   "ate_trajectory_body": 0.09698951548649153,
+   "ate_trajectory_slam_body": 0.07452199055861465,
+   "ate_trajectory_slam_smoothed_body": 0.10891226749610779,
+   "dark_segment_rel_s": [
+    54.704999923706055,
+    68.60499978065491
+   ],
+   "window_rms_trajectory_body": {
+    "before_dark_20s": 0.06566161596739975,
+    "dark": 0.09344257601841122,
+    "after_dark_20s": 0.10723633878366041,
+    "last_10s": 0.16450863607449925
+   },
+   "window_rms_trajectory_slam_body": {
+    "before_dark_20s": 0.06199647583402055,
+    "dark": 0.07829612155738863,
+    "after_dark_20s": 0.10056833010340983,
+    "last_10s": 0.06882649514941044
+   }
+  },
+  {
+   "run": "cuvslam-stereo-MH_04_difficult-20261024-180215-slam-async-run2",
+   "mode": "stereo",
+   "sequence": "MH_04_difficult",
+   "config": "slam-async",
+   "repeat": 2,
+   "track_ms_p50": 7.598474003316369,
+   "track_ms_p95": 54.93975000354112,
+   "track_ms_max": 159.78325699688867,
+   "sm_clock_mhz": {
+    "min": 210.0,
+    "median": 210.0,
+    "max": 2535.0
+   },
+   "valid_for_performance": true,
+   "loop_closures": 29,
+   "peak_rss_mib": 527.82421875,
+   "ate_trajectory_body": 0.09698951548649153,
+   "ate_trajectory_slam_body": 0.1096884742259947,
+   "ate_trajectory_slam_smoothed_body": 0.08993980044661537,
+   "dark_segment_rel_s": [
+    54.704999923706055,
+    68.60499978065491
+   ],
+   "window_rms_trajectory_body": {
+    "before_dark_20s": 0.06566161596739975,
+    "dark": 0.09344257601841122,
+    "after_dark_20s": 0.10723633878366041,
+    "last_10s": 0.16450863607449925
+   },
+   "window_rms_trajectory_slam_body": {
+    "before_dark_20s": 0.08077105231396683,
+    "dark": 0.08079584990904365,
+    "after_dark_20s": 0.119452610551031,
+    "last_10s": 0.057019814889959025
+   }
+  },
+  {
+   "run": "cuvslam-stereo-MH_04_difficult-20261024-180215-slam-sync-run1",
+   "mode": "stereo",
+   "sequence": "MH_04_difficult",
+   "config": "slam-sync",
+   "repeat": 1,
+   "track_ms_p50": 7.730770994385239,
+   "track_ms_p95": 60.007287000189535,
+   "track_ms_max": 217.12693299923558,
+   "sm_clock_mhz": {
+    "min": 210.0,
+    "median": 210.0,
+    "max": 2535.0
+   },
+   "valid_for_performance": true,
+   "loop_closures": 31,
+   "peak_rss_mib": 525.5,
+   "ate_trajectory_body": 0.09698951548649153,
+   "ate_trajectory_slam_body": 0.0780065968210438,
+   "ate_trajectory_slam_smoothed_body": 0.08936741687403171,
+   "dark_segment_rel_s": [
+    54.704999923706055,
+    68.60499978065491
+   ],
+   "window_rms_trajectory_body": {
+    "before_dark_20s": 0.06566161596739975,
+    "dark": 0.09344257601841122,
+    "after_dark_20s": 0.10723633878366041,
+    "last_10s": 0.16450863607449925
+   },
+   "window_rms_trajectory_slam_body": {
+    "before_dark_20s": 0.06148116929099152,
+    "dark": 0.07702925423156014,
+    "after_dark_20s": 0.10118459836266683,
+    "last_10s": 0.09906154239396339
+   }
+  },
+  {
+   "run": "cuvslam-stereo-MH_04_difficult-20261024-180215-slam-sync-run2",
+   "mode": "stereo",
+   "sequence": "MH_04_difficult",
+   "config": "slam-sync",
+   "repeat": 2,
+   "track_ms_p50": 7.690801998251118,
+   "track_ms_p95": 58.98578150299727,
+   "track_ms_max": 216.11690199642908,
+   "sm_clock_mhz": {
+    "min": 210.0,
+    "median": 210.0,
+    "max": 2535.0
+   },
+   "valid_for_performance": true,
+   "loop_closures": 31,
+   "peak_rss_mib": 524.70703125,
+   "ate_trajectory_body": 0.09698951548649153,
+   "ate_trajectory_slam_body": 0.0780065968210438,
+   "ate_trajectory_slam_smoothed_body": 0.08936741687403171,
+   "dark_segment_rel_s": [
+    54.704999923706055,
+    68.60499978065491
+   ],
+   "window_rms_trajectory_body": {
+    "before_dark_20s": 0.06566161596739975,
+    "dark": 0.09344257601841122,
+    "after_dark_20s": 0.10723633878366041,
+    "last_10s": 0.16450863607449925
+   },
+   "window_rms_trajectory_slam_body": {
+    "before_dark_20s": 0.06148116929099152,
+    "dark": 0.07702925423156014,
+    "after_dark_20s": 0.10118459836266683,
+    "last_10s": 0.09906154239396339
+   }
+  },
+  {
+   "run": "cuvslam-stereo-MH_05_difficult-20261024-180215-noslam-run1",
+   "mode": "stereo",
+   "sequence": "MH_05_difficult",
+   "config": "noslam",
+   "repeat": 1,
+   "track_ms_p50": 6.750021500920411,
+   "track_ms_p95": 28.83637779777922,
+   "track_ms_max": 267.85965399903944,
+   "sm_clock_mhz": {
+    "min": 210.0,
+    "median": 210.0,
+    "max": 2535.0
+   },
+   "valid_for_performance": true,
+   "ate_trajectory_body": 0.15451018228341248,
+   "dark_segment_rel_s": [
+    57.235000133514404,
+    71.7350001335144
+   ],
+   "window_rms_trajectory_body": {
+    "before_dark_20s": 0.08405514737616276,
+    "dark": 0.16396212998720788,
+    "after_dark_20s": 0.22132357873324224,
+    "last_10s": 0.13134691299862497
+   }
+  },
+  {
+   "run": "cuvslam-stereo-MH_05_difficult-20261024-180215-noslam-run2",
+   "mode": "stereo",
+   "sequence": "MH_05_difficult",
+   "config": "noslam",
+   "repeat": 2,
+   "track_ms_p50": 7.608643500134349,
+   "track_ms_p95": 48.82383849944735,
+   "track_ms_max": 88.46325900231022,
+   "sm_clock_mhz": {
+    "min": 210.0,
+    "median": 210.0,
+    "max": 2535.0
+   },
+   "valid_for_performance": true,
+   "ate_trajectory_body": 0.14854955631678635,
+   "dark_segment_rel_s": [
+    57.235000133514404,
+    71.7350001335144
+   ],
+   "window_rms_trajectory_body": {
+    "before_dark_20s": 0.13123672969986547,
+    "dark": 0.12951879935015853,
+    "after_dark_20s": 0.1844008814466814,
+    "last_10s": 0.16528127906262163
+   }
+  },
+  {
+   "run": "cuvslam-stereo-MH_05_difficult-20261024-180215-slam-async-run1",
+   "mode": "stereo",
+   "sequence": "MH_05_difficult",
+   "config": "slam-async",
+   "repeat": 1,
+   "track_ms_p50": 7.347705999563914,
+   "track_ms_p95": 50.30711830404461,
+   "track_ms_max": 152.85443299944745,
+   "sm_clock_mhz": {
+    "min": 210.0,
+    "median": 210.0,
+    "max": 2535.0
+   },
+   "valid_for_performance": true,
+   "loop_closures": 29,
+   "peak_rss_mib": 528.828125,
+   "ate_trajectory_body": 0.14854955631678635,
+   "ate_trajectory_slam_body": 0.09894731476399869,
+   "ate_trajectory_slam_smoothed_body": 0.09230072282209917,
+   "dark_segment_rel_s": [
+    57.235000133514404,
+    71.7350001335144
+   ],
+   "window_rms_trajectory_body": {
+    "before_dark_20s": 0.13123672969986547,
+    "dark": 0.12951879935015853,
+    "after_dark_20s": 0.1844008814466814,
+    "last_10s": 0.16528127906262163
+   },
+   "window_rms_trajectory_slam_body": {
+    "before_dark_20s": 0.07637765513373794,
+    "dark": 0.11165548207926672,
+    "after_dark_20s": 0.13317293238301417,
+    "last_10s": 0.10029106337852023
+   }
+  },
+  {
+   "run": "cuvslam-stereo-MH_05_difficult-20261024-180215-slam-async-run2",
+   "mode": "stereo",
+   "sequence": "MH_05_difficult",
+   "config": "slam-async",
+   "repeat": 2,
+   "track_ms_p50": 7.737468997220276,
+   "track_ms_p95": 52.88786590281228,
+   "track_ms_max": 135.54324900178472,
+   "sm_clock_mhz": {
+    "min": 210.0,
+    "median": 210.0,
+    "max": 2535.0
+   },
+   "valid_for_performance": true,
+   "loop_closures": 25,
+   "peak_rss_mib": 528.859375,
+   "ate_trajectory_body": 0.15451018228341248,
+   "ate_trajectory_slam_body": 0.10621892918479808,
+   "ate_trajectory_slam_smoothed_body": 0.09998579966242534,
+   "dark_segment_rel_s": [
+    57.235000133514404,
+    71.7350001335144
+   ],
+   "window_rms_trajectory_body": {
+    "before_dark_20s": 0.08405514737616276,
+    "dark": 0.16396212998720788,
+    "after_dark_20s": 0.22132357873324224,
+    "last_10s": 0.13134691299862497
+   },
+   "window_rms_trajectory_slam_body": {
+    "before_dark_20s": 0.06907929325742586,
+    "dark": 0.1291254382410627,
+    "after_dark_20s": 0.141093768679857,
+    "last_10s": 0.08061870347942064
+   }
+  },
+  {
+   "run": "cuvslam-stereo-MH_05_difficult-20261024-180215-slam-sync-run1",
+   "mode": "stereo",
+   "sequence": "MH_05_difficult",
+   "config": "slam-sync",
+   "repeat": 1,
+   "track_ms_p50": 7.796755999152083,
+   "track_ms_p95": 55.06718365395486,
+   "track_ms_max": 233.3159829940996,
+   "sm_clock_mhz": {
+    "min": 210.0,
+    "median": 210.0,
+    "max": 2535.0
+   },
+   "valid_for_performance": true,
+   "loop_closures": 29,
+   "peak_rss_mib": 525.3359375,
+   "ate_trajectory_body": 0.14851223565690233,
+   "ate_trajectory_slam_body": 0.10644984769780219,
+   "ate_trajectory_slam_smoothed_body": 0.09132719466187923,
+   "dark_segment_rel_s": [
+    57.235000133514404,
+    71.7350001335144
+   ],
+   "window_rms_trajectory_body": {
+    "before_dark_20s": 0.1314972374978942,
+    "dark": 0.12772026385801838,
+    "after_dark_20s": 0.18567484196473333,
+    "last_10s": 0.1652288501751599
+   },
+   "window_rms_trajectory_slam_body": {
+    "before_dark_20s": 0.07118615001148217,
+    "dark": 0.11725268925462709,
+    "after_dark_20s": 0.14869034985700055,
+    "last_10s": 0.11031125276281482
+   }
+  },
+  {
+   "run": "cuvslam-stereo-MH_05_difficult-20261024-180215-slam-sync-run2",
+   "mode": "stereo",
+   "sequence": "MH_05_difficult",
+   "config": "slam-sync",
+   "repeat": 2,
+   "track_ms_p50": 7.9781110034673475,
+   "track_ms_p95": 58.08422924965268,
+   "track_ms_max": 220.7344669950544,
+   "sm_clock_mhz": {
+    "min": 210.0,
+    "median": 210.0,
+    "max": 2535.0
+   },
+   "valid_for_performance": true,
+   "loop_closures": 29,
+   "peak_rss_mib": 525.62109375,
+   "ate_trajectory_body": 0.14851223565690233,
+   "ate_trajectory_slam_body": 0.10644984769780219,
+   "ate_trajectory_slam_smoothed_body": 0.09132719466187923,
+   "dark_segment_rel_s": [
+    57.235000133514404,
+    71.7350001335144
+   ],
+   "window_rms_trajectory_body": {
+    "before_dark_20s": 0.1314972374978942,
+    "dark": 0.12772026385801838,
+    "after_dark_20s": 0.18567484196473333,
+    "last_10s": 0.1652288501751599
+   },
+   "window_rms_trajectory_slam_body": {
+    "before_dark_20s": 0.07118615001148217,
+    "dark": 0.11725268925462709,
+    "after_dark_20s": 0.14869034985700055,
+    "last_10s": 0.11031125276281482
+   }
+  }
+ ]
+}

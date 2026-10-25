@@ -1,0 +1,82 @@
+{
+  "tool": "benchmarks/gps_denied/run_cuvslam_euroc.py",
+  "claims": "Offline dataset replay only. Not field-camera integration, not flight-ready, no control output.",
+  "cuvslam_version": [
+    "17.0.1+51631ba",
+    17,
+    0,
+    1
+  ],
+  "cuvslam_examples_revision": "51631ba358ea51262342f9ae649820d639363eb9",
+  "aegisland_revision": "a68bbfc95dca846846495fa96bc5600b6c83e9af",
+  "aegisland_tracked_files_dirty": true,
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "gpu": "NVIDIA GeForce RTX 4060 Ti, 610.60, 8188 MiB, 8.9",
+  "sequence": "/home/shiyue1128/aegisland-data/euroc/MH_05_difficult/mav0",
+  "mode": "stereo",
+  "export_signals": false,
+  "slam": null,
+  "odometry_config": {
+    "async_sba": false,
+    "rectified_stereo_camera": false,
+    "odometry_mode": "OdometryMode.Multicamera"
+  },
+  "max_frames": null,
+  "start_frame": 0,
+  "throttle_ms": 0.0,
+  "realtime_rate": 1.0,
+  "gpu_clocks": {
+    "available": true,
+    "samples": 225,
+    "sm_clock_mhz": {
+      "min": 210.0,
+      "median": 210.0,
+      "max": 2535.0
+    },
+    "pstates": [
+      "P2",
+      "P3",
+      "P5",
+      "P8"
+    ],
+    "note": "clocks not locked (no admin rights in WSL); recorded instead"
+  },
+  "pair_by_timestamp": true,
+  "unpaired_camera_timestamps_ns": {
+    "cam0_only": [],
+    "cam1_only": []
+  },
+  "input_sha256": {
+    "cam0/data.csv": "c48f149a52045b685f55e47d82ac0bc299def3736ffc838cbac8287ec4181318",
+    "cam1/data.csv": "c48f149a52045b685f55e47d82ac0bc299def3736ffc838cbac8287ec4181318",
+    "imu0/data.csv": "e6498fb86f0b618abb07b256b1822957bb4bcf158d07cc82d3b43ca8166ec004",
+    "cam0/sensor_recalibrated.yaml": "80324218a06be7b8479ea347dc7414b0fa123d70fb1829c9df342248d3b82faf",
+    "cam1/sensor_recalibrated.yaml": "db54b71bc718ed74ba313d63d5f2f89f671933d3b0e9d470a5aea8936c64049f",
+    "imu0/sensor_recalibrated.yaml": "845ef065835eb510fc6607644aa626077947f872573569ecd6c2d69a92642f98",
+    "cam0/sensor.yaml": "191748edddda5d1368188f5b0a3c4bed6c48842c178ef9d83c50cba17d66e819",
+    "cam1/sensor.yaml": "a469fd673f369881f37dd6b93d251e9444950360d70c6214bf909cf509ac9524",
+    "imu0/sensor.yaml": "91e6c408416f549f87e7405830b83849cca10521f3d3fc8bb3de862c2bc882d0",
+    "state_groundtruth_estimate0/data.csv": "da13e5dcb3d5fc2f12c4e8bfae10dd380d765150be3312f989b0bc5550965451"
+  },
+  "counts": {
+    "stereo_frames": 2273,
+    "tracked_frames": 2273,
+    "untracked_frames": 0,
+    "imu_samples": 0
+  },
+  "timing": {
+    "note": "Host wall time around Tracker.track(), synchronous; includes upload. Excludes PNG decode. Development GPU, not Orin.",
+    "valid_for_performance_claims": true,
+    "rule": "performance numbers only from --realtime runs with gpu_clocks recorded (docs/dronehacks/gps-denied-benchmark-plan.md)",
+    "first_call_ms": 18.561208999017254,
+    "warm_track_ms": {
+      "count": 2272,
+      "mean": 8.340171003990845,
+      "p50": 6.750021500920411,
+      "p95": 28.83637779777922,
+      "max": 267.85965399903944
+    },
+    "total_wall_s": 113.61092316899885
+  }
+}

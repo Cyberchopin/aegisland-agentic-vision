@@ -1,0 +1,53 @@
+{
+ "trajectory_slam_body.tum": {
+  "map_frame_rmse_m": 13.057624083511444,
+  "map_frame_max_m": 21.85801030713522,
+  "map_frame_final_m": 0.5876528759907922,
+  "se3_aligned": {
+   "metric": "ate_position",
+   "alignment": "se3",
+   "unit": "m",
+   "pairs": 2210,
+   "rmse": 0.14129456035939736,
+   "mean": 0.12990927188009604,
+   "median": 0.13124945646837682,
+   "max": 0.3067851996424083,
+   "scale": 1.0
+  },
+  "note": "trajectory_body.tum is odometry in its own start frame; its map-frame numbers are only meaningful after a successful relocalization reset of the SLAM frame, not of odometry"
+ },
+ "trajectory_slam_smoothed_body.tum": {
+  "map_frame_rmse_m": 13.094874585423877,
+  "map_frame_max_m": 21.85362725695219,
+  "map_frame_final_m": 0.5865960214782986,
+  "se3_aligned": {
+   "metric": "ate_position",
+   "alignment": "se3",
+   "unit": "m",
+   "pairs": 2210,
+   "rmse": 0.1118414110327864,
+   "mean": 0.09339699112159244,
+   "median": 0.06280724094954107,
+   "max": 0.24465057404973758,
+   "scale": 1.0
+  },
+  "note": "trajectory_body.tum is odometry in its own start frame; its map-frame numbers are only meaningful after a successful relocalization reset of the SLAM frame, not of odometry"
+ },
+ "trajectory_body.tum": {
+  "map_frame_rmse_m": 13.078164321842173,
+  "map_frame_max_m": 21.85604452216119,
+  "map_frame_final_m": 0.884131842524408,
+  "se3_aligned": {
+   "metric": "ate_position",
+   "alignment": "se3",
+   "unit": "m",
+   "pairs": 2210,
+   "rmse": 0.20409977208111468,
+   "mean": 0.1950630601299355,
+   "median": 0.1999252937041177,
+   "max": 0.4171888065708579,
+   "scale": 1.0
+  },
+  "note": "trajectory_body.tum is odometry in its own start frame; its map-frame numbers are only meaningful after a successful relocalization reset of the SLAM frame, not of odometry"
+ }
+}
