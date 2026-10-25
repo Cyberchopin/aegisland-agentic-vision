@@ -1,0 +1,95 @@
+{
+ "tool": "benchmarks/gps_denied/sitl_hil_replay.py",
+ "control_output": "DISABLED",
+ "command_executed": false,
+ "px4": "v1.17.0 none_iris (simulator_mavlink, lockstep), localhost only",
+ "args": {
+  "px4_build": "/home/shiyue1128/work/px4/PX4-Autopilot-v1.17.0/build/px4_sitl_default",
+  "sequence": "/home/shiyue1128/aegisland-data/euroc/MH_01_easy/mav0",
+  "cuvslam_run": "/home/shiyue1128/aegisland-agentic-vision/benchmarks/results/gps_denied/cuvslam-inertial-MH_01_easy-20261024-102659-signals",
+  "vdr_run": "/home/shiyue1128/aegisland-agentic-vision/benchmarks/results/gps_denied/vdr-MH_01_easy-20261024-030019",
+  "start_s": "20.5",
+  "rest_s": "3.0",
+  "duration_s": "75.0",
+  "policy": "raw",
+  "fault": "drift",
+  "drift_mps": "0.05",
+  "oracle_verdict": "degraded",
+  "degraded_variance_m2": "1.0",
+  "fault_at_s": "40.0",
+  "fault_length_s": "20.0",
+  "latency_ms": "30.0",
+  "speed": "4.0",
+  "output": "/home/shiyue1128/work/demo-runs/drift-marking-20261024-120655/var1"
+ },
+ "params": {
+  "SYS_HAS_MAG": 0,
+  "SYS_HAS_GPS": 0,
+  "SYS_HAS_BARO": 0,
+  "EKF2_MAG_TYPE": 5,
+  "EKF2_GPS_CTRL": 0,
+  "EKF2_BARO_CTRL": 0,
+  "EKF2_HGT_REF": 3,
+  "EKF2_EV_CTRL": 11,
+  "EKF2_EV_DELAY": 30.0,
+  "EKF2_EV_QMIN": 1,
+  "EKF2_EV_NOISE_MD": 0,
+  "EKF2_MULTI_IMU": 0,
+  "SENS_IMU_MODE": 1,
+  "IMU_INTEG_RATE": 200,
+  "COM_ARM_WO_GPS": 1
+ },
+ "t0_dataset_s": 1403636601.3385556,
+ "counts": {
+  "hil_sensor": 15000,
+  "odometry": 1499,
+  "actuator_replies": 14992
+ },
+ "gyro_bias_removed_rad_s": [
+  -0.0032777283352453486,
+  0.02095907721078271,
+  0.08004661726063307
+ ],
+ "frd_from_world": [
+  [
+   -0.18529907526169503,
+   -0.2959214478518717,
+   0.9370670997364131
+  ],
+  [
+   0.9824522318338158,
+   -0.07641485979036354,
+   0.17014223863571734
+  ],
+  [
+   0.021257113442680477,
+   0.952150862996233,
+   0.3048882897449719
+  ]
+ ],
+ "body_from_frd": [
+  [
+   0.26416178818471714,
+   0.049895286299746336,
+   -0.9631869029778793
+  ],
+  [
+   0.006249922059601804,
+   0.9985514315745327,
+   0.05344134143806414
+  ],
+  [
+   0.964458131873697,
+   -0.020137003389710036,
+   0.26346729010862296
+  ]
+ ],
+ "origin_frd_m": [
+  0.1358926405280007,
+  0.14672414834471065,
+  0.36357926208428076
+ ],
+ "ulog": "/home/shiyue1128/work/demo-runs/drift-marking-20261024-120655/var1/rootfs/log/2026-10-24/19_07_16.ulg",
+ "ulog_sha256": "a9067788165cbd6453bc1dfe7b675efc0196dfcd760d87e04245bb9ecdc10fda",
+ "wall_s": 19.75864065800124
+}

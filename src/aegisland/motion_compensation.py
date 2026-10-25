@@ -10,6 +10,9 @@ except ImportError:
     cv2 = None
     np = None
 
+# Two entries keep both the base frame and an active-perception retry frame.
+FEATURE_CACHE_SIZE = 2
+
 
 def require_opencv() -> None:
     if cv2 is None or np is None:
@@ -59,6 +62,27 @@ class CameraMotionCompensator:
             crossCheck=False,
         )
 
+        # The previous frame of call N is usually the current frame of call N-1.
+        # ORB is deterministic, so features are reused only for byte-identical
+        # images (a private copy is compared, so caller mutation cannot leak in).
+        self._feature_cache: list[tuple[Any, Any, Any]] = []
+
+    def _features(self, gray: Any) -> tuple[Any, Any]:
+        for cached_gray, keypoints, descriptors in self._feature_cache:
+            if (
+                cached_gray.shape == gray.shape
+                and cached_gray.dtype == gray.dtype
+                and np.array_equal(cached_gray, gray)
+            ):
+                return keypoints, descriptors
+
+        keypoints, descriptors = self.orb.detectAndCompute(gray, None)
+        self._feature_cache = [
+            (np.array(gray, copy=True), keypoints, descriptors),
+            *self._feature_cache,
+        ][:FEATURE_CACHE_SIZE]
+        return keypoints, descriptors
+
     def compensate(
         self,
         previous_gray: Any,
@@ -86,15 +110,8 @@ class CameraMotionCompensator:
                 success=False,
             )
 
-        prev_keypoints, prev_descriptors = self.orb.detectAndCompute(
-            previous_gray,
-            None,
-        )
-
-        curr_keypoints, curr_descriptors = self.orb.detectAndCompute(
-            current_gray,
-            None,
-        )
+        prev_keypoints, prev_descriptors = self._features(previous_gray)
+        curr_keypoints, curr_descriptors = self._features(current_gray)
 
         if prev_descriptors is None or curr_descriptors is None:
             return self._failure(previous_gray)

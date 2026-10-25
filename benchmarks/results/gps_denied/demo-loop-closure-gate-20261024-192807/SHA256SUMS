@@ -1,0 +1,14 @@
+8007b1d07bec1b4739c1125ca3d7928e31192683bfad3258124e019403213e9a  ./demo_g.png
+59175a2e24b9a4de14a0a7f37db30b15910b245f75d9d2586e1b60177d9f6a31  ./gated-false-lc/sent.jsonl
+3ae3ad2aeaaa898d64f65b06f1893b9c8b3cfa32227e780e9d457cc0a879a19c  ./gated-false-lc/summary.json
+bed3c3d69805fbc056d4b00706495f71d97916bf3cf2006744b007b514f43ea7  ./gated-injected-jump/sent.jsonl
+5d77319ff862efcd1fc747330744cb028ebd8787e34c3edea7ea80e4b879da9e  ./gated-injected-jump/summary.json
+e3e8b96c8c4509fde25eb9af72bb17c93247f7c40718607225b067ea8ad85cb8  ./gated/sent.jsonl
+27161805ada6bd5e7699a6575731e1352a5d04ee15cc6692d713c81b70a993ab  ./gated/summary.json
+5e013e909ff04220196a5b4037bc92436407cb34f249f6f76b620fdcda392b77  ./metrics.json
+aad19528c883bd4bc657beee358978fbab63a3ab6bdf26be8b21ba5d77aec1ae  ./naive-injected-jump/sent.jsonl
+0b66d0b0e7080af133926efae38224a2a1c0ad7e160ed5f75111387536ced996  ./naive-injected-jump/summary.json
+c8b0bdf63c7e662842d9f4d42a00ac00fb0cec755552f5f7361890239fd62038  ./naive/sent.jsonl
+994340a45e49b65c02f730762aef7e527a4688a395f5550421e1996c2fffcbca  ./naive/summary.json
+e721b32f6cbad340a9493d6c1600cc4460467b0779b11fa69ef02893dc0a0a75  ./odometry/sent.jsonl
+04ab22c31c0205957d1cd87c9231ab88f68600f27c637fcbb8d50f0e959f4d82  ./odometry/summary.json

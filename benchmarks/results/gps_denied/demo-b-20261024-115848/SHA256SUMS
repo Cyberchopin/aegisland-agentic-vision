@@ -1,0 +1,6 @@
+a5b0578b13923a8bc7bbd794219b37afdbd85e1ff78d729a0b1a5d4b3a3634e3  ./MH_05-raw/sent.jsonl
+7536498db670213e90c26f03729ffb5cb7b398e219fcbfe7204e036e04faa34f  ./MH_05-raw/summary.json
+c43d180911bb94397967ed99c2feeefbd25d5b54ebc244bbf0120dc5efbe1d77  ./MH_05-supervised/sent.jsonl
+048e69b4cfeb1f8823ecabeee6c22312c3c42851a0a6765699d359eb15f00ce4  ./MH_05-supervised/summary.json
+f6881363b588eb36fb4bf062f82963ce61e2b665f94a3363f1f691ca7af49d16  ./demo_b.png
+284095e7ef089486fbbeb8363efbd62cdcde6520acb97733ebfed527e575a2ef  ./metrics.json

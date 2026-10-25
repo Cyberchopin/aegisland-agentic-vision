@@ -1,0 +1,106 @@
+{
+ "tool": "benchmarks/gps_denied/sitl_hil_replay.py",
+ "control_output": "DISABLED",
+ "command_executed": false,
+ "px4": "v1.17.0 none_iris (simulator_mavlink, lockstep), localhost only",
+ "args": {
+  "px4_build": "/home/shiyue1128/work/px4/PX4-Autopilot-v1.17.0/build/px4_sitl_default",
+  "sequence": "/home/shiyue1128/aegisland-data/euroc/MH_05_difficult/mav0",
+  "cuvslam_run": "/home/shiyue1128/aegisland-agentic-vision/benchmarks/results/gps_denied/cuvslam-stereo-MH_05_difficult-20261024-180215-slam-sync-run1",
+  "vdr_run": "/home/shiyue1128/aegisland-agentic-vision/benchmarks/results/gps_denied/vdr-MH_05_difficult-20261024-032023",
+  "start_s": "12.0",
+  "rest_s": "3.0",
+  "duration_s": "95.0",
+  "policy": "supervised",
+  "fault": "none",
+  "drift_mps": "0.05",
+  "oracle_verdict": "None",
+  "degraded_variance_m2": "None",
+  "fault_at_s": "30.0",
+  "fault_length_s": "2.0",
+  "latency_ms": "30.0",
+  "slam_output": "gated",
+  "inject_slam_jump_at_s": "40.0",
+  "inject_slam_jump_m": "0.3",
+  "inject_false_lc_at_s": "None",
+  "speed": "4.0",
+  "output": "/home/shiyue1128/work/demo-runs/lc-gate-v2-20261024-192418/gated-injected-jump"
+ },
+ "params": {
+  "SYS_HAS_MAG": 0,
+  "SYS_HAS_GPS": 0,
+  "SYS_HAS_BARO": 0,
+  "EKF2_MAG_TYPE": 5,
+  "EKF2_GPS_CTRL": 0,
+  "EKF2_BARO_CTRL": 0,
+  "EKF2_HGT_REF": 3,
+  "EKF2_EV_CTRL": 11,
+  "EKF2_EV_DELAY": 30.0,
+  "EKF2_EV_QMIN": 1,
+  "EKF2_EV_NOISE_MD": 0,
+  "EKF2_MULTI_IMU": 0,
+  "SENS_IMU_MODE": 1,
+  "IMU_INTEG_RATE": 200,
+  "COM_ARM_WO_GPS": 1
+ },
+ "t0_dataset_s": 1403638531.4928293,
+ "counts": {
+  "hil_sensor": 19001,
+  "odometry": 1899,
+  "actuator_replies": 18993
+ },
+ "gate_verdicts": {
+  "accepted_loop_closure": 4,
+  "continuous": 1894,
+  "rejected_no_loop_closure_event": 1,
+  "rejected_oversized_correction": 1
+ },
+ "final_reset_counter": 4,
+ "gyro_bias_removed_rad_s": [
+  -0.0018771727595493087,
+  0.01985086960887266,
+  0.07723938632469778
+ ],
+ "frd_from_world": [
+  [
+   0.19146988748534235,
+   -0.3791416170597141,
+   0.9053126070036225
+  ],
+  [
+   0.9813039699297327,
+   0.09231071424537324,
+   -0.16888235738423327
+  ],
+  [
+   -0.01953972329633052,
+   0.9207227412467092,
+   0.38972789605652913
+  ]
+ ],
+ "body_from_frd": [
+  [
+   0.4012391515546615,
+   -0.01856328546736148,
+   -0.915785208273399
+  ],
+  [
+   0.025842610761830937,
+   0.9996260464843134,
+   -0.008940171091974689
+  ],
+  [
+   0.9156087061232586,
+   -0.020079134015154293,
+   0.40156883052410025
+  ]
+ ],
+ "origin_frd_m": [
+  0.14690420983427135,
+  0.14671010378404387,
+  0.014395690046908199
+ ],
+ "ulog": "/home/shiyue1128/work/demo-runs/lc-gate-v2-20261024-192418/gated-injected-jump/rootfs/log/2026-10-25/02_24_44.ulg",
+ "ulog_sha256": "e0bc77f408de5cdc25a24ed04540ec49acf623785faa74b182a7b26535787028",
+ "wall_s": 24.757412635000946
+}

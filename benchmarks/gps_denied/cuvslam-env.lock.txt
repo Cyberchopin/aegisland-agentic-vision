@@ -1,0 +1,13 @@
+# Isolated cuVSLAM benchmark environment (NOT the AegisLand venv). Python 3.12, Ubuntu 24.04 x86_64.
+# wheel: gh release download v17.0.1 -R nvidia-isaac/cuVSLAM -p 'cuvslam-17.0.1+cu13-cp312-abi3-manylinux_2_39_x86_64.whl'
+# wheel sha256: dba2079a3e013b6bb37d8c9965e4beb42007282f33863815d69689568f820ed1
+# examples checkout: nvidia-isaac/cuVSLAM tag v17.0.1 = 51631ba358ea51262342f9ae649820d639363eb9
+numpy==2.2.4
+nvidia-cublas==13.8.1.7
+nvidia-cuda-nvrtc==13.4.92
+nvidia-cusolver==12.3.5.3
+nvidia-cusparse==12.8.6.72
+nvidia-nvjitlink==13.4.92
+pillow==12.2.0
+PyYAML==6.0.2
+scipy==1.14.1

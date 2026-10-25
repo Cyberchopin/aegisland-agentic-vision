@@ -1,0 +1,214 @@
+{
+  "tool": "benchmarks/gps_denied/fault_replay.py",
+  "control_output": "DISABLED",
+  "command_executed": false,
+  "cuvslam_run": "/home/shiyue1128/aegisland-agentic-vision/benchmarks/results/gps_denied/cuvslam-inertial-MH_01_easy-20261024-102659-signals",
+  "trajectory_sha256": "3e5c72905e56434f9be1be837b1a32d7c62469e9a977df0e692b6f4329570a03",
+  "messages": 3682,
+  "tracked_messages": 3682,
+  "imu_samples": 36820,
+  "feature_match_frames": 3681,
+  "period_ns": 49999872,
+  "config": {
+    "expected_period_ns": 49999872,
+    "max_age_ns": 200000000,
+    "outage_timeout_ns": 400000000,
+    "gap_factor": 1.5,
+    "max_speed_mps": 5.0,
+    "max_angular_rate_rad_s": 10.0,
+    "imu_check_window_s": 5.0,
+    "imu_check_every": 20,
+    "imu_search_s": 0.15,
+    "imu_step_s": 0.0025,
+    "imu_max_offset_s": 0.02,
+    "imu_min_correlation": 0.9,
+    "imu_min_motion_rad_s": 0.05,
+    "imu_persistence": 2,
+    "rotation_residual_rad_s": 0.014,
+    "min_feature_matches": 597.0,
+    "degradation_smooth_frames": 10,
+    "gyro_bias_frames": 200,
+    "gyro_bias_min_frames": 20
+  },
+  "scenarios": {
+    "none": {
+      "spec": {
+        "kind": "none",
+        "start": 0,
+        "length": 1,
+        "magnitude": 0.0
+      },
+      "expected_reasons": [],
+      "window_ns": [
+        0,
+        0
+      ],
+      "false_alarms": 0,
+      "reason_counts": {
+        "low_texture": 152,
+        "rotation_inconsistent": 80
+      },
+      "degradation_warnings": 205,
+      "degradation_vs_groundtruth": {
+        "events": 0,
+        "detected": 0,
+        "miss_rate": null,
+        "lead_s": [],
+        "lead_s_median": null,
+        "early_warnings": 0,
+        "clean_frames": 3618,
+        "false_alarm_frame_rate": 0.048645660585959094,
+        "false_alarm_episodes_per_min": 5.970154947314781
+      }
+    },
+    "dropped_frames": {
+      "spec": {
+        "kind": "dropped_frames",
+        "start": 1227,
+        "length": 5,
+        "magnitude": 0.0
+      },
+      "expected_reasons": [
+        "dropped_frames"
+      ],
+      "window_ns": [
+        1403636641113555456,
+        1403636641363555584
+      ],
+      "detected": true,
+      "latency_ns": 251752028,
+      "false_alarms_outside_window": 0,
+      "reason_counts": {
+        "low_texture": 152,
+        "rotation_inconsistent": 80,
+        "dropped_frames": 1
+      },
+      "degradation_warnings": 205
+    },
+    "camera_outage": {
+      "spec": {
+        "kind": "camera_outage",
+        "start": 1841,
+        "length": 20,
+        "magnitude": 0.0
+      },
+      "expected_reasons": [
+        "no_messages"
+      ],
+      "window_ns": [
+        1403636671813555456,
+        1403636672813555456
+      ],
+      "detected": true,
+      "latency_ns": 374763520,
+      "false_alarms_outside_window": 0,
+      "reason_counts": {
+        "low_texture": 152,
+        "rotation_inconsistent": 80,
+        "no_messages": 13,
+        "dropped_frames": 1
+      },
+      "degradation_warnings": 205
+    },
+    "pose_jump": {
+      "spec": {
+        "kind": "pose_jump",
+        "start": 2454,
+        "length": 1,
+        "magnitude": 1.0
+      },
+      "expected_reasons": [
+        "pose_jump"
+      ],
+      "window_ns": [
+        1403636702463555584,
+        1403636763820678456
+      ],
+      "detected": true,
+      "latency_ns": 65990700,
+      "false_alarms_outside_window": 0,
+      "reason_counts": {
+        "low_texture": 152,
+        "rotation_inconsistent": 80,
+        "pose_jump": 1
+      },
+      "degradation_warnings": 205
+    },
+    "stale_delivery": {
+      "spec": {
+        "kind": "stale_delivery",
+        "start": 920,
+        "length": 5,
+        "magnitude": 0.3
+      },
+      "expected_reasons": [
+        "stale"
+      ],
+      "window_ns": [
+        1403636625763555584,
+        1403636626013555456
+      ],
+      "detected": true,
+      "latency_ns": 315611200,
+      "false_alarms_outside_window": 0,
+      "reason_counts": {
+        "low_texture": 152,
+        "rotation_inconsistent": 80,
+        "dropped_frames": 1,
+        "stale": 5,
+        "capture_time_not_increasing": 5
+      },
+      "degradation_warnings": 205
+    },
+    "out_of_order": {
+      "spec": {
+        "kind": "out_of_order",
+        "start": 736,
+        "length": 1,
+        "magnitude": 0.0
+      },
+      "expected_reasons": [
+        "capture_time_not_increasing"
+      ],
+      "window_ns": [
+        1403636616563555584,
+        1403636616614961556
+      ],
+      "detected": true,
+      "latency_ns": 51405972,
+      "false_alarms_outside_window": 0,
+      "reason_counts": {
+        "low_texture": 152,
+        "rotation_inconsistent": 80,
+        "contract:publish_time_ns must not precede capture_time_ns": 1,
+        "dropped_frames": 1,
+        "capture_time_not_increasing": 1
+      },
+      "degradation_warnings": 205
+    },
+    "imu_time_offset": {
+      "spec": {
+        "kind": "imu_time_offset",
+        "start": 0,
+        "length": 1,
+        "magnitude": 0.05
+      },
+      "expected_reasons": [
+        "imu_time_offset"
+      ],
+      "window_ns": [
+        1403636579763555584,
+        1403636763820678456
+      ],
+      "detected": true,
+      "latency_ns": 1950892472,
+      "false_alarms_outside_window": 0,
+      "reason_counts": {
+        "low_texture": 152,
+        "rotation_inconsistent": 3306,
+        "imu_time_offset": 2043
+      },
+      "degradation_warnings": 3312
+    }
+  }
+}

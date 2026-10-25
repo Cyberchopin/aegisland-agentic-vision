@@ -1,0 +1,188 @@
+{
+  "tool": "benchmarks/gps_denied/fault_replay.py",
+  "control_output": "DISABLED",
+  "command_executed": false,
+  "cuvslam_run": "/home/shiyue1128/aegisland-agentic-vision/benchmarks/results/gps_denied/cuvslam-inertial-MH_01_easy-20261024-030019-run1",
+  "trajectory_sha256": "0426e10f9ab1ba1426d37d76e9463440bb87fb58d30d5b1c400a488d2b44c005",
+  "messages": 3682,
+  "tracked_messages": 3682,
+  "imu_samples": 36820,
+  "period_ns": 49999872,
+  "config": {
+    "expected_period_ns": 49999872,
+    "max_age_ns": 200000000,
+    "outage_timeout_ns": 400000000,
+    "gap_factor": 1.5,
+    "max_speed_mps": 5.0,
+    "max_angular_rate_rad_s": 10.0,
+    "imu_check_window_s": 5.0,
+    "imu_check_every": 20,
+    "imu_search_s": 0.15,
+    "imu_step_s": 0.0025,
+    "imu_max_offset_s": 0.02,
+    "imu_min_correlation": 0.6,
+    "imu_min_motion_rad_s": 0.05
+  },
+  "scenarios": {
+    "none": {
+      "spec": {
+        "kind": "none",
+        "start": 0,
+        "length": 1,
+        "magnitude": 0.0
+      },
+      "expected_reasons": [],
+      "window_ns": [
+        0,
+        0
+      ],
+      "false_alarms": 24,
+      "reason_counts": {
+        "dropped_frames": 2,
+        "capture_time_not_increasing": 2,
+        "imu_time_offset": 20
+      }
+    },
+    "dropped_frames": {
+      "spec": {
+        "kind": "dropped_frames",
+        "start": 1227,
+        "length": 5,
+        "magnitude": 0.0
+      },
+      "expected_reasons": [
+        "dropped_frames"
+      ],
+      "window_ns": [
+        1403636641113555456,
+        1403636641363555584
+      ],
+      "detected": true,
+      "latency_ns": 255852228,
+      "false_alarms_outside_window": 24,
+      "reason_counts": {
+        "dropped_frames": 3,
+        "capture_time_not_increasing": 2,
+        "imu_time_offset": 20
+      }
+    },
+    "camera_outage": {
+      "spec": {
+        "kind": "camera_outage",
+        "start": 1841,
+        "length": 20,
+        "magnitude": 0.0
+      },
+      "expected_reasons": [
+        "no_messages"
+      ],
+      "window_ns": [
+        1403636671813555456,
+        1403636672813555456
+      ],
+      "detected": true,
+      "latency_ns": 374763520,
+      "false_alarms_outside_window": 24,
+      "reason_counts": {
+        "dropped_frames": 3,
+        "capture_time_not_increasing": 2,
+        "imu_time_offset": 20,
+        "no_messages": 13
+      }
+    },
+    "pose_jump": {
+      "spec": {
+        "kind": "pose_jump",
+        "start": 2454,
+        "length": 1,
+        "magnitude": 1.0
+      },
+      "expected_reasons": [
+        "pose_jump"
+      ],
+      "window_ns": [
+        1403636702463555584,
+        1403636763821124356
+      ],
+      "detected": true,
+      "latency_ns": 7667100,
+      "false_alarms_outside_window": 22,
+      "reason_counts": {
+        "dropped_frames": 2,
+        "capture_time_not_increasing": 2,
+        "imu_time_offset": 20,
+        "pose_jump": 1
+      }
+    },
+    "stale_delivery": {
+      "spec": {
+        "kind": "stale_delivery",
+        "start": 920,
+        "length": 5,
+        "magnitude": 0.3
+      },
+      "expected_reasons": [
+        "stale"
+      ],
+      "window_ns": [
+        1403636625763555584,
+        1403636626013555456
+      ],
+      "detected": true,
+      "latency_ns": 327981400,
+      "false_alarms_outside_window": 24,
+      "reason_counts": {
+        "dropped_frames": 3,
+        "capture_time_not_increasing": 7,
+        "imu_time_offset": 20,
+        "stale": 5
+      }
+    },
+    "out_of_order": {
+      "spec": {
+        "kind": "out_of_order",
+        "start": 736,
+        "length": 1,
+        "magnitude": 0.0
+      },
+      "expected_reasons": [
+        "capture_time_not_increasing"
+      ],
+      "window_ns": [
+        1403636616563555584,
+        1403636616616532056
+      ],
+      "detected": true,
+      "latency_ns": 52976472,
+      "false_alarms_outside_window": 4,
+      "reason_counts": {
+        "dropped_frames": 3,
+        "capture_time_not_increasing": 3,
+        "contract:publish_time_ns must not precede capture_time_ns": 1
+      }
+    },
+    "imu_time_offset": {
+      "spec": {
+        "kind": "imu_time_offset",
+        "start": 0,
+        "length": 1,
+        "magnitude": 0.05
+      },
+      "expected_reasons": [
+        "imu_time_offset"
+      ],
+      "window_ns": [
+        1403636579763555584,
+        1403636763821124356
+      ],
+      "detected": true,
+      "latency_ns": 950678072,
+      "false_alarms_outside_window": 0,
+      "reason_counts": {
+        "imu_time_offset": 3663,
+        "dropped_frames": 2,
+        "capture_time_not_increasing": 2
+      }
+    }
+  }
+}

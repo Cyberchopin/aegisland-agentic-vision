@@ -1,0 +1,99 @@
+{
+  "tool": "benchmarks/gps_denied/run_ffs_euroc.py",
+  "claims": "Proxy metrics only (no depth ground truth). Dev GPU, not Orin.",
+  "ffs_revision": "476f4249561f7c79ca707326954f9255643412a6",
+  "checkpoint": "/home/shiyue1128/.cache/aegisland-dl/ffs-src/weights/c-ffs/model_best_bp2_serialize.pth",
+  "checkpoint_sha256": "7aee85948373da62b0503c2542507129a3e7cab9d97d10e6790d89512a7db214",
+  "torch": "2.6.0+cu124",
+  "gpu": "NVIDIA GeForce RTX 4060 Ti",
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "sequence": "/home/shiyue1128/aegisland-data/euroc/MH_05_difficult/mav0",
+  "frames": 40,
+  "stride": 50,
+  "valid_iters": 8,
+  "max_disp": 192,
+  "normalize_defaulted_to_true": true,
+  "rectified_size": [
+    752,
+    480
+  ],
+  "rectified_focal_px": 415.0498836681906,
+  "baseline_m": 0.10998606903486488,
+  "first_call_ms": {
+    "ffs_upload_pad_ms": 14.895852000336163,
+    "ffs_model_ms": 1318.102512999758
+  },
+  "warm": {
+    "ffs_rectify_ms": {
+      "count": 39,
+      "p50": 0.6441370005632052,
+      "p95": 0.8486203996653785,
+      "mean": 0.6214354616065229
+    },
+    "ffs_upload_pad_ms": {
+      "count": 39,
+      "p50": 1.5770890004205285,
+      "p95": 2.215081500798988,
+      "mean": 1.631071615403739
+    },
+    "ffs_model_ms": {
+      "count": 39,
+      "p50": 109.61016900000686,
+      "p95": 115.41726950090379,
+      "mean": 110.4377465640144
+    },
+    "ffs_post_ms": {
+      "count": 39,
+      "p50": 1.66274399998656,
+      "p95": 1.9051292996664415,
+      "mean": 1.6755932050821287
+    },
+    "sgbm_ms": {
+      "count": 39,
+      "p50": 12.32594500106643,
+      "p95": 17.553661299643863,
+      "mean": 13.138184922914101
+    }
+  },
+  "proxy": {
+    "ffs_invalid_fraction": {
+      "count": 40,
+      "p50": 0.013487644060283688,
+      "p95": 0.18149046985815603,
+      "mean": 0.03958485704787234
+    },
+    "sgbm_invalid_fraction": {
+      "count": 40,
+      "p50": 0.20959940159574464,
+      "p95": 0.5957991190159574,
+      "mean": 0.2756455008865248
+    },
+    "ffs_lr_consistency": {
+      "count": 10,
+      "p50": 0.9490973703912704,
+      "p95": 0.9812894579395002,
+      "mean": 0.8611837253304777
+    },
+    "sgbm_lr_consistency": {
+      "count": 10,
+      "p50": 0.7702225420813836,
+      "p95": 0.8022537411757517,
+      "mean": 0.7471114070877425
+    },
+    "ffs_vs_sgbm_median_abs_disp_px": {
+      "count": 40,
+      "p50": 0.3085249662399292,
+      "p95": 0.562066900730133,
+      "mean": 0.34060141146183015
+    },
+    "ffs_median_depth_m": {
+      "count": 40,
+      "p50": 6.285095930099487,
+      "p95": 8.13498430252075,
+      "mean": 5.553250067681074
+    }
+  },
+  "peak_cuda_memory_mb": 779.8994140625,
+  "timing_note": "LR-check frames run FFS twice; only the first (left) call is timed."
+}

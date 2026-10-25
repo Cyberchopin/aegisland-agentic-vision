@@ -1,0 +1,19 @@
+{
+ "cuvslam_sent_rms_m": 0.16444465089687987,
+ "ekf2_raw_rms_m": 0.17348977120368794,
+ "ekf2_supervised_rms_m": 0.17981610051212954,
+ "ekf2_raw_max_m": 0.3166902733338794,
+ "ekf2_supervised_max_m": 0.3215435383266376,
+ "dark_segment_s": [
+  45.43500018119812,
+  59.985000133514404
+ ],
+ "rotation_inconsistent_fraction": 0.050026329647182725,
+ "low_texture_fraction": 0.10321221695629279,
+ "tracking_lost_frames": 0,
+ "inputs": {
+  "run": "/home/shiyue1128/work/demo-runs/demo-b-20261024-115848/MH_05-raw",
+  "supervised_run": "/home/shiyue1128/work/demo-runs/demo-b-20261024-115848/MH_05-supervised",
+  "ulog_sha256": "1abe4fa410f355a5c1f1294b82fe9c5c56c86be106153c28cb77428e360b41c5"
+ }
+}

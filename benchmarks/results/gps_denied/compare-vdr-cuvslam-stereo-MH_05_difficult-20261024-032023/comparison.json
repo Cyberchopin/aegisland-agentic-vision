@@ -1,0 +1,242 @@
+{
+  "tool": "benchmarks/gps_denied/compare_motion_direction.py",
+  "limits": [
+    "VDR units are normalized image motion; no meter comparison is made.",
+    "Predicted center flow needs a depth assumption; results are given per depth.",
+    "VDR fits one homography to the distorted fisheye image; this is part of what is being measured, not corrected for.",
+    "Agreement in direction says nothing about accumulated drift or position error.",
+    "Single sequence; not representative of the competition camera or arena."
+  ],
+  "inputs": {
+    "sequence": "/home/shiyue1128/aegisland-data/euroc/MH_05_difficult/mav0",
+    "vdr_run": "/home/shiyue1128/aegisland-agentic-vision/benchmarks/results/gps_denied/vdr-MH_05_difficult-20261024-032023",
+    "vdr_frames_sha256": "80bd9846c558d764cd7f65c90ae0f2aca7d385641f6c1f26fad555d52af1c8d3",
+    "cuvslam_run": "/home/shiyue1128/aegisland-agentic-vision/benchmarks/results/gps_denied/cuvslam-stereo-MH_05_difficult-20261024-032023-run1",
+    "cuvslam_trajectory_sha256": "9ea37b0b189ec7586433e6130c570dfb06cb569c03b723c264c4df6ba9755cb1"
+  },
+  "extrinsics": {
+    "source": "imu0/sensor_recalibrated.yaml (cam0_from_imu), inverted",
+    "original_vs_recalibrated_rotation_deg": 0.3637975212506026,
+    "original_vs_recalibrated_translation_m": 0.007569602559231045
+  },
+  "center_ray_cam0": [
+    0.021483691254245728,
+    -0.020066792756697927,
+    1.0
+  ],
+  "frame_pairs": 2272,
+  "direction_agreement": {
+    "inf_rotation_only": {
+      "vdr_vs_groundtruth": {
+        "used": 1537,
+        "skipped_small_reference": 735,
+        "skipped_missing_estimate": 0,
+        "minimum_reference_px": 1.0,
+        "cosine_median": 0.9637056397223406,
+        "cosine_mean": 0.7610892770977525,
+        "fraction_same_half_plane": 0.9271307742355237,
+        "fraction_within_45_deg": 0.7664281067013663,
+        "magnitude_ratio_median": 1.3270367292805636
+      },
+      "cuvslam_vs_groundtruth": {
+        "used": 1537,
+        "skipped_small_reference": 735,
+        "skipped_missing_estimate": 0,
+        "minimum_reference_px": 1.0,
+        "cosine_median": 0.9999052597099191,
+        "cosine_mean": 0.9986759883681041,
+        "fraction_same_half_plane": 1.0,
+        "fraction_within_45_deg": 0.9993493819128172,
+        "magnitude_ratio_median": 1.0002323118100345
+      },
+      "vdr_vs_cuvslam": {
+        "used": 1556,
+        "skipped_small_reference": 716,
+        "skipped_missing_estimate": 0,
+        "minimum_reference_px": 1.0,
+        "cosine_median": 0.9638525333976102,
+        "cosine_mean": 0.7613446600673283,
+        "fraction_same_half_plane": 0.9260925449871465,
+        "fraction_within_45_deg": 0.7673521850899743,
+        "magnitude_ratio_median": 1.3330096991159275
+      }
+    },
+    "2m": {
+      "vdr_vs_groundtruth": {
+        "used": 2011,
+        "skipped_small_reference": 261,
+        "skipped_missing_estimate": 0,
+        "minimum_reference_px": 1.0,
+        "cosine_median": 0.9866661831513015,
+        "cosine_mean": 0.9106097166383834,
+        "fraction_same_half_plane": 0.9825957235206365,
+        "fraction_within_45_deg": 0.9318746892093486,
+        "magnitude_ratio_median": 0.46923973265439683
+      },
+      "cuvslam_vs_groundtruth": {
+        "used": 2011,
+        "skipped_small_reference": 261,
+        "skipped_missing_estimate": 0,
+        "minimum_reference_px": 1.0,
+        "cosine_median": 0.9998504397993455,
+        "cosine_mean": 0.9957881580281046,
+        "fraction_same_half_plane": 0.9985082048731975,
+        "fraction_within_45_deg": 0.9980109398309299,
+        "magnitude_ratio_median": 1.0109693048920032
+      },
+      "vdr_vs_cuvslam": {
+        "used": 2018,
+        "skipped_small_reference": 254,
+        "skipped_missing_estimate": 0,
+        "minimum_reference_px": 1.0,
+        "cosine_median": 0.9859317426299932,
+        "cosine_mean": 0.9037320087216625,
+        "fraction_same_half_plane": 0.9767096134786918,
+        "fraction_within_45_deg": 0.9261645193260654,
+        "magnitude_ratio_median": 0.46507051597231075
+      }
+    },
+    "5m": {
+      "vdr_vs_groundtruth": {
+        "used": 1954,
+        "skipped_small_reference": 318,
+        "skipped_missing_estimate": 0,
+        "minimum_reference_px": 1.0,
+        "cosine_median": 0.9980856698129998,
+        "cosine_mean": 0.9785894560268,
+        "fraction_same_half_plane": 0.9959058341862845,
+        "fraction_within_45_deg": 0.9887410440122825,
+        "magnitude_ratio_median": 0.8853665005036291
+      },
+      "cuvslam_vs_groundtruth": {
+        "used": 1954,
+        "skipped_small_reference": 318,
+        "skipped_missing_estimate": 0,
+        "minimum_reference_px": 1.0,
+        "cosine_median": 0.9999247027100976,
+        "cosine_mean": 0.999261201683954,
+        "fraction_same_half_plane": 1.0,
+        "fraction_within_45_deg": 1.0,
+        "magnitude_ratio_median": 1.0080243188373328
+      },
+      "vdr_vs_cuvslam": {
+        "used": 1958,
+        "skipped_small_reference": 314,
+        "skipped_missing_estimate": 0,
+        "minimum_reference_px": 1.0,
+        "cosine_median": 0.9981572023707337,
+        "cosine_mean": 0.9755483397470092,
+        "fraction_same_half_plane": 0.9943820224719101,
+        "fraction_within_45_deg": 0.9867211440245148,
+        "magnitude_ratio_median": 0.8814401192974692
+      }
+    },
+    "10m": {
+      "vdr_vs_groundtruth": {
+        "used": 1856,
+        "skipped_small_reference": 416,
+        "skipped_missing_estimate": 0,
+        "minimum_reference_px": 1.0,
+        "cosine_median": 0.9973233059992133,
+        "cosine_mean": 0.9708953584067952,
+        "fraction_same_half_plane": 0.9962284482758621,
+        "fraction_within_45_deg": 0.9827586206896551,
+        "magnitude_ratio_median": 1.111188326001599
+      },
+      "cuvslam_vs_groundtruth": {
+        "used": 1856,
+        "skipped_small_reference": 416,
+        "skipped_missing_estimate": 0,
+        "minimum_reference_px": 1.0,
+        "cosine_median": 0.9999430498057726,
+        "cosine_mean": 0.9996225790583803,
+        "fraction_same_half_plane": 1.0,
+        "fraction_within_45_deg": 1.0,
+        "magnitude_ratio_median": 1.0050040707062493
+      },
+      "vdr_vs_cuvslam": {
+        "used": 1863,
+        "skipped_small_reference": 409,
+        "skipped_missing_estimate": 0,
+        "minimum_reference_px": 1.0,
+        "cosine_median": 0.9974737544134828,
+        "cosine_mean": 0.9714637845958989,
+        "fraction_same_half_plane": 0.9957058507783145,
+        "fraction_within_45_deg": 0.9838969404186796,
+        "magnitude_ratio_median": 1.1071553214740848
+      }
+    }
+  },
+  "failure_behavior": {
+    "vdr_compensation_success_fraction": 1.0,
+    "vdr_valid_fraction": 1.0,
+    "vdr_invalid_by_groundtruth_angular_speed_rad_s": [
+      {
+        "low": 0.0,
+        "high": 0.25,
+        "frames": 1728,
+        "invalid_fraction": 0.0
+      },
+      {
+        "low": 0.25,
+        "high": 0.5,
+        "frames": 400,
+        "invalid_fraction": 0.0
+      },
+      {
+        "low": 0.5,
+        "high": 1.0,
+        "frames": 139,
+        "invalid_fraction": 0.0
+      },
+      {
+        "low": 1.0,
+        "high": 2.0,
+        "frames": 4,
+        "invalid_fraction": 0.0
+      },
+      {
+        "low": 2.0,
+        "high": 100.0,
+        "frames": 1,
+        "invalid_fraction": 0.0
+      }
+    ],
+    "cuvslam_tracked_fraction": 1.0,
+    "cuvslam_untracked_gaps_frames": []
+  },
+  "clock_alignment": {
+    "convention": "positive offset = second stream lags the IMU",
+    "cuvslam_vs_imu": {
+      "offset_s": -0.0019999999999999185,
+      "correlation": 0.9617308462971099,
+      "samples": 2271,
+      "search_s": 0.1,
+      "step_s": 0.0005,
+      "average_window_s": 0.04999995231628418
+    },
+    "groundtruth_vs_imu": {
+      "offset_s": 0.0005000000000000837,
+      "correlation": 0.9658653660613614,
+      "samples": 22211,
+      "search_s": 0.1,
+      "step_s": 0.0005,
+      "average_window_s": 0.005000114440917969
+    },
+    "cuvslam_vs_imu_point_sampled_biased": {
+      "offset_s": 0.0025000000000000855,
+      "correlation": 0.9450958977376464,
+      "samples": 2272,
+      "search_s": 0.1,
+      "step_s": 0.0005,
+      "average_window_s": null
+    },
+    "imu_samples_per_camera_interval": {
+      "min": 6,
+      "max": 10,
+      "intervals_with_zero": 0,
+      "intervals_with_10": 2271,
+      "intervals": 2272
+    }
+  }
+}

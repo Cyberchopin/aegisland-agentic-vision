@@ -1,0 +1,452 @@
+{
+  "tool": "benchmarks/gps_denied/run_cuvslam_euroc.py",
+  "claims": "Offline dataset replay only. Not field-camera integration, not flight-ready, no control output.",
+  "cuvslam_version": [
+    "17.0.1+51631ba",
+    17,
+    0,
+    1
+  ],
+  "cuvslam_examples_revision": "51631ba358ea51262342f9ae649820d639363eb9",
+  "aegisland_revision": "a68bbfc95dca846846495fa96bc5600b6c83e9af",
+  "aegisland_tracked_files_dirty": true,
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "gpu": "NVIDIA GeForce RTX 4060 Ti, 610.60, 8188 MiB, 8.9",
+  "sequence": "/home/shiyue1128/aegisland-data/euroc/MH_01_easy/mav0",
+  "mode": "stereo",
+  "export_signals": false,
+  "slam": {
+    "config": {
+      "sync_mode": true,
+      "max_map_size": 300,
+      "throttling_time_ms": 0,
+      "map_cell_size": 0.0,
+      "max_landmarks_distance": 100.0,
+      "retention_time_ms": 5000,
+      "use_gpu": true
+    },
+    "loop_closure_events": 49,
+    "loop_closure_event_list": [
+      {
+        "frame_timestamp_ns": 1403636584763555584,
+        "lc_timestamp_ns": 1403636584763555584
+      },
+      {
+        "frame_timestamp_ns": 1403636595963555584,
+        "lc_timestamp_ns": 1403636595963555584
+      },
+      {
+        "frame_timestamp_ns": 1403636597263555584,
+        "lc_timestamp_ns": 1403636597263555584
+      },
+      {
+        "frame_timestamp_ns": 1403636597963555584,
+        "lc_timestamp_ns": 1403636597963555584
+      },
+      {
+        "frame_timestamp_ns": 1403636599463555584,
+        "lc_timestamp_ns": 1403636599463555584
+      },
+      {
+        "frame_timestamp_ns": 1403636612313555456,
+        "lc_timestamp_ns": 1403636612313555456
+      },
+      {
+        "frame_timestamp_ns": 1403636625013555456,
+        "lc_timestamp_ns": 1403636625013555456
+      },
+      {
+        "frame_timestamp_ns": 1403636625563555584,
+        "lc_timestamp_ns": 1403636625563555584
+      },
+      {
+        "frame_timestamp_ns": 1403636625913555456,
+        "lc_timestamp_ns": 1403636625913555456
+      },
+      {
+        "frame_timestamp_ns": 1403636627263555584,
+        "lc_timestamp_ns": 1403636627263555584
+      },
+      {
+        "frame_timestamp_ns": 1403636628713555456,
+        "lc_timestamp_ns": 1403636628713555456
+      },
+      {
+        "frame_timestamp_ns": 1403636629913555456,
+        "lc_timestamp_ns": 1403636629913555456
+      },
+      {
+        "frame_timestamp_ns": 1403636633013555456,
+        "lc_timestamp_ns": 1403636633013555456
+      },
+      {
+        "frame_timestamp_ns": 1403636670963555584,
+        "lc_timestamp_ns": 1403636670963555584
+      },
+      {
+        "frame_timestamp_ns": 1403636671813555456,
+        "lc_timestamp_ns": 1403636671813555456
+      },
+      {
+        "frame_timestamp_ns": 1403636672963555584,
+        "lc_timestamp_ns": 1403636672963555584
+      },
+      {
+        "frame_timestamp_ns": 1403636676413555456,
+        "lc_timestamp_ns": 1403636676413555456
+      },
+      {
+        "frame_timestamp_ns": 1403636677763555584,
+        "lc_timestamp_ns": 1403636677763555584
+      },
+      {
+        "frame_timestamp_ns": 1403636696613555456,
+        "lc_timestamp_ns": 1403636696613555456
+      },
+      {
+        "frame_timestamp_ns": 1403636699063555584,
+        "lc_timestamp_ns": 1403636699063555584
+      },
+      {
+        "frame_timestamp_ns": 1403636702613555456,
+        "lc_timestamp_ns": 1403636702613555456
+      },
+      {
+        "frame_timestamp_ns": 1403636704413555456,
+        "lc_timestamp_ns": 1403636704413555456
+      },
+      {
+        "frame_timestamp_ns": 1403636705863555584,
+        "lc_timestamp_ns": 1403636705863555584
+      },
+      {
+        "frame_timestamp_ns": 1403636707113555456,
+        "lc_timestamp_ns": 1403636707113555456
+      },
+      {
+        "frame_timestamp_ns": 1403636708263555584,
+        "lc_timestamp_ns": 1403636708263555584
+      },
+      {
+        "frame_timestamp_ns": 1403636709763555584,
+        "lc_timestamp_ns": 1403636709763555584
+      },
+      {
+        "frame_timestamp_ns": 1403636711313555456,
+        "lc_timestamp_ns": 1403636711313555456
+      },
+      {
+        "frame_timestamp_ns": 1403636715763555584,
+        "lc_timestamp_ns": 1403636715763555584
+      },
+      {
+        "frame_timestamp_ns": 1403636718213555456,
+        "lc_timestamp_ns": 1403636718213555456
+      },
+      {
+        "frame_timestamp_ns": 1403636719513555456,
+        "lc_timestamp_ns": 1403636719513555456
+      },
+      {
+        "frame_timestamp_ns": 1403636721463555584,
+        "lc_timestamp_ns": 1403636721463555584
+      },
+      {
+        "frame_timestamp_ns": 1403636724463555584,
+        "lc_timestamp_ns": 1403636724463555584
+      },
+      {
+        "frame_timestamp_ns": 1403636728563555584,
+        "lc_timestamp_ns": 1403636728563555584
+      },
+      {
+        "frame_timestamp_ns": 1403636732563555584,
+        "lc_timestamp_ns": 1403636732563555584
+      },
+      {
+        "frame_timestamp_ns": 1403636736963555584,
+        "lc_timestamp_ns": 1403636736963555584
+      },
+      {
+        "frame_timestamp_ns": 1403636740913555456,
+        "lc_timestamp_ns": 1403636740913555456
+      },
+      {
+        "frame_timestamp_ns": 1403636743363555584,
+        "lc_timestamp_ns": 1403636743363555584
+      },
+      {
+        "frame_timestamp_ns": 1403636750513555456,
+        "lc_timestamp_ns": 1403636750513555456
+      },
+      {
+        "frame_timestamp_ns": 1403636752863555584,
+        "lc_timestamp_ns": 1403636752863555584
+      },
+      {
+        "frame_timestamp_ns": 1403636755463555584,
+        "lc_timestamp_ns": 1403636755463555584
+      },
+      {
+        "frame_timestamp_ns": 1403636757613555456,
+        "lc_timestamp_ns": 1403636757613555456
+      },
+      {
+        "frame_timestamp_ns": 1403636758563555584,
+        "lc_timestamp_ns": 1403636758563555584
+      },
+      {
+        "frame_timestamp_ns": 1403636759663555584,
+        "lc_timestamp_ns": 1403636759663555584
+      },
+      {
+        "frame_timestamp_ns": 1403636760913555456,
+        "lc_timestamp_ns": 1403636760913555456
+      },
+      {
+        "frame_timestamp_ns": 1403636762013555456,
+        "lc_timestamp_ns": 1403636762013555456
+      },
+      {
+        "frame_timestamp_ns": 1403636762763555584,
+        "lc_timestamp_ns": 1403636762763555584
+      },
+      {
+        "frame_timestamp_ns": 1403636762863555584,
+        "lc_timestamp_ns": 1403636762863555584
+      },
+      {
+        "frame_timestamp_ns": 1403636763013555456,
+        "lc_timestamp_ns": 1403636763013555456
+      },
+      {
+        "frame_timestamp_ns": 1403636763163555584,
+        "lc_timestamp_ns": 1403636763163555584
+      }
+    ],
+    "pose_graph": {
+      "nodes": 0,
+      "edges": 0
+    },
+    "smoothed_poses": 3682,
+    "localization": null,
+    "saved_map": {
+      "path": "/home/shiyue1128/aegisland-data/maps/MH_01-stereo-slam-sync-20261024-180215",
+      "success": true,
+      "duration_s": 0.18308050799532793,
+      "size_bytes": 66912256
+    },
+    "memory": {
+      "samples": [
+        {
+          "frame": 100,
+          "rss_mib": 483.33203125
+        },
+        {
+          "frame": 200,
+          "rss_mib": 485.38671875
+        },
+        {
+          "frame": 300,
+          "rss_mib": 487.7265625
+        },
+        {
+          "frame": 400,
+          "rss_mib": 489.5390625
+        },
+        {
+          "frame": 500,
+          "rss_mib": 489.57421875
+        },
+        {
+          "frame": 600,
+          "rss_mib": 489.60546875
+        },
+        {
+          "frame": 700,
+          "rss_mib": 490.046875
+        },
+        {
+          "frame": 800,
+          "rss_mib": 490.08203125
+        },
+        {
+          "frame": 900,
+          "rss_mib": 490.1171875
+        },
+        {
+          "frame": 1000,
+          "rss_mib": 491.3515625
+        },
+        {
+          "frame": 1100,
+          "rss_mib": 491.39453125
+        },
+        {
+          "frame": 1200,
+          "rss_mib": 491.4296875
+        },
+        {
+          "frame": 1300,
+          "rss_mib": 491.546875
+        },
+        {
+          "frame": 1400,
+          "rss_mib": 492.96875
+        },
+        {
+          "frame": 1500,
+          "rss_mib": 494.03515625
+        },
+        {
+          "frame": 1600,
+          "rss_mib": 496.640625
+        },
+        {
+          "frame": 1700,
+          "rss_mib": 499.734375
+        },
+        {
+          "frame": 1800,
+          "rss_mib": 500.78515625
+        },
+        {
+          "frame": 1900,
+          "rss_mib": 503.21875
+        },
+        {
+          "frame": 2000,
+          "rss_mib": 504.68359375
+        },
+        {
+          "frame": 2100,
+          "rss_mib": 505.48046875
+        },
+        {
+          "frame": 2200,
+          "rss_mib": 506.14453125
+        },
+        {
+          "frame": 2300,
+          "rss_mib": 508.1796875
+        },
+        {
+          "frame": 2400,
+          "rss_mib": 510.234375
+        },
+        {
+          "frame": 2500,
+          "rss_mib": 511.23046875
+        },
+        {
+          "frame": 2600,
+          "rss_mib": 513.34765625
+        },
+        {
+          "frame": 2700,
+          "rss_mib": 515.10546875
+        },
+        {
+          "frame": 2800,
+          "rss_mib": 516.0390625
+        },
+        {
+          "frame": 2900,
+          "rss_mib": 515.61328125
+        },
+        {
+          "frame": 3000,
+          "rss_mib": 517.62109375
+        },
+        {
+          "frame": 3100,
+          "rss_mib": 516.9921875
+        },
+        {
+          "frame": 3200,
+          "rss_mib": 517.4921875
+        },
+        {
+          "frame": 3300,
+          "rss_mib": 518.36328125
+        },
+        {
+          "frame": 3400,
+          "rss_mib": 519.30859375
+        },
+        {
+          "frame": 3500,
+          "rss_mib": 520.328125
+        },
+        {
+          "frame": 3600,
+          "rss_mib": 522.03125
+        }
+      ],
+      "peak_rss_mib": 587.06640625
+    }
+  },
+  "odometry_config": {
+    "async_sba": false,
+    "rectified_stereo_camera": false,
+    "odometry_mode": "OdometryMode.Multicamera"
+  },
+  "max_frames": null,
+  "start_frame": 0,
+  "throttle_ms": 0.0,
+  "realtime_rate": 1.0,
+  "gpu_clocks": {
+    "available": true,
+    "samples": 365,
+    "sm_clock_mhz": {
+      "min": 210.0,
+      "median": 330.0,
+      "max": 2535.0
+    },
+    "pstates": [
+      "P2",
+      "P3",
+      "P5",
+      "P8"
+    ],
+    "note": "clocks not locked (no admin rights in WSL); recorded instead"
+  },
+  "pair_by_timestamp": true,
+  "unpaired_camera_timestamps_ns": {
+    "cam0_only": [],
+    "cam1_only": []
+  },
+  "input_sha256": {
+    "cam0/data.csv": "62db628a8e6358f43df81e66ddb4597ab40b19a10f3d6cd80cc04d590b5adb12",
+    "cam1/data.csv": "62db628a8e6358f43df81e66ddb4597ab40b19a10f3d6cd80cc04d590b5adb12",
+    "imu0/data.csv": "226470999dc8ba758c838982fd7eb2bc9f3f2b489e85a38d0ecf8b9d40785a5b",
+    "cam0/sensor_recalibrated.yaml": "80324218a06be7b8479ea347dc7414b0fa123d70fb1829c9df342248d3b82faf",
+    "cam1/sensor_recalibrated.yaml": "db54b71bc718ed74ba313d63d5f2f89f671933d3b0e9d470a5aea8936c64049f",
+    "imu0/sensor_recalibrated.yaml": "845ef065835eb510fc6607644aa626077947f872573569ecd6c2d69a92642f98",
+    "cam0/sensor.yaml": "191748edddda5d1368188f5b0a3c4bed6c48842c178ef9d83c50cba17d66e819",
+    "cam1/sensor.yaml": "a469fd673f369881f37dd6b93d251e9444950360d70c6214bf909cf509ac9524",
+    "imu0/sensor.yaml": "91e6c408416f549f87e7405830b83849cca10521f3d3fc8bb3de862c2bc882d0",
+    "state_groundtruth_estimate0/data.csv": "aae2d7c5684724c8afe364d2fd8499a6ed77a9169adf03736531f67d8e7b2117"
+  },
+  "counts": {
+    "stereo_frames": 3682,
+    "tracked_frames": 3682,
+    "untracked_frames": 0,
+    "imu_samples": 0
+  },
+  "timing": {
+    "note": "Host wall time around Tracker.track(), synchronous; includes upload. Excludes PNG decode. Development GPU, not Orin.",
+    "valid_for_performance_claims": true,
+    "rule": "performance numbers only from --realtime runs with gpu_clocks recorded (docs/dronehacks/gps-denied-benchmark-plan.md)",
+    "first_call_ms": 12.7867379997042,
+    "warm_track_ms": {
+      "count": 3681,
+      "mean": 9.10060956235847,
+      "p50": 5.965254000329878,
+      "p95": 12.174775001767557,
+      "max": 374.53357300546486
+    },
+    "total_wall_s": 184.05444750600145
+  }
+}

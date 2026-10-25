@@ -1,0 +1,21 @@
+{
+ "ekf2_raw_max_error_10s_after_fault_m": 1.0425122873441641,
+ "ekf2_raw_error_before_fault_rms_m": 0.04131522648179843,
+ "raw_reasons_during_fault": [
+  "capture_time_not_increasing",
+  "dropped_frames",
+  "stale"
+ ],
+ "ekf2_supervised_max_error_10s_after_fault_m": 0.14925341226865346,
+ "ekf2_supervised_error_before_fault_rms_m": 0.044578000962597016,
+ "supervised_reasons_during_fault": [
+  "capture_time_not_increasing",
+  "dropped_frames",
+  "stale"
+ ],
+ "inputs": {
+  "run": "/home/shiyue1128/work/demo-runs/demo-c-20261024-115940/MH_01-freeze-raw",
+  "supervised_run": "/home/shiyue1128/work/demo-runs/demo-c-20261024-115940/MH_01-freeze-supervised",
+  "ulog_sha256": "bb6f681b041d0e1723b897820e7a06a39bf4b73b79c8bce9a8b14024e5eab226"
+ }
+}

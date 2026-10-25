@@ -1,0 +1,24 @@
+{
+  "tool": "benchmarks/gps_denied/bench_orb_cache.py",
+  "sequence": "/home/shiyue1128/aegisland-data/euroc/MH_01_easy/mav0",
+  "pairs": 599,
+  "image_shape": [
+    480,
+    752
+  ],
+  "opencv": "5.0.0",
+  "threads": 1,
+  "outputs_identical": true,
+  "note": "dev machine (RTX 4060 Ti host CPU), interleaved A/B, no profiler; not Orin",
+  "cached": {
+    "p50_ms": 13.960964,
+    "p95_ms": 17.854897999999995,
+    "mean_ms": 14.511117816053515
+  },
+  "uncached": {
+    "p50_ms": 18.866163,
+    "p95_ms": 23.917703899999996,
+    "mean_ms": 19.418272657190634
+  },
+  "p50_speedup": 1.3513510241842899
+}

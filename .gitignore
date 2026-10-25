@@ -13,3 +13,15 @@ runs/
 tmp/
 /aegisland-agentic-vision/
 /work/
+
+# Per-message fault replay logs are large (~20 MB per sequence); summary.json + SHA256SUMS are kept.
+benchmarks/results/gps_denied/fault-replay-*/*.jsonl
+# degradation study per-frame series (~4 MB each, regenerable from the *-signals runs)
+benchmarks/results/gps_denied/degradation-study-*/series.json
+# Visualizations that overlay dataset camera frames (EuRoC cam0 etc.) are not committed by default.
+# Pure charts (matplotlib PNGs without camera imagery) remain allowed.
+benchmarks/results/**/*.jpg
+benchmarks/results/**/*.jpeg
+benchmarks/results/**/vis-*.png
+benchmarks/results/**/*overlay*.png
+benchmarks/results/**/*frame*.png
