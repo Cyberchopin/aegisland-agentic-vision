@@ -6,16 +6,16 @@
 
 | 产物 | 位置 |
 | --- | --- |
-| 感知模块及输入契约 | [course_perception.py](src/aegisland/course_perception.py) |
-| 集中阈值及 provenance/hash | [course_config.py](src/aegisland/course_config.py) |
-| 离线合成场景与失败案例 | [course_synthetic.py](src/aegisland/course_synthetic.py) |
-| 本地 synthetic / NPZ 回放 | [course_replay.py](src/aegisland/course_replay.py) |
-| 单元/合成/边界/回放测试 | [test_course_perception.py](tests/test_course_perception.py) |
-| 圆弧/阴影/墙沿/片段、gap 范围与执行边界测试 | [test_course_adversarial.py](tests/test_course_adversarial.py) |
-| 设计和字段解释 | [course-perception-design.md](docs/course-perception-design.md) |
-| 通用性证据、实测边界和残留误检 | [generality-defense.md](docs/generality-defense.md) |
-| 当前 v2，36 帧硬化 trace/report/config | [report.md](examples/course-perception-hardened/report.md)、[report.json](examples/course-perception-hardened/report.json)、[trace.jsonl](examples/course-perception-hardened/trace.jsonl)、[config.json](examples/course-perception-hardened/config.json) |
-| v1 历史快照，保留初版误检证据 | [report.md](examples/course-perception/report.md)；其中源码哈希不代表当前代码 |
+| 感知模块及输入契约 | [course_perception.py](../../src/aegisland/course_perception.py) |
+| 集中阈值及 provenance/hash | [course_config.py](../../src/aegisland/course_config.py) |
+| 离线合成场景与失败案例 | [course_synthetic.py](../../src/aegisland/course_synthetic.py) |
+| 本地 synthetic / NPZ 回放 | [course_replay.py](../../src/aegisland/course_replay.py) |
+| 单元/合成/边界/回放测试 | [test_course_perception.py](../../tests/test_course_perception.py) |
+| 圆弧/阴影/墙沿/片段、gap 范围与执行边界测试 | [test_course_adversarial.py](../../tests/test_course_adversarial.py) |
+| 设计和字段解释 | [course-perception-design.md](../../docs/course-perception-design.md) |
+| 通用性证据、实测边界和残留误检 | [generality-defense.md](../../docs/generality-defense.md) |
+| 当前 v2，36 帧硬化 trace/report/config | [report.md](../../examples/course-perception-hardened/report.md)、[report.json](../../examples/course-perception-hardened/report.json)、[trace.jsonl](../../examples/course-perception-hardened/trace.jsonl)、[config.json](../../examples/course-perception-hardened/config.json) |
+| v1 历史快照，保留初版误检证据 | [report.md](../../examples/course-perception/report.md)；其中源码哈希不代表当前代码 |
 
 实现优先级依次是走廊/迷宫线、Gate A 开口候选、tunnel 低光/深度退化、Gate B/chicane 间隙、
 pad 外圈与下降几何条件。没有实现 window 或 return 路线逻辑。所有输出仅为 advisory evidence；
