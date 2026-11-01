@@ -18,9 +18,11 @@ dependencies = [
 [project.optional-dependencies]
 aws = ["boto3==1.40.18"]
 dev = ["pytest>=8.4,<9", "ruff>=0.12,<1"]
+forensics = ["pyulog==1.2.2"]
 
 [project.scripts]
 aegisland = "aegisland.cli:main"
+dronehacks-forensics = "aegisland.forensics.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
