@@ -25,6 +25,11 @@ def require_opencv() -> None:
         raise RuntimeError("OpenCV 5 and NumPy are required. Run: pip install -e '.[dev]'")
 
 
+def clahe_gray(gray: Any, *, clip_limit: float = 2.2, tiles: int = 8) -> Any:
+    """Shared same-frame exposure retry; it makes no confidence/authority claim."""
+    return cv2.createCLAHE(clipLimit=clip_limit, tileGridSize=(tiles, tiles)).apply(gray)
+
+
 @dataclass(frozen=True, slots=True)
 class PerceptionConfig:
     grid_rows: int = 3
@@ -64,7 +69,7 @@ class OpenCVLandingPerception:
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
         if active_perception:
-            gray = cv2.createCLAHE(clipLimit=2.2, tileGridSize=(8, 8)).apply(gray)
+            gray = clahe_gray(gray)
 
         blurred = cv2.GaussianBlur(gray, (5, 5), 0)
         edges = cv2.Canny(blurred, 55, 145)
