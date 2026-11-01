@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import json
 import os
+from collections.abc import Mapping
 from pathlib import Path
+from typing import Any
 
 from .domain import TraceEvent, jsonable
 
@@ -14,7 +16,7 @@ class JsonlTraceStore:
         if truncate:
             self.path.write_text("", encoding="utf-8")
 
-    def write(self, event: TraceEvent) -> None:
+    def write(self, event: TraceEvent | Mapping[str, Any]) -> None:
         with self.path.open("a", encoding="utf-8") as handle:
             handle.write(json.dumps(jsonable(event), sort_keys=True) + "\n")
 
