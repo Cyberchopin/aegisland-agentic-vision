@@ -1,0 +1,1041 @@
+{
+  "audit_date_local": "2026-10-31",
+  "audit_timezone": "America/Los_Angeles",
+  "retrieval_date_utc": "2026-11-01",
+  "scope": "Documentation, source and public interface audit; no REA; no builds; no large assets; no third-party source in repository",
+  "source_retrieval": "Connected GitHub fetch tool, pinned contents endpoints; decoded UTF-8 content checked against Git tree blob SHA-1 and exact byte length; SHA-256 computed locally",
+  "hash_validation": {
+    "files": 44,
+    "bytes": 1244609,
+    "git_blob_formula": "SHA1(b\"blob \" + ASCII(byte_length) + b\"\\0\" + original_file_bytes)",
+    "release_asset_digests": "GitHub API reported, not locally verified"
+  },
+  "pins": {
+    "cuvslam": {
+      "repo": "nvidia-isaac/cuVSLAM",
+      "ref": "v17.0.1",
+      "sha": "51631ba358ea51262342f9ae649820d639363eb9",
+      "date": "2026-10-13T10:29:25Z"
+    },
+    "ros": {
+      "repo": "NVIDIA-ISAAC-ROS/isaac_ros_visual_slam",
+      "ref": "v5.0-0",
+      "sha": "9058506efd0b967ac894a717bdbe98df017637e5",
+      "date": "2026-09-22T02:27:11Z"
+    },
+    "depthai": {
+      "repo": "luxonis/depthai-core",
+      "ref": "v3.11.0",
+      "sha": "e9ead6536e1bf9842d91211fcf80f0b4ef119954",
+      "date": "2026-10-10T16:33:49Z"
+    },
+    "ffs": {
+      "repo": "NVlabs/Fast-FoundationStereo",
+      "ref": "476f4249561f7c79ca707326954f9255643412a6",
+      "sha": "476f4249561f7c79ca707326954f9255643412a6",
+      "date": "2026-09-11T23:30:10Z"
+    },
+    "kimera": {
+      "repo": "MIT-SPARK/Kimera-VIO",
+      "ref": "ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "sha": "ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "date": "2025-02-10T14:57:18Z"
+    }
+  },
+  "euroc_docs_commit": "0ee434728bf1f13a14f86937baf53edd30ea556a",
+  "trees": {
+    "cuvslam": {
+      "truncated": false,
+      "entries": 1096,
+      "notice_paths": [
+        "LICENSE",
+        "license_header.txt"
+      ],
+      "gitlinks": []
+    },
+    "ros": {
+      "truncated": false,
+      "entries": 99,
+      "notice_paths": [
+        "LICENSE"
+      ],
+      "gitlinks": [
+        {
+          "path": "cuvslam",
+          "mode": "160000",
+          "type": "commit",
+          "sha": "33da60662b27c0c5b63e0597bd778066af2731ed"
+        }
+      ]
+    },
+    "depthai": {
+      "truncated": false,
+      "entries": 2076,
+      "notice_paths": [
+        "LICENSE",
+        "cmake/DepthaiVisualizerLicense.cmake",
+        "cmake/VerifyLicense.cmake",
+        "notices",
+        "notices/THIRD_PARTY_NOTICES",
+        "notices/depthai-device-RVC2-LICENSE",
+        "notices/depthai-device-RVC4-LICENSE",
+        "notices/depthai-visualizer-LICENSE",
+        "notices/dynamic_calibration-LICENSE",
+        "scripts/generate_third_party_notices.py",
+        "scripts/verify_license_artifact.py"
+      ],
+      "gitlinks": [
+        {
+          "path": "3rdparty/foxglove/ws-protocol",
+          "mode": "160000",
+          "type": "commit",
+          "sha": "1d9c154f2e340898c43cb027e543694a6b9323e7"
+        },
+        {
+          "path": "3rdparty/xtensor",
+          "mode": "160000",
+          "type": "commit",
+          "sha": "8ef0ee649fcd7476242af1d2072b45364036937d"
+        },
+        {
+          "path": "3rdparty/xtl",
+          "mode": "160000",
+          "type": "commit",
+          "sha": "e697c91e2a3ac571d120d2b093fb3b250d060a7d"
+        },
+        {
+          "path": "bindings/python/external/pybind11_opencv_numpy",
+          "mode": "160000",
+          "type": "commit",
+          "sha": "7926f9a81cced260d16166437272e1491905230a"
+        },
+        {
+          "path": "bindings/python/external/xtensor-python",
+          "mode": "160000",
+          "type": "commit",
+          "sha": "629004f274ff999388ebb59bd5b59e43af6eb537"
+        },
+        {
+          "path": "shared/depthai-bootloader-shared",
+          "mode": "160000",
+          "type": "commit",
+          "sha": "b287ecbacd3b0c963b5dfcf95767123b0c143b57"
+        },
+        {
+          "path": "shared/depthai_boards",
+          "mode": "160000",
+          "type": "commit",
+          "sha": "fcba107eccb5fbdee5bd99964500e922f1438217"
+        }
+      ]
+    },
+    "ffs": {
+      "truncated": false,
+      "entries": 69,
+      "notice_paths": [
+        "LICENSE.txt"
+      ],
+      "gitlinks": []
+    },
+    "kimera": {
+      "truncated": false,
+      "entries": 892,
+      "notice_paths": [
+        "LICENSE.BSD",
+        "include/kimera-vio/frontend/feature-detector/anms/LICENSE",
+        "src/frontend/feature-detector/anms/LICENSE",
+        "tests/data/MicroEurocDataset/LICENSE.md"
+      ],
+      "gitlinks": [
+        {
+          "path": "dev_tools/linter",
+          "mode": "160000",
+          "type": "commit",
+          "sha": "3897207461d19a445071e11644a50e72951b8d3e"
+        }
+      ]
+    }
+  },
+  "files": [
+    {
+      "project": "cuvslam",
+      "repo": "nvidia-isaac/cuVSLAM",
+      "ref": "v17.0.1",
+      "commit": "51631ba358ea51262342f9ae649820d639363eb9",
+      "path": "CMakeLists.txt",
+      "url": "https://github.com/nvidia-isaac/cuVSLAM/blob/51631ba358ea51262342f9ae649820d639363eb9/CMakeLists.txt",
+      "raw_url": "https://raw.githubusercontent.com/nvidia-isaac/cuVSLAM/51631ba358ea51262342f9ae649820d639363eb9/CMakeLists.txt",
+      "git_blob_sha1": "abdc67971b80ac504646d336bc06620f4f390f1a",
+      "size_bytes": 5740,
+      "sha256": "c08e7029d3cfe39dc4f83596d1596ba762b232053a990490520a6ed8089a605e",
+      "local_relative_path": "by-sha256/c08e7029d3cfe39dc4f83596d1596ba762b232053a990490520a6ed8089a605e",
+      "source_cache_relative_path": "cuvslam/CMakeLists.txt",
+      "artifact_id": "cuvslam@51631ba358ea51262342f9ae649820d639363eb9:CMakeLists.txt"
+    },
+    {
+      "project": "cuvslam",
+      "repo": "nvidia-isaac/cuVSLAM",
+      "ref": "v17.0.1",
+      "commit": "51631ba358ea51262342f9ae649820d639363eb9",
+      "path": "LICENSE",
+      "url": "https://github.com/nvidia-isaac/cuVSLAM/blob/51631ba358ea51262342f9ae649820d639363eb9/LICENSE",
+      "raw_url": "https://raw.githubusercontent.com/nvidia-isaac/cuVSLAM/51631ba358ea51262342f9ae649820d639363eb9/LICENSE",
+      "api_url": "https://api.github.com/repos/nvidia-isaac/cuVSLAM/contents/LICENSE?ref=51631ba358ea51262342f9ae649820d639363eb9",
+      "git_blob_sha1": "f55dae365f82292120caa6774d42d1d26f68e21b",
+      "size_bytes": 8178,
+      "sha256": "f369a8d255622b2ad0108b65dacb62b96c40a3a113f7893218436188bdc373fd",
+      "local_relative_path": "by-sha256/f369a8d255622b2ad0108b65dacb62b96c40a3a113f7893218436188bdc373fd",
+      "source_cache_relative_path": "cuvslam/LICENSE",
+      "artifact_id": "cuvslam@51631ba358ea51262342f9ae649820d639363eb9:LICENSE"
+    },
+    {
+      "project": "cuvslam",
+      "repo": "nvidia-isaac/cuVSLAM",
+      "ref": "v17.0.1",
+      "commit": "51631ba358ea51262342f9ae649820d639363eb9",
+      "path": "README.md",
+      "url": "https://github.com/nvidia-isaac/cuVSLAM/blob/51631ba358ea51262342f9ae649820d639363eb9/README.md",
+      "raw_url": "https://raw.githubusercontent.com/nvidia-isaac/cuVSLAM/51631ba358ea51262342f9ae649820d639363eb9/README.md",
+      "api_url": "https://api.github.com/repos/nvidia-isaac/cuVSLAM/contents/README.md?ref=51631ba358ea51262342f9ae649820d639363eb9",
+      "git_blob_sha1": "e7463808fbb5febbccb1974658f7f5daa2f3b319",
+      "size_bytes": 16629,
+      "sha256": "c830b2c68d76ec315bfef722f22a728ff09f8c43f045c8fde8314099bf6c2d11",
+      "local_relative_path": "by-sha256/c830b2c68d76ec315bfef722f22a728ff09f8c43f045c8fde8314099bf6c2d11",
+      "source_cache_relative_path": "cuvslam/README.md",
+      "artifact_id": "cuvslam@51631ba358ea51262342f9ae649820d639363eb9:README.md"
+    },
+    {
+      "project": "cuvslam",
+      "repo": "nvidia-isaac/cuVSLAM",
+      "ref": "v17.0.1",
+      "commit": "51631ba358ea51262342f9ae649820d639363eb9",
+      "path": "examples/euroc/README.md",
+      "url": "https://github.com/nvidia-isaac/cuVSLAM/blob/51631ba358ea51262342f9ae649820d639363eb9/examples/euroc/README.md",
+      "raw_url": "https://raw.githubusercontent.com/nvidia-isaac/cuVSLAM/51631ba358ea51262342f9ae649820d639363eb9/examples/euroc/README.md",
+      "api_url": "https://api.github.com/repos/nvidia-isaac/cuVSLAM/contents/examples/euroc/README.md?ref=51631ba358ea51262342f9ae649820d639363eb9",
+      "git_blob_sha1": "9329365425422a4f355ef203dd88cbe32bc40687",
+      "size_bytes": 5150,
+      "sha256": "0041142e05bf45ca94ab77c557e8fb7fbe772743dbec89b1a0ed6cfccb25b0bf",
+      "local_relative_path": "by-sha256/0041142e05bf45ca94ab77c557e8fb7fbe772743dbec89b1a0ed6cfccb25b0bf",
+      "source_cache_relative_path": "cuvslam/examples/euroc/README.md",
+      "artifact_id": "cuvslam@51631ba358ea51262342f9ae649820d639363eb9:examples/euroc/README.md"
+    },
+    {
+      "project": "cuvslam",
+      "repo": "nvidia-isaac/cuVSLAM",
+      "ref": "v17.0.1",
+      "commit": "51631ba358ea51262342f9ae649820d639363eb9",
+      "path": "examples/euroc/dataset_utils.py",
+      "url": "https://github.com/nvidia-isaac/cuVSLAM/blob/51631ba358ea51262342f9ae649820d639363eb9/examples/euroc/dataset_utils.py",
+      "raw_url": "https://raw.githubusercontent.com/nvidia-isaac/cuVSLAM/51631ba358ea51262342f9ae649820d639363eb9/examples/euroc/dataset_utils.py",
+      "api_url": "https://api.github.com/repos/nvidia-isaac/cuVSLAM/contents/examples/euroc/dataset_utils.py?ref=51631ba358ea51262342f9ae649820d639363eb9",
+      "git_blob_sha1": "ccacf46e580596936e0ce7f847cbdeaef6b3b824",
+      "size_bytes": 10945,
+      "sha256": "45b2854569dfd891be5f317437034f44ac652ee85fbf321f147428e89dbe8416",
+      "local_relative_path": "by-sha256/45b2854569dfd891be5f317437034f44ac652ee85fbf321f147428e89dbe8416",
+      "source_cache_relative_path": "cuvslam/examples/euroc/dataset_utils.py",
+      "artifact_id": "cuvslam@51631ba358ea51262342f9ae649820d639363eb9:examples/euroc/dataset_utils.py"
+    },
+    {
+      "project": "cuvslam",
+      "repo": "nvidia-isaac/cuVSLAM",
+      "ref": "v17.0.1",
+      "commit": "51631ba358ea51262342f9ae649820d639363eb9",
+      "path": "examples/euroc/track_euroc.py",
+      "url": "https://github.com/nvidia-isaac/cuVSLAM/blob/51631ba358ea51262342f9ae649820d639363eb9/examples/euroc/track_euroc.py",
+      "raw_url": "https://raw.githubusercontent.com/nvidia-isaac/cuVSLAM/51631ba358ea51262342f9ae649820d639363eb9/examples/euroc/track_euroc.py",
+      "api_url": "https://api.github.com/repos/nvidia-isaac/cuVSLAM/contents/examples/euroc/track_euroc.py?ref=51631ba358ea51262342f9ae649820d639363eb9",
+      "git_blob_sha1": "5f51541b8d71e4ecc60a244da1c523d0bd0da438",
+      "size_bytes": 8064,
+      "sha256": "8732d43cf9ec8e777336ed406002f64903bf38caa49eb85add7c3d85c0d513ed",
+      "local_relative_path": "by-sha256/8732d43cf9ec8e777336ed406002f64903bf38caa49eb85add7c3d85c0d513ed",
+      "source_cache_relative_path": "cuvslam/examples/euroc/track_euroc.py",
+      "artifact_id": "cuvslam@51631ba358ea51262342f9ae649820d639363eb9:examples/euroc/track_euroc.py"
+    },
+    {
+      "project": "cuvslam",
+      "repo": "nvidia-isaac/cuVSLAM",
+      "ref": "v17.0.1",
+      "commit": "51631ba358ea51262342f9ae649820d639363eb9",
+      "path": "examples/oak-d/README.md",
+      "url": "https://github.com/nvidia-isaac/cuVSLAM/blob/51631ba358ea51262342f9ae649820d639363eb9/examples/oak-d/README.md",
+      "raw_url": "https://raw.githubusercontent.com/nvidia-isaac/cuVSLAM/51631ba358ea51262342f9ae649820d639363eb9/examples/oak-d/README.md",
+      "api_url": "https://api.github.com/repos/nvidia-isaac/cuVSLAM/contents/examples/oak-d/README.md?ref=51631ba358ea51262342f9ae649820d639363eb9",
+      "git_blob_sha1": "95f74afe9d6af720d0544aeafe6e4c35efa33487",
+      "size_bytes": 3336,
+      "sha256": "9f11c38308fdb9deea916bb01bddc47803de9a3dda2ee92a855a526f8bb67e92",
+      "local_relative_path": "by-sha256/9f11c38308fdb9deea916bb01bddc47803de9a3dda2ee92a855a526f8bb67e92",
+      "source_cache_relative_path": "cuvslam/examples/oak-d/README.md",
+      "artifact_id": "cuvslam@51631ba358ea51262342f9ae649820d639363eb9:examples/oak-d/README.md"
+    },
+    {
+      "project": "cuvslam",
+      "repo": "nvidia-isaac/cuVSLAM",
+      "ref": "v17.0.1",
+      "commit": "51631ba358ea51262342f9ae649820d639363eb9",
+      "path": "examples/oak-d/run_stereo.py",
+      "url": "https://github.com/nvidia-isaac/cuVSLAM/blob/51631ba358ea51262342f9ae649820d639363eb9/examples/oak-d/run_stereo.py",
+      "raw_url": "https://raw.githubusercontent.com/nvidia-isaac/cuVSLAM/51631ba358ea51262342f9ae649820d639363eb9/examples/oak-d/run_stereo.py",
+      "api_url": "https://api.github.com/repos/nvidia-isaac/cuVSLAM/contents/examples/oak-d/run_stereo.py?ref=51631ba358ea51262342f9ae649820d639363eb9",
+      "git_blob_sha1": "f1ae1d6b6c2db00e72e747e50f3f8427a244bfd3",
+      "size_bytes": 8842,
+      "sha256": "33e99be52f8ae8e3a650f5a923c3be66ab33805b85bcabc9ec2b0b0001fee7d9",
+      "local_relative_path": "by-sha256/33e99be52f8ae8e3a650f5a923c3be66ab33805b85bcabc9ec2b0b0001fee7d9",
+      "source_cache_relative_path": "cuvslam/examples/oak-d/run_stereo.py",
+      "artifact_id": "cuvslam@51631ba358ea51262342f9ae649820d639363eb9:examples/oak-d/run_stereo.py"
+    },
+    {
+      "project": "depthai",
+      "repo": "luxonis/depthai-core",
+      "ref": "v3.11.0",
+      "commit": "e9ead6536e1bf9842d91211fcf80f0b4ef119954",
+      "path": ".gitmodules",
+      "url": "https://github.com/luxonis/depthai-core/blob/e9ead6536e1bf9842d91211fcf80f0b4ef119954/.gitmodules",
+      "raw_url": "https://raw.githubusercontent.com/luxonis/depthai-core/e9ead6536e1bf9842d91211fcf80f0b4ef119954/.gitmodules",
+      "api_url": "https://api.github.com/repos/luxonis/depthai-core/contents/.gitmodules?ref=e9ead6536e1bf9842d91211fcf80f0b4ef119954",
+      "git_blob_sha1": "3ba7b9b8cc37524194eca65e122524e6ca050a64",
+      "size_bytes": 901,
+      "sha256": "bd6ed8e52218ecf5ecb7aea145bee6812243f6869e8987c12b4b27d00be62577",
+      "local_relative_path": "by-sha256/bd6ed8e52218ecf5ecb7aea145bee6812243f6869e8987c12b4b27d00be62577",
+      "source_cache_relative_path": "depthai/.gitmodules",
+      "artifact_id": "depthai@e9ead6536e1bf9842d91211fcf80f0b4ef119954:.gitmodules"
+    },
+    {
+      "project": "depthai",
+      "repo": "luxonis/depthai-core",
+      "ref": "v3.11.0",
+      "commit": "e9ead6536e1bf9842d91211fcf80f0b4ef119954",
+      "path": "LICENSE",
+      "url": "https://github.com/luxonis/depthai-core/blob/e9ead6536e1bf9842d91211fcf80f0b4ef119954/LICENSE",
+      "raw_url": "https://raw.githubusercontent.com/luxonis/depthai-core/e9ead6536e1bf9842d91211fcf80f0b4ef119954/LICENSE",
+      "api_url": "https://api.github.com/repos/luxonis/depthai-core/contents/LICENSE?ref=e9ead6536e1bf9842d91211fcf80f0b4ef119954",
+      "git_blob_sha1": "b45d6ba17fd4c00852095670c3ad38a4d391cde8",
+      "size_bytes": 1068,
+      "sha256": "5fe6d4ec2aa4e228142ee71084d1c8bfea474238fee8d49bd10e8cbd0b44ace1",
+      "local_relative_path": "by-sha256/5fe6d4ec2aa4e228142ee71084d1c8bfea474238fee8d49bd10e8cbd0b44ace1",
+      "source_cache_relative_path": "depthai/LICENSE",
+      "artifact_id": "depthai@e9ead6536e1bf9842d91211fcf80f0b4ef119954:LICENSE"
+    },
+    {
+      "project": "depthai",
+      "repo": "luxonis/depthai-core",
+      "ref": "v3.11.0",
+      "commit": "e9ead6536e1bf9842d91211fcf80f0b4ef119954",
+      "path": "README.md",
+      "url": "https://github.com/luxonis/depthai-core/blob/e9ead6536e1bf9842d91211fcf80f0b4ef119954/README.md",
+      "raw_url": "https://raw.githubusercontent.com/luxonis/depthai-core/e9ead6536e1bf9842d91211fcf80f0b4ef119954/README.md",
+      "api_url": "https://api.github.com/repos/luxonis/depthai-core/contents/README.md?ref=e9ead6536e1bf9842d91211fcf80f0b4ef119954",
+      "git_blob_sha1": "4e63f74ff8b29a74e82885fd5c00cbc67e868581",
+      "size_bytes": 36821,
+      "sha256": "b8f10e57daeb4c2a1b60b67778cab2c854f82720ea62ea840bd98a2428b6223e",
+      "local_relative_path": "by-sha256/b8f10e57daeb4c2a1b60b67778cab2c854f82720ea62ea840bd98a2428b6223e",
+      "source_cache_relative_path": "depthai/README.md",
+      "artifact_id": "depthai@e9ead6536e1bf9842d91211fcf80f0b4ef119954:README.md"
+    },
+    {
+      "project": "depthai",
+      "repo": "luxonis/depthai-core",
+      "ref": "v3.11.0",
+      "commit": "e9ead6536e1bf9842d91211fcf80f0b4ef119954",
+      "path": "cmake/Depthai/DepthaiDeviceSideConfig.cmake",
+      "url": "https://github.com/luxonis/depthai-core/blob/e9ead6536e1bf9842d91211fcf80f0b4ef119954/cmake/Depthai/DepthaiDeviceSideConfig.cmake",
+      "raw_url": "https://raw.githubusercontent.com/luxonis/depthai-core/e9ead6536e1bf9842d91211fcf80f0b4ef119954/cmake/Depthai/DepthaiDeviceSideConfig.cmake",
+      "git_blob_sha1": "0cfb66a8d7122ba0197546d9f5ee8aa2ecc08218",
+      "size_bytes": 267,
+      "sha256": "3e025ebf1ede44c5b4198d8712092fca18cf8a5f4c2373c14510922454802658",
+      "local_relative_path": "by-sha256/3e025ebf1ede44c5b4198d8712092fca18cf8a5f4c2373c14510922454802658",
+      "source_cache_relative_path": "depthai/cmake/Depthai/DepthaiDeviceSideConfig.cmake",
+      "artifact_id": "depthai@e9ead6536e1bf9842d91211fcf80f0b4ef119954:cmake/Depthai/DepthaiDeviceSideConfig.cmake"
+    },
+    {
+      "project": "depthai",
+      "repo": "luxonis/depthai-core",
+      "ref": "v3.11.0",
+      "commit": "e9ead6536e1bf9842d91211fcf80f0b4ef119954",
+      "path": "examples/python/IMU/imu_gyroscope_accelerometer.py",
+      "url": "https://github.com/luxonis/depthai-core/blob/e9ead6536e1bf9842d91211fcf80f0b4ef119954/examples/python/IMU/imu_gyroscope_accelerometer.py",
+      "raw_url": "https://raw.githubusercontent.com/luxonis/depthai-core/e9ead6536e1bf9842d91211fcf80f0b4ef119954/examples/python/IMU/imu_gyroscope_accelerometer.py",
+      "api_url": "https://api.github.com/repos/luxonis/depthai-core/contents/examples/python/IMU/imu_gyroscope_accelerometer.py?ref=e9ead6536e1bf9842d91211fcf80f0b4ef119954",
+      "git_blob_sha1": "f7847f12bc5f82bf79cc9177ab9128418f28e7fc",
+      "size_bytes": 2437,
+      "sha256": "77fdc8fc6fc24d9a3b3a3bfb930f5a483e5ad7907227b823a2f9033d89a426df",
+      "local_relative_path": "by-sha256/77fdc8fc6fc24d9a3b3a3bfb930f5a483e5ad7907227b823a2f9033d89a426df",
+      "source_cache_relative_path": "depthai/examples/python/IMU/imu_gyroscope_accelerometer.py",
+      "artifact_id": "depthai@e9ead6536e1bf9842d91211fcf80f0b4ef119954:examples/python/IMU/imu_gyroscope_accelerometer.py"
+    },
+    {
+      "project": "depthai",
+      "repo": "luxonis/depthai-core",
+      "ref": "v3.11.0",
+      "commit": "e9ead6536e1bf9842d91211fcf80f0b4ef119954",
+      "path": "examples/python/StereoDepth/stereo.py",
+      "url": "https://github.com/luxonis/depthai-core/blob/e9ead6536e1bf9842d91211fcf80f0b4ef119954/examples/python/StereoDepth/stereo.py",
+      "raw_url": "https://raw.githubusercontent.com/luxonis/depthai-core/e9ead6536e1bf9842d91211fcf80f0b4ef119954/examples/python/StereoDepth/stereo.py",
+      "api_url": "https://api.github.com/repos/luxonis/depthai-core/contents/examples/python/StereoDepth/stereo.py?ref=e9ead6536e1bf9842d91211fcf80f0b4ef119954",
+      "git_blob_sha1": "9592372f5eac93741f182353358c964ea9a18b1a",
+      "size_bytes": 986,
+      "sha256": "9c89967f1b1bbd16e7fb7703d8ca1d1bb4a11bcb1dd97b620f2abb15ecc5c858",
+      "local_relative_path": "by-sha256/9c89967f1b1bbd16e7fb7703d8ca1d1bb4a11bcb1dd97b620f2abb15ecc5c858",
+      "source_cache_relative_path": "depthai/examples/python/StereoDepth/stereo.py",
+      "artifact_id": "depthai@e9ead6536e1bf9842d91211fcf80f0b4ef119954:examples/python/StereoDepth/stereo.py"
+    },
+    {
+      "project": "depthai",
+      "repo": "luxonis/depthai-core",
+      "ref": "v3.11.0",
+      "commit": "e9ead6536e1bf9842d91211fcf80f0b4ef119954",
+      "path": "include/depthai/pipeline/datatype/IMUData.hpp",
+      "url": "https://github.com/luxonis/depthai-core/blob/e9ead6536e1bf9842d91211fcf80f0b4ef119954/include/depthai/pipeline/datatype/IMUData.hpp",
+      "raw_url": "https://raw.githubusercontent.com/luxonis/depthai-core/e9ead6536e1bf9842d91211fcf80f0b4ef119954/include/depthai/pipeline/datatype/IMUData.hpp",
+      "api_url": "https://api.github.com/repos/luxonis/depthai-core/contents/include/depthai/pipeline/datatype/IMUData.hpp?ref=e9ead6536e1bf9842d91211fcf80f0b4ef119954",
+      "git_blob_sha1": "2673327d0111b1f17a95bb5fcd5662d6aa666ff6",
+      "size_bytes": 8333,
+      "sha256": "2baa804a48980a5e55465e45fbefeeafabcadd68eaf230220bd9947cf59fddcf",
+      "local_relative_path": "by-sha256/2baa804a48980a5e55465e45fbefeeafabcadd68eaf230220bd9947cf59fddcf",
+      "source_cache_relative_path": "depthai/include/depthai/pipeline/datatype/IMUData.hpp",
+      "artifact_id": "depthai@e9ead6536e1bf9842d91211fcf80f0b4ef119954:include/depthai/pipeline/datatype/IMUData.hpp"
+    },
+    {
+      "project": "depthai",
+      "repo": "luxonis/depthai-core",
+      "ref": "v3.11.0",
+      "commit": "e9ead6536e1bf9842d91211fcf80f0b4ef119954",
+      "path": "include/depthai/pipeline/node/StereoDepth.hpp",
+      "url": "https://github.com/luxonis/depthai-core/blob/e9ead6536e1bf9842d91211fcf80f0b4ef119954/include/depthai/pipeline/node/StereoDepth.hpp",
+      "raw_url": "https://raw.githubusercontent.com/luxonis/depthai-core/e9ead6536e1bf9842d91211fcf80f0b4ef119954/include/depthai/pipeline/node/StereoDepth.hpp",
+      "api_url": "https://api.github.com/repos/luxonis/depthai-core/contents/include/depthai/pipeline/node/StereoDepth.hpp?ref=e9ead6536e1bf9842d91211fcf80f0b4ef119954",
+      "git_blob_sha1": "c980fa3a9fffd864a32d34d24aba2962cd331622",
+      "size_bytes": 14980,
+      "sha256": "41f0dc23defee1afcc4694e457d331886becf87c43fb220585b35abff9c2f6e1",
+      "local_relative_path": "by-sha256/41f0dc23defee1afcc4694e457d331886becf87c43fb220585b35abff9c2f6e1",
+      "source_cache_relative_path": "depthai/include/depthai/pipeline/node/StereoDepth.hpp",
+      "artifact_id": "depthai@e9ead6536e1bf9842d91211fcf80f0b4ef119954:include/depthai/pipeline/node/StereoDepth.hpp"
+    },
+    {
+      "project": "depthai",
+      "repo": "luxonis/depthai-core",
+      "ref": "v3.11.0",
+      "commit": "e9ead6536e1bf9842d91211fcf80f0b4ef119954",
+      "path": "notices/THIRD_PARTY_NOTICES",
+      "url": "https://github.com/luxonis/depthai-core/blob/e9ead6536e1bf9842d91211fcf80f0b4ef119954/notices/THIRD_PARTY_NOTICES",
+      "raw_url": "https://raw.githubusercontent.com/luxonis/depthai-core/e9ead6536e1bf9842d91211fcf80f0b4ef119954/notices/THIRD_PARTY_NOTICES",
+      "git_blob_sha1": "3ab8ac5343943012e0511b6166d274f1dd78724f",
+      "size_bytes": 384862,
+      "sha256": "a63d1d1f44c96037dc84106b23d5f7543dfa22c8878e4daed081babcd1272774",
+      "local_relative_path": "by-sha256/a63d1d1f44c96037dc84106b23d5f7543dfa22c8878e4daed081babcd1272774",
+      "source_cache_relative_path": "depthai/notices/THIRD_PARTY_NOTICES",
+      "artifact_id": "depthai@e9ead6536e1bf9842d91211fcf80f0b4ef119954:notices/THIRD_PARTY_NOTICES"
+    },
+    {
+      "project": "depthai",
+      "repo": "luxonis/depthai-core",
+      "ref": "v3.11.0",
+      "commit": "e9ead6536e1bf9842d91211fcf80f0b4ef119954",
+      "path": "notices/depthai-device-RVC2-LICENSE",
+      "url": "https://github.com/luxonis/depthai-core/blob/e9ead6536e1bf9842d91211fcf80f0b4ef119954/notices/depthai-device-RVC2-LICENSE",
+      "raw_url": "https://raw.githubusercontent.com/luxonis/depthai-core/e9ead6536e1bf9842d91211fcf80f0b4ef119954/notices/depthai-device-RVC2-LICENSE",
+      "git_blob_sha1": "4208265eee895711bf470f48c894813a7edd8e07",
+      "size_bytes": 39898,
+      "sha256": "dc62c000d32a3336bdfd1d3df0509865d4f93ad2bd9bbe185dcee3e3713134c0",
+      "local_relative_path": "by-sha256/dc62c000d32a3336bdfd1d3df0509865d4f93ad2bd9bbe185dcee3e3713134c0",
+      "source_cache_relative_path": "depthai/notices/depthai-device-RVC2-LICENSE",
+      "artifact_id": "depthai@e9ead6536e1bf9842d91211fcf80f0b4ef119954:notices/depthai-device-RVC2-LICENSE"
+    },
+    {
+      "project": "depthai",
+      "repo": "luxonis/depthai-core",
+      "ref": "v3.11.0",
+      "commit": "e9ead6536e1bf9842d91211fcf80f0b4ef119954",
+      "path": "notices/depthai-device-RVC4-LICENSE",
+      "url": "https://github.com/luxonis/depthai-core/blob/e9ead6536e1bf9842d91211fcf80f0b4ef119954/notices/depthai-device-RVC4-LICENSE",
+      "raw_url": "https://raw.githubusercontent.com/luxonis/depthai-core/e9ead6536e1bf9842d91211fcf80f0b4ef119954/notices/depthai-device-RVC4-LICENSE",
+      "git_blob_sha1": "ec36efc13900242f573cfa727070de9a234b27dc",
+      "size_bytes": 112701,
+      "sha256": "f5a79ff75e1b81cbf688f5929dd6bcc596d2f1c9e69757f50e78ac99ed2591a1",
+      "local_relative_path": "by-sha256/f5a79ff75e1b81cbf688f5929dd6bcc596d2f1c9e69757f50e78ac99ed2591a1",
+      "source_cache_relative_path": "depthai/notices/depthai-device-RVC4-LICENSE",
+      "artifact_id": "depthai@e9ead6536e1bf9842d91211fcf80f0b4ef119954:notices/depthai-device-RVC4-LICENSE"
+    },
+    {
+      "project": "euroc",
+      "repo": "ethz-asl/ethz-asl.github.io",
+      "ref": "documentation snapshot (dataset DOI edition 2024-09-27)",
+      "commit": "0ee434728bf1f13a14f86937baf53edd30ea556a",
+      "path": "_datasets/euroc_mav.md",
+      "url": "https://github.com/ethz-asl/ethz-asl.github.io/blob/0ee434728bf1f13a14f86937baf53edd30ea556a/_datasets/euroc_mav.md",
+      "raw_url": "https://raw.githubusercontent.com/ethz-asl/ethz-asl.github.io/0ee434728bf1f13a14f86937baf53edd30ea556a/_datasets/euroc_mav.md",
+      "git_blob_sha1": "7c06ec88fd99c7e8ba5a33b23e088bd2ef046cf6",
+      "size_bytes": 2814,
+      "sha256": "a51da9c1ab058ca5f85b0260941dfa1d39d5fd65597aa185af927d79be9bf344",
+      "local_relative_path": "by-sha256/a51da9c1ab058ca5f85b0260941dfa1d39d5fd65597aa185af927d79be9bf344",
+      "source_cache_relative_path": "euroc/_datasets/euroc_mav.md",
+      "artifact_id": "euroc@0ee434728bf1f13a14f86937baf53edd30ea556a:_datasets/euroc_mav.md"
+    },
+    {
+      "project": "ffs",
+      "repo": "NVlabs/Fast-FoundationStereo",
+      "ref": "476f4249561f7c79ca707326954f9255643412a6",
+      "commit": "476f4249561f7c79ca707326954f9255643412a6",
+      "path": "LICENSE.txt",
+      "url": "https://github.com/NVlabs/Fast-FoundationStereo/blob/476f4249561f7c79ca707326954f9255643412a6/LICENSE.txt",
+      "raw_url": "https://raw.githubusercontent.com/NVlabs/Fast-FoundationStereo/476f4249561f7c79ca707326954f9255643412a6/LICENSE.txt",
+      "api_url": "https://api.github.com/repos/NVlabs/Fast-FoundationStereo/contents/LICENSE.txt?ref=476f4249561f7c79ca707326954f9255643412a6",
+      "git_blob_sha1": "db16c96e458c7ba6ef4f4d3890dadb2b7bf56431",
+      "size_bytes": 4338,
+      "sha256": "045b564ebafefaa863beec07c5acdcfa8d99cefbbd060c22865bc4613318ddd6",
+      "local_relative_path": "by-sha256/045b564ebafefaa863beec07c5acdcfa8d99cefbbd060c22865bc4613318ddd6",
+      "source_cache_relative_path": "ffs/LICENSE.txt",
+      "artifact_id": "ffs@476f4249561f7c79ca707326954f9255643412a6:LICENSE.txt"
+    },
+    {
+      "project": "ffs",
+      "repo": "NVlabs/Fast-FoundationStereo",
+      "ref": "476f4249561f7c79ca707326954f9255643412a6",
+      "commit": "476f4249561f7c79ca707326954f9255643412a6",
+      "path": "cpp/README.md",
+      "url": "https://github.com/NVlabs/Fast-FoundationStereo/blob/476f4249561f7c79ca707326954f9255643412a6/cpp/README.md",
+      "raw_url": "https://raw.githubusercontent.com/NVlabs/Fast-FoundationStereo/476f4249561f7c79ca707326954f9255643412a6/cpp/README.md",
+      "api_url": "https://api.github.com/repos/NVlabs/Fast-FoundationStereo/contents/cpp/README.md?ref=476f4249561f7c79ca707326954f9255643412a6",
+      "git_blob_sha1": "3afc1338acec5eafa365c4b60ed2b7a96961095e",
+      "size_bytes": 9833,
+      "sha256": "85a6a826b0901f3387dd2b7ee8bbde81ea9b9a61d663f3da75d23860bb56ca35",
+      "local_relative_path": "by-sha256/85a6a826b0901f3387dd2b7ee8bbde81ea9b9a61d663f3da75d23860bb56ca35",
+      "source_cache_relative_path": "ffs/cpp/README.md",
+      "artifact_id": "ffs@476f4249561f7c79ca707326954f9255643412a6:cpp/README.md"
+    },
+    {
+      "project": "ffs",
+      "repo": "NVlabs/Fast-FoundationStereo",
+      "ref": "476f4249561f7c79ca707326954f9255643412a6",
+      "commit": "476f4249561f7c79ca707326954f9255643412a6",
+      "path": "model_card.md",
+      "url": "https://github.com/NVlabs/Fast-FoundationStereo/blob/476f4249561f7c79ca707326954f9255643412a6/model_card.md",
+      "raw_url": "https://raw.githubusercontent.com/NVlabs/Fast-FoundationStereo/476f4249561f7c79ca707326954f9255643412a6/model_card.md",
+      "api_url": "https://api.github.com/repos/NVlabs/Fast-FoundationStereo/contents/model_card.md?ref=476f4249561f7c79ca707326954f9255643412a6",
+      "git_blob_sha1": "b1e11a181311798f80d3cd95e2edb36e1e1a68ff",
+      "size_bytes": 5941,
+      "sha256": "604bee935908ad92e3b5c702dd0d6073895d5c1c7058e1b68d01fc8770c98b69",
+      "local_relative_path": "by-sha256/604bee935908ad92e3b5c702dd0d6073895d5c1c7058e1b68d01fc8770c98b69",
+      "source_cache_relative_path": "ffs/model_card.md",
+      "artifact_id": "ffs@476f4249561f7c79ca707326954f9255643412a6:model_card.md"
+    },
+    {
+      "project": "ffs",
+      "repo": "NVlabs/Fast-FoundationStereo",
+      "ref": "476f4249561f7c79ca707326954f9255643412a6",
+      "commit": "476f4249561f7c79ca707326954f9255643412a6",
+      "path": "readme.md",
+      "url": "https://github.com/NVlabs/Fast-FoundationStereo/blob/476f4249561f7c79ca707326954f9255643412a6/readme.md",
+      "raw_url": "https://raw.githubusercontent.com/NVlabs/Fast-FoundationStereo/476f4249561f7c79ca707326954f9255643412a6/readme.md",
+      "api_url": "https://api.github.com/repos/NVlabs/Fast-FoundationStereo/contents/readme.md?ref=476f4249561f7c79ca707326954f9255643412a6",
+      "git_blob_sha1": "99b4dbf3248965ac44d914dfe68e9e0996891661",
+      "size_bytes": 15932,
+      "sha256": "692c5def294146876ae05353acd785bfcd2100e82f943cd87e542406228de7d2",
+      "local_relative_path": "by-sha256/692c5def294146876ae05353acd785bfcd2100e82f943cd87e542406228de7d2",
+      "source_cache_relative_path": "ffs/readme.md",
+      "artifact_id": "ffs@476f4249561f7c79ca707326954f9255643412a6:readme.md"
+    },
+    {
+      "project": "ffs",
+      "repo": "NVlabs/Fast-FoundationStereo",
+      "ref": "476f4249561f7c79ca707326954f9255643412a6",
+      "commit": "476f4249561f7c79ca707326954f9255643412a6",
+      "path": "requirements.txt",
+      "url": "https://github.com/NVlabs/Fast-FoundationStereo/blob/476f4249561f7c79ca707326954f9255643412a6/requirements.txt",
+      "raw_url": "https://raw.githubusercontent.com/NVlabs/Fast-FoundationStereo/476f4249561f7c79ca707326954f9255643412a6/requirements.txt",
+      "api_url": "https://api.github.com/repos/NVlabs/Fast-FoundationStereo/contents/requirements.txt?ref=476f4249561f7c79ca707326954f9255643412a6",
+      "git_blob_sha1": "29feba322b923709d4958b5005f57bc4b542e94c",
+      "size_bytes": 286,
+      "sha256": "080550f3115f281c89ca40bd6ad6e2f743c39cfb3d202e3878a26e82b539190a",
+      "local_relative_path": "by-sha256/080550f3115f281c89ca40bd6ad6e2f743c39cfb3d202e3878a26e82b539190a",
+      "source_cache_relative_path": "ffs/requirements.txt",
+      "artifact_id": "ffs@476f4249561f7c79ca707326954f9255643412a6:requirements.txt"
+    },
+    {
+      "project": "kimera",
+      "repo": "MIT-SPARK/Kimera-VIO",
+      "ref": "ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "commit": "ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "path": ".gitmodules",
+      "url": "https://github.com/MIT-SPARK/Kimera-VIO/blob/ce8c59b7b273ab5ac29db7e5572e1623760e19c7/.gitmodules",
+      "raw_url": "https://raw.githubusercontent.com/MIT-SPARK/Kimera-VIO/ce8c59b7b273ab5ac29db7e5572e1623760e19c7/.gitmodules",
+      "api_url": "https://api.github.com/repos/MIT-SPARK/Kimera-VIO/contents/.gitmodules?ref=ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "git_blob_sha1": "51b456637f4da4701909a0805baf7ea5df49cae9",
+      "size_bytes": 103,
+      "sha256": "8cbb7a2366da3f99614dde495cbbb9beddbade10b933e1c4b9806d34abe49d2a",
+      "local_relative_path": "by-sha256/8cbb7a2366da3f99614dde495cbbb9beddbade10b933e1c4b9806d34abe49d2a",
+      "source_cache_relative_path": "kimera/.gitmodules",
+      "artifact_id": "kimera@ce8c59b7b273ab5ac29db7e5572e1623760e19c7:.gitmodules"
+    },
+    {
+      "project": "kimera",
+      "repo": "MIT-SPARK/Kimera-VIO",
+      "ref": "ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "commit": "ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "path": "CMakeLists.txt",
+      "url": "https://github.com/MIT-SPARK/Kimera-VIO/blob/ce8c59b7b273ab5ac29db7e5572e1623760e19c7/CMakeLists.txt",
+      "raw_url": "https://raw.githubusercontent.com/MIT-SPARK/Kimera-VIO/ce8c59b7b273ab5ac29db7e5572e1623760e19c7/CMakeLists.txt",
+      "api_url": "https://api.github.com/repos/MIT-SPARK/Kimera-VIO/contents/CMakeLists.txt?ref=ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "git_blob_sha1": "c87aec04f7a133498c0a7987b8379f6dc6101bbf",
+      "size_bytes": 13102,
+      "sha256": "bc2a4f8ab1f2d2690a90c9c1983f72d05e7c77a6f22ff10035a3d003abdc716d",
+      "local_relative_path": "by-sha256/bc2a4f8ab1f2d2690a90c9c1983f72d05e7c77a6f22ff10035a3d003abdc716d",
+      "source_cache_relative_path": "kimera/CMakeLists.txt",
+      "artifact_id": "kimera@ce8c59b7b273ab5ac29db7e5572e1623760e19c7:CMakeLists.txt"
+    },
+    {
+      "project": "kimera",
+      "repo": "MIT-SPARK/Kimera-VIO",
+      "ref": "ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "commit": "ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "path": "LICENSE.BSD",
+      "url": "https://github.com/MIT-SPARK/Kimera-VIO/blob/ce8c59b7b273ab5ac29db7e5572e1623760e19c7/LICENSE.BSD",
+      "raw_url": "https://raw.githubusercontent.com/MIT-SPARK/Kimera-VIO/ce8c59b7b273ab5ac29db7e5572e1623760e19c7/LICENSE.BSD",
+      "api_url": "https://api.github.com/repos/MIT-SPARK/Kimera-VIO/contents/LICENSE.BSD?ref=ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "git_blob_sha1": "9b10fcbe55c7dc4d80589df7ac5cd4b1661d4214",
+      "size_bytes": 1291,
+      "sha256": "9cf61e2c9ebb83fe29e3981ae79540fd7a82d2aefc3ce5f7242e2131e40e7d70",
+      "local_relative_path": "by-sha256/9cf61e2c9ebb83fe29e3981ae79540fd7a82d2aefc3ce5f7242e2131e40e7d70",
+      "source_cache_relative_path": "kimera/LICENSE.BSD",
+      "artifact_id": "kimera@ce8c59b7b273ab5ac29db7e5572e1623760e19c7:LICENSE.BSD"
+    },
+    {
+      "project": "kimera",
+      "repo": "MIT-SPARK/Kimera-VIO",
+      "ref": "ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "commit": "ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "path": "README.md",
+      "url": "https://github.com/MIT-SPARK/Kimera-VIO/blob/ce8c59b7b273ab5ac29db7e5572e1623760e19c7/README.md",
+      "raw_url": "https://raw.githubusercontent.com/MIT-SPARK/Kimera-VIO/ce8c59b7b273ab5ac29db7e5572e1623760e19c7/README.md",
+      "api_url": "https://api.github.com/repos/MIT-SPARK/Kimera-VIO/contents/README.md?ref=ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "git_blob_sha1": "7720fcd0ff5c136f53304b5d8497a8293f8fa840",
+      "size_bytes": 14434,
+      "sha256": "be3d32e6f3cd112481574fb92b26f19a4dab7370b2aa60800dae67a6be035e1b",
+      "local_relative_path": "by-sha256/be3d32e6f3cd112481574fb92b26f19a4dab7370b2aa60800dae67a6be035e1b",
+      "source_cache_relative_path": "kimera/README.md",
+      "artifact_id": "kimera@ce8c59b7b273ab5ac29db7e5572e1623760e19c7:README.md"
+    },
+    {
+      "project": "kimera",
+      "repo": "MIT-SPARK/Kimera-VIO",
+      "ref": "ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "commit": "ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "path": "docs/kimera_vio_install.md",
+      "url": "https://github.com/MIT-SPARK/Kimera-VIO/blob/ce8c59b7b273ab5ac29db7e5572e1623760e19c7/docs/kimera_vio_install.md",
+      "raw_url": "https://raw.githubusercontent.com/MIT-SPARK/Kimera-VIO/ce8c59b7b273ab5ac29db7e5572e1623760e19c7/docs/kimera_vio_install.md",
+      "git_blob_sha1": "0a3dadba48bd02799ae10c3225cb9111705c5126",
+      "size_bytes": 9612,
+      "sha256": "b4d154ca24125e1c461e5cadda4f9aa864f6b67a75fe9c8314f09ea9b2ce7804",
+      "local_relative_path": "by-sha256/b4d154ca24125e1c461e5cadda4f9aa864f6b67a75fe9c8314f09ea9b2ce7804",
+      "source_cache_relative_path": "kimera/docs/kimera_vio_install.md",
+      "artifact_id": "kimera@ce8c59b7b273ab5ac29db7e5572e1623760e19c7:docs/kimera_vio_install.md"
+    },
+    {
+      "project": "kimera",
+      "repo": "MIT-SPARK/Kimera-VIO",
+      "ref": "ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "commit": "ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "path": "include/kimera-vio/pipeline/Pipeline.h",
+      "url": "https://github.com/MIT-SPARK/Kimera-VIO/blob/ce8c59b7b273ab5ac29db7e5572e1623760e19c7/include/kimera-vio/pipeline/Pipeline.h",
+      "raw_url": "https://raw.githubusercontent.com/MIT-SPARK/Kimera-VIO/ce8c59b7b273ab5ac29db7e5572e1623760e19c7/include/kimera-vio/pipeline/Pipeline.h",
+      "api_url": "https://api.github.com/repos/MIT-SPARK/Kimera-VIO/contents/include/kimera-vio/pipeline/Pipeline.h?ref=ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "git_blob_sha1": "38d2537b336165454cf63f8c000e17acc5117958",
+      "size_bytes": 10104,
+      "sha256": "ef3a1b665fd0771f933a18ed0b15899bc04ed939a3134b8efd1007dd965e54ef",
+      "local_relative_path": "by-sha256/ef3a1b665fd0771f933a18ed0b15899bc04ed939a3134b8efd1007dd965e54ef",
+      "source_cache_relative_path": "kimera/include/kimera-vio/pipeline/Pipeline.h",
+      "artifact_id": "kimera@ce8c59b7b273ab5ac29db7e5572e1623760e19c7:include/kimera-vio/pipeline/Pipeline.h"
+    },
+    {
+      "project": "kimera",
+      "repo": "MIT-SPARK/Kimera-VIO",
+      "ref": "ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "commit": "ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "path": "src/frontend/feature-detector/anms/LICENSE",
+      "url": "https://github.com/MIT-SPARK/Kimera-VIO/blob/ce8c59b7b273ab5ac29db7e5572e1623760e19c7/src/frontend/feature-detector/anms/LICENSE",
+      "raw_url": "https://raw.githubusercontent.com/MIT-SPARK/Kimera-VIO/ce8c59b7b273ab5ac29db7e5572e1623760e19c7/src/frontend/feature-detector/anms/LICENSE",
+      "api_url": "https://api.github.com/repos/MIT-SPARK/Kimera-VIO/contents/src/frontend/feature-detector/anms/LICENSE?ref=ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "git_blob_sha1": "cd2a9dc7db2aa06eed5ab5ecd21ba9b223cd2ad0",
+      "size_bytes": 1072,
+      "sha256": "5a9911ffe08f1f07b3a6df1d3920f71065f26e6f77cee4c4762a4e8468af63db",
+      "local_relative_path": "by-sha256/5a9911ffe08f1f07b3a6df1d3920f71065f26e6f77cee4c4762a4e8468af63db",
+      "source_cache_relative_path": "kimera/src/frontend/feature-detector/anms/LICENSE",
+      "artifact_id": "kimera@ce8c59b7b273ab5ac29db7e5572e1623760e19c7:src/frontend/feature-detector/anms/LICENSE"
+    },
+    {
+      "project": "kimera",
+      "repo": "MIT-SPARK/Kimera-VIO",
+      "ref": "ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "commit": "ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "path": "tests/data/MicroEurocDataset/LICENSE.md",
+      "url": "https://github.com/MIT-SPARK/Kimera-VIO/blob/ce8c59b7b273ab5ac29db7e5572e1623760e19c7/tests/data/MicroEurocDataset/LICENSE.md",
+      "raw_url": "https://raw.githubusercontent.com/MIT-SPARK/Kimera-VIO/ce8c59b7b273ab5ac29db7e5572e1623760e19c7/tests/data/MicroEurocDataset/LICENSE.md",
+      "api_url": "https://api.github.com/repos/MIT-SPARK/Kimera-VIO/contents/tests/data/MicroEurocDataset/LICENSE.md?ref=ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "git_blob_sha1": "b0eb31d958a5332b3b5f6322a4a6722b2f0c73c7",
+      "size_bytes": 106,
+      "sha256": "e598606848584116871454e0f77cf4518f2d3d7dc8867f68e1f23ea00f3cfacf",
+      "local_relative_path": "by-sha256/e598606848584116871454e0f77cf4518f2d3d7dc8867f68e1f23ea00f3cfacf",
+      "source_cache_relative_path": "kimera/tests/data/MicroEurocDataset/LICENSE.md",
+      "artifact_id": "kimera@ce8c59b7b273ab5ac29db7e5572e1623760e19c7:tests/data/MicroEurocDataset/LICENSE.md"
+    },
+    {
+      "project": "kimera",
+      "repo": "MIT-SPARK/Kimera-VIO",
+      "ref": "ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "commit": "ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "path": "third_party/CMakeLists.txt",
+      "url": "https://github.com/MIT-SPARK/Kimera-VIO/blob/ce8c59b7b273ab5ac29db7e5572e1623760e19c7/third_party/CMakeLists.txt",
+      "raw_url": "https://raw.githubusercontent.com/MIT-SPARK/Kimera-VIO/ce8c59b7b273ab5ac29db7e5572e1623760e19c7/third_party/CMakeLists.txt",
+      "git_blob_sha1": "fd9ac19fc7368fb743bf2cd8fa9ab1765600128a",
+      "size_bytes": 27,
+      "sha256": "f88af47c952a3c12574be2d736851cf6d05e956e13fdc1870d9c0de2ea99e68a",
+      "local_relative_path": "by-sha256/f88af47c952a3c12574be2d736851cf6d05e956e13fdc1870d9c0de2ea99e68a",
+      "source_cache_relative_path": "kimera/third_party/CMakeLists.txt",
+      "artifact_id": "kimera@ce8c59b7b273ab5ac29db7e5572e1623760e19c7:third_party/CMakeLists.txt"
+    },
+    {
+      "project": "kimera",
+      "repo": "MIT-SPARK/Kimera-VIO",
+      "ref": "ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "commit": "ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "path": "third_party/triangle/include/triangle/triangle.h",
+      "url": "https://github.com/MIT-SPARK/Kimera-VIO/blob/ce8c59b7b273ab5ac29db7e5572e1623760e19c7/third_party/triangle/include/triangle/triangle.h",
+      "raw_url": "https://raw.githubusercontent.com/MIT-SPARK/Kimera-VIO/ce8c59b7b273ab5ac29db7e5572e1623760e19c7/third_party/triangle/include/triangle/triangle.h",
+      "git_blob_sha1": "ff65a94716bc42c0daec302808006db0dd0bb1c6",
+      "size_bytes": 21847,
+      "sha256": "bf4a4c37c6970e8f2be33eba8acb1206d7af64c383df8aa90313235548314a3d",
+      "local_relative_path": "by-sha256/bf4a4c37c6970e8f2be33eba8acb1206d7af64c383df8aa90313235548314a3d",
+      "source_cache_relative_path": "kimera/third_party/triangle/include/triangle/triangle.h",
+      "artifact_id": "kimera@ce8c59b7b273ab5ac29db7e5572e1623760e19c7:third_party/triangle/include/triangle/triangle.h"
+    },
+    {
+      "project": "kimera",
+      "repo": "MIT-SPARK/Kimera-VIO",
+      "ref": "ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "commit": "ce8c59b7b273ab5ac29db7e5572e1623760e19c7",
+      "path": "third_party/triangle/src/triangle.c",
+      "url": "https://github.com/MIT-SPARK/Kimera-VIO/blob/ce8c59b7b273ab5ac29db7e5572e1623760e19c7/third_party/triangle/src/triangle.c",
+      "raw_url": "https://raw.githubusercontent.com/MIT-SPARK/Kimera-VIO/ce8c59b7b273ab5ac29db7e5572e1623760e19c7/third_party/triangle/src/triangle.c",
+      "git_blob_sha1": "ed368cae80c6ab7cdae161e2358e2dbfdcbe7316",
+      "size_bytes": 390394,
+      "sha256": "8cbe9f07e5b271410ccc0955c81d977f4d8f360455fc3d8d2d04adefa48b2cbb",
+      "local_relative_path": "by-sha256/8cbe9f07e5b271410ccc0955c81d977f4d8f360455fc3d8d2d04adefa48b2cbb",
+      "source_cache_relative_path": "kimera/third_party/triangle/src/triangle.c",
+      "artifact_id": "kimera@ce8c59b7b273ab5ac29db7e5572e1623760e19c7:third_party/triangle/src/triangle.c"
+    },
+    {
+      "project": "ros",
+      "repo": "NVIDIA-ISAAC-ROS/isaac_ros_visual_slam",
+      "ref": "v5.0-0",
+      "commit": "9058506efd0b967ac894a717bdbe98df017637e5",
+      "path": ".gitmodules",
+      "url": "https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam/blob/9058506efd0b967ac894a717bdbe98df017637e5/.gitmodules",
+      "raw_url": "https://raw.githubusercontent.com/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam/9058506efd0b967ac894a717bdbe98df017637e5/.gitmodules",
+      "api_url": "https://api.github.com/repos/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam/contents/.gitmodules?ref=9058506efd0b967ac894a717bdbe98df017637e5",
+      "git_blob_sha1": "691f171cd829cdd87b87c28af8a2fb0cb9d8058b",
+      "size_bytes": 104,
+      "sha256": "c3bee1ade29cecf0bdfd6222c0564f7dc7a78c646e670eb1bb86d3c16ca8424f",
+      "local_relative_path": "by-sha256/c3bee1ade29cecf0bdfd6222c0564f7dc7a78c646e670eb1bb86d3c16ca8424f",
+      "source_cache_relative_path": "ros/.gitmodules",
+      "artifact_id": "ros@9058506efd0b967ac894a717bdbe98df017637e5:.gitmodules"
+    },
+    {
+      "project": "ros",
+      "repo": "NVIDIA-ISAAC-ROS/isaac_ros_visual_slam",
+      "ref": "v5.0-0",
+      "commit": "9058506efd0b967ac894a717bdbe98df017637e5",
+      "path": "LICENSE",
+      "url": "https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam/blob/9058506efd0b967ac894a717bdbe98df017637e5/LICENSE",
+      "raw_url": "https://raw.githubusercontent.com/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam/9058506efd0b967ac894a717bdbe98df017637e5/LICENSE",
+      "api_url": "https://api.github.com/repos/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam/contents/LICENSE?ref=9058506efd0b967ac894a717bdbe98df017637e5",
+      "git_blob_sha1": "7a4a3ea2424c09fbe48d455aed1eaa94d9124835",
+      "size_bytes": 11357,
+      "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
+      "local_relative_path": "by-sha256/58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
+      "source_cache_relative_path": "ros/LICENSE",
+      "artifact_id": "ros@9058506efd0b967ac894a717bdbe98df017637e5:LICENSE"
+    },
+    {
+      "project": "ros",
+      "repo": "NVIDIA-ISAAC-ROS/isaac_ros_visual_slam",
+      "ref": "v5.0-0",
+      "commit": "9058506efd0b967ac894a717bdbe98df017637e5",
+      "path": "README.md",
+      "url": "https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam/blob/9058506efd0b967ac894a717bdbe98df017637e5/README.md",
+      "raw_url": "https://raw.githubusercontent.com/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam/9058506efd0b967ac894a717bdbe98df017637e5/README.md",
+      "api_url": "https://api.github.com/repos/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam/contents/README.md?ref=9058506efd0b967ac894a717bdbe98df017637e5",
+      "git_blob_sha1": "3da8dc07beff17df066d3a1033ee46e15f7a75b3",
+      "size_bytes": 7633,
+      "sha256": "35ed7952153c9db3a6a8a20b2aafaebcc51369d26bbafe2f3a1a56aa70c658b8",
+      "local_relative_path": "by-sha256/35ed7952153c9db3a6a8a20b2aafaebcc51369d26bbafe2f3a1a56aa70c658b8",
+      "source_cache_relative_path": "ros/README.md",
+      "artifact_id": "ros@9058506efd0b967ac894a717bdbe98df017637e5:README.md"
+    },
+    {
+      "project": "ros",
+      "repo": "NVIDIA-ISAAC-ROS/isaac_ros_visual_slam",
+      "ref": "v5.0-0",
+      "commit": "9058506efd0b967ac894a717bdbe98df017637e5",
+      "path": "isaac_ros_cuvslam/CMakeLists.txt",
+      "url": "https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam/blob/9058506efd0b967ac894a717bdbe98df017637e5/isaac_ros_cuvslam/CMakeLists.txt",
+      "raw_url": "https://raw.githubusercontent.com/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam/9058506efd0b967ac894a717bdbe98df017637e5/isaac_ros_cuvslam/CMakeLists.txt",
+      "git_blob_sha1": "62ad64e74d14803bdab27e036c77e80e947f521d",
+      "size_bytes": 6774,
+      "sha256": "49af2c7f19a30c2c946ab5f513de54e76ff0d9e24539e01176365ad27b4f5742",
+      "local_relative_path": "by-sha256/49af2c7f19a30c2c946ab5f513de54e76ff0d9e24539e01176365ad27b4f5742",
+      "source_cache_relative_path": "ros/isaac_ros_cuvslam/CMakeLists.txt",
+      "artifact_id": "ros@9058506efd0b967ac894a717bdbe98df017637e5:isaac_ros_cuvslam/CMakeLists.txt"
+    },
+    {
+      "project": "ros",
+      "repo": "NVIDIA-ISAAC-ROS/isaac_ros_visual_slam",
+      "ref": "v5.0-0",
+      "commit": "9058506efd0b967ac894a717bdbe98df017637e5",
+      "path": "isaac_ros_cuvslam/include/isaac_ros_cuvslam/visual_slam_node.hpp",
+      "url": "https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam/blob/9058506efd0b967ac894a717bdbe98df017637e5/isaac_ros_cuvslam/include/isaac_ros_cuvslam/visual_slam_node.hpp",
+      "raw_url": "https://raw.githubusercontent.com/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam/9058506efd0b967ac894a717bdbe98df017637e5/isaac_ros_cuvslam/include/isaac_ros_cuvslam/visual_slam_node.hpp",
+      "api_url": "https://api.github.com/repos/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam/contents/isaac_ros_cuvslam/include/isaac_ros_cuvslam/visual_slam_node.hpp?ref=9058506efd0b967ac894a717bdbe98df017637e5",
+      "git_blob_sha1": "0758e8578634556bc2ce1fe0948c6b412ce38875",
+      "size_bytes": 14127,
+      "sha256": "10784204b6970306385f0229999019268160569703cdfcd0a5da58fb4fe6b933",
+      "local_relative_path": "by-sha256/10784204b6970306385f0229999019268160569703cdfcd0a5da58fb4fe6b933",
+      "source_cache_relative_path": "ros/isaac_ros_cuvslam/include/isaac_ros_cuvslam/visual_slam_node.hpp",
+      "artifact_id": "ros@9058506efd0b967ac894a717bdbe98df017637e5:isaac_ros_cuvslam/include/isaac_ros_cuvslam/visual_slam_node.hpp"
+    },
+    {
+      "project": "ros",
+      "repo": "NVIDIA-ISAAC-ROS/isaac_ros_visual_slam",
+      "ref": "v5.0-0",
+      "commit": "9058506efd0b967ac894a717bdbe98df017637e5",
+      "path": "isaac_ros_cuvslam/package.xml",
+      "url": "https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam/blob/9058506efd0b967ac894a717bdbe98df017637e5/isaac_ros_cuvslam/package.xml",
+      "raw_url": "https://raw.githubusercontent.com/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam/9058506efd0b967ac894a717bdbe98df017637e5/isaac_ros_cuvslam/package.xml",
+      "api_url": "https://api.github.com/repos/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam/contents/isaac_ros_cuvslam/package.xml?ref=9058506efd0b967ac894a717bdbe98df017637e5",
+      "git_blob_sha1": "7963d879f29c5fbd592359a92e531f6ecd2aab02",
+      "size_bytes": 2448,
+      "sha256": "04c6ce69809043d18bd65bd98145796711a99223e4a728726f246d1b5bab1eaa",
+      "local_relative_path": "by-sha256/04c6ce69809043d18bd65bd98145796711a99223e4a728726f246d1b5bab1eaa",
+      "source_cache_relative_path": "ros/isaac_ros_cuvslam/package.xml",
+      "artifact_id": "ros@9058506efd0b967ac894a717bdbe98df017637e5:isaac_ros_cuvslam/package.xml"
+    },
+    {
+      "project": "ros",
+      "repo": "NVIDIA-ISAAC-ROS/isaac_ros_visual_slam",
+      "ref": "v5.0-0",
+      "commit": "9058506efd0b967ac894a717bdbe98df017637e5",
+      "path": "isaac_ros_cuvslam/src/visual_slam_node.cpp",
+      "url": "https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam/blob/9058506efd0b967ac894a717bdbe98df017637e5/isaac_ros_cuvslam/src/visual_slam_node.cpp",
+      "raw_url": "https://raw.githubusercontent.com/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam/9058506efd0b967ac894a717bdbe98df017637e5/isaac_ros_cuvslam/src/visual_slam_node.cpp",
+      "git_blob_sha1": "752245d2cd9192a38cd49974a3ac7492e7ed8a87",
+      "size_bytes": 22614,
+      "sha256": "0ce7ca394ef758be13e75c32f39e40f9efcd757dcec4adec5cbcbee694acba3b",
+      "local_relative_path": "by-sha256/0ce7ca394ef758be13e75c32f39e40f9efcd757dcec4adec5cbcbee694acba3b",
+      "source_cache_relative_path": "ros/isaac_ros_cuvslam/src/visual_slam_node.cpp",
+      "artifact_id": "ros@9058506efd0b967ac894a717bdbe98df017637e5:isaac_ros_cuvslam/src/visual_slam_node.cpp"
+    },
+    {
+      "project": "ros_dependency",
+      "repo": "nvidia-isaac/cuVSLAM",
+      "ref": "33da60662b27c0c5b63e0597bd778066af2731ed",
+      "commit": "33da60662b27c0c5b63e0597bd778066af2731ed",
+      "path": "LICENSE",
+      "url": "https://github.com/nvidia-isaac/cuVSLAM/blob/33da60662b27c0c5b63e0597bd778066af2731ed/LICENSE",
+      "raw_url": "https://raw.githubusercontent.com/nvidia-isaac/cuVSLAM/33da60662b27c0c5b63e0597bd778066af2731ed/LICENSE",
+      "git_blob_sha1": "f55dae365f82292120caa6774d42d1d26f68e21b",
+      "size_bytes": 8178,
+      "sha256": "f369a8d255622b2ad0108b65dacb62b96c40a3a113f7893218436188bdc373fd",
+      "local_relative_path": "by-sha256/f369a8d255622b2ad0108b65dacb62b96c40a3a113f7893218436188bdc373fd",
+      "source_cache_relative_path": "ros_dependency/LICENSE",
+      "artifact_id": "ros_dependency@33da60662b27c0c5b63e0597bd778066af2731ed:LICENSE"
+    }
+  ],
+  "release_assets_not_downloaded": [
+    {
+      "name": "cuvslam-17.0.1+cu12-cp310-cp310-manylinux_2_35_aarch64.whl",
+      "size_bytes": 113384281,
+      "sha256": "d3ab8db351a16fb763b901738098b7fff6a1c3ada547a3d1c81cddea70731b83",
+      "url": "https://github.com/nvidia-isaac/cuVSLAM/releases/download/v17.0.1/cuvslam-17.0.1%2Bcu12-cp310-cp310-manylinux_2_35_aarch64.whl",
+      "source_url": "https://api.github.com/repos/nvidia-isaac/cuVSLAM/releases/tags/v17.0.1"
+    },
+    {
+      "name": "cuvslam-17.0.1+cu12-cp310-cp310-manylinux_2_35_x86_64.whl",
+      "size_bytes": 116424612,
+      "sha256": "c4fac1e9f577c2bfe8160a9595ce8f8c8b44b98308344bffd991925821599cc1",
+      "url": "https://github.com/nvidia-isaac/cuVSLAM/releases/download/v17.0.1/cuvslam-17.0.1%2Bcu12-cp310-cp310-manylinux_2_35_x86_64.whl",
+      "source_url": "https://api.github.com/repos/nvidia-isaac/cuVSLAM/releases/tags/v17.0.1"
+    },
+    {
+      "name": "cuvslam-17.0.1+cu12-cp312-abi3-manylinux_2_39_x86_64.whl",
+      "size_bytes": 116493489,
+      "sha256": "a02e41dae6e2b6547a0cad81ff59743e5224a8f23d0c4fd42fac095e4a37ac2b",
+      "url": "https://github.com/nvidia-isaac/cuVSLAM/releases/download/v17.0.1/cuvslam-17.0.1%2Bcu12-cp312-abi3-manylinux_2_39_x86_64.whl",
+      "source_url": "https://api.github.com/repos/nvidia-isaac/cuVSLAM/releases/tags/v17.0.1"
+    },
+    {
+      "name": "cuvslam-17.0.1+cu13-cp310-cp310-manylinux_2_35_x86_64.whl",
+      "size_bytes": 89504988,
+      "sha256": "1d677ab55809820d72b4b3f8b163071b9b89c217e9a3213fd047efafbe5e61f1",
+      "url": "https://github.com/nvidia-isaac/cuVSLAM/releases/download/v17.0.1/cuvslam-17.0.1%2Bcu13-cp310-cp310-manylinux_2_35_x86_64.whl",
+      "source_url": "https://api.github.com/repos/nvidia-isaac/cuVSLAM/releases/tags/v17.0.1"
+    },
+    {
+      "name": "cuvslam-17.0.1+cu13-cp312-abi3-manylinux_2_39_aarch64.whl",
+      "size_bytes": 84421230,
+      "sha256": "b6b98ff484e5bc07333fb4231cf99b87906312534763dac2abfb8ed9dd5af752",
+      "url": "https://github.com/nvidia-isaac/cuVSLAM/releases/download/v17.0.1/cuvslam-17.0.1%2Bcu13-cp312-abi3-manylinux_2_39_aarch64.whl",
+      "source_url": "https://api.github.com/repos/nvidia-isaac/cuVSLAM/releases/tags/v17.0.1"
+    },
+    {
+      "name": "cuvslam-17.0.1+cu13-cp312-abi3-manylinux_2_39_x86_64.whl",
+      "size_bytes": 89588532,
+      "sha256": "dba2079a3e013b6bb37d8c9965e4beb42007282f33863815d69689568f820ed1",
+      "url": "https://github.com/nvidia-isaac/cuVSLAM/releases/download/v17.0.1/cuvslam-17.0.1%2Bcu13-cp312-abi3-manylinux_2_39_x86_64.whl",
+      "source_url": "https://api.github.com/repos/nvidia-isaac/cuVSLAM/releases/tags/v17.0.1"
+    },
+    {
+      "name": "cuvslam-cpp-17.0.1-orin-cuda12.6.3-ubuntu22.04.tar.gz",
+      "size_bytes": 113823651,
+      "sha256": "65a2e24276665c8f466d3934bf78118aa001b30be2f8af219af33c7674c6ab64",
+      "url": "https://github.com/nvidia-isaac/cuVSLAM/releases/download/v17.0.1/cuvslam-cpp-17.0.1-orin-cuda12.6.3-ubuntu22.04.tar.gz",
+      "source_url": "https://api.github.com/repos/nvidia-isaac/cuVSLAM/releases/tags/v17.0.1"
+    },
+    {
+      "name": "cuvslam-cpp-17.0.1-thor-cuda13.0.1-ubuntu24.04.tar.gz",
+      "size_bytes": 84856024,
+      "sha256": "e5ee5e47e8812b04755232d60949dd62bd86619b53dac038ba5941e91878913e",
+      "url": "https://github.com/nvidia-isaac/cuVSLAM/releases/download/v17.0.1/cuvslam-cpp-17.0.1-thor-cuda13.0.1-ubuntu24.04.tar.gz",
+      "source_url": "https://api.github.com/repos/nvidia-isaac/cuVSLAM/releases/tags/v17.0.1"
+    },
+    {
+      "name": "cuvslam-cpp-17.0.1-x86_64-cuda12.6.3-ubuntu22.04.tar.gz",
+      "size_bytes": 116872530,
+      "sha256": "4182904f97b4138576aad93868e588f6aaa4a10869f66ffdb721573a0444efe1",
+      "url": "https://github.com/nvidia-isaac/cuVSLAM/releases/download/v17.0.1/cuvslam-cpp-17.0.1-x86_64-cuda12.6.3-ubuntu22.04.tar.gz",
+      "source_url": "https://api.github.com/repos/nvidia-isaac/cuVSLAM/releases/tags/v17.0.1"
+    },
+    {
+      "name": "cuvslam-cpp-17.0.1-x86_64-cuda12.6.3-ubuntu24.04.tar.gz",
+      "size_bytes": 116972537,
+      "sha256": "e7ee81fe4ff3b0769e6a613087747b75840e9381c3b4e7f235ee01380a2a2336",
+      "url": "https://github.com/nvidia-isaac/cuVSLAM/releases/download/v17.0.1/cuvslam-cpp-17.0.1-x86_64-cuda12.6.3-ubuntu24.04.tar.gz",
+      "source_url": "https://api.github.com/repos/nvidia-isaac/cuVSLAM/releases/tags/v17.0.1"
+    },
+    {
+      "name": "cuvslam-cpp-17.0.1-x86_64-cuda13.2.0-ubuntu22.04.tar.gz",
+      "size_bytes": 89879435,
+      "sha256": "9d00ae47aacff37da9ffb069f343b4b1704f633aa1af3d2efc7f96932012db9b",
+      "url": "https://github.com/nvidia-isaac/cuVSLAM/releases/download/v17.0.1/cuvslam-cpp-17.0.1-x86_64-cuda13.2.0-ubuntu22.04.tar.gz",
+      "source_url": "https://api.github.com/repos/nvidia-isaac/cuVSLAM/releases/tags/v17.0.1"
+    },
+    {
+      "name": "cuvslam-cpp-17.0.1-x86_64-cuda13.2.0-ubuntu24.04.tar.gz",
+      "size_bytes": 90002151,
+      "sha256": "1d8aa235e8c4a27370544c7609815a4e25f7df15b7b43faaa2decf424e05108c",
+      "url": "https://github.com/nvidia-isaac/cuVSLAM/releases/download/v17.0.1/cuvslam-cpp-17.0.1-x86_64-cuda13.2.0-ubuntu24.04.tar.gz",
+      "source_url": "https://api.github.com/repos/nvidia-isaac/cuVSLAM/releases/tags/v17.0.1"
+    },
+    {
+      "name": "cuvslam-docs-17.0.1.tar.gz",
+      "size_bytes": 8056542,
+      "sha256": "1a12fbf2f732aa69fc70a55f741ade085265fc033e85c53048c441eefaa1f10b",
+      "url": "https://github.com/nvidia-isaac/cuVSLAM/releases/download/v17.0.1/cuvslam-docs-17.0.1.tar.gz",
+      "source_url": "https://api.github.com/repos/nvidia-isaac/cuVSLAM/releases/tags/v17.0.1"
+    },
+    {
+      "name": "cuvslam-evaluation-17.0.1.tar.gz",
+      "size_bytes": 16471841,
+      "sha256": "3a0e29685564532ee4e1a6c18377b2c0bb0738c296795865bdec671019ab2a22",
+      "url": "https://github.com/nvidia-isaac/cuVSLAM/releases/download/v17.0.1/cuvslam-evaluation-17.0.1.tar.gz",
+      "source_url": "https://api.github.com/repos/nvidia-isaac/cuVSLAM/releases/tags/v17.0.1"
+    }
+  ],
+  "web_observations": [
+    {
+      "url": "https://www.research-collection.ethz.ch/items/bcaf173e-5dac-484b-bc37-faf97a594f1f",
+      "method": "Official-domain web search result; direct open returned HTTP403",
+      "record_date": "2024-09-27",
+      "rights_label": "In Copyright - Non-Commercial Use Permitted",
+      "raw_page_sha256": null,
+      "limitation": "Indexed official metadata only; archive-specific terms and raw page bytes not retrieved"
+    },
+    {
+      "url": "https://rightsstatements.org/page/InC-NC/1.0/?language=en",
+      "method": "Official rights statement opened",
+      "finding": "Additional permission for non-commercial use; other uses require rights-holder permission; a rights statement is not a license",
+      "raw_page_sha256": null
+    },
+    {
+      "url": "https://nvidia-isaac-ros.github.io/v/release-5.0/getting_started/index.html#system-requirements",
+      "method": "Versioned official documentation opened; rolling page, not immutable Git snapshot",
+      "finding": "Observed release-5.0 matrix lists JetPack7.2 for Jetson; x86 Ubuntu24.04 CUDA13.2+ driver595+ Ampere+; ROS2 Lyrical",
+      "raw_page_sha256": null,
+      "limitation": "Observation at review date, not historical requirements at tag publication"
+    }
+  ],
+  "limitations": [
+    "No full transitive-license clearance",
+    "No actual wheel, firmware, dataset or model payload inspected",
+    "No hardware/runtime/performance certification",
+    "No certification of pre-existing code authorship or historical experimental artifact licenses"
+  ],
+  "validation": {
+    "status": "SUPERSEDED_BY_VERIFICATION_REPORT",
+    "checks": [
+      "60 CSV rows parsed and all required fields present",
+      "44 cached files matched byte lengths, Git blob SHA-1 and SHA-256",
+      "44 CSV file digests matched evidence metadata",
+      "14 reported asset digests explicitly unverified locally",
+      "2 absent large-asset hashes explicitly unknown",
+      "All local Markdown links resolved",
+      "No mutable main/master file links in new Markdown",
+      "No third-party source content in durable evidence JSON",
+      "Only six authorized audit artifacts added; tracked application code unchanged",
+      "Markdown whitespace checks passed"
+    ],
+    "not_run": [
+      "Application test suite",
+      "GPU/OAK/ROS runtime",
+      "Model/dataset evaluation",
+      "Build or package integration"
+    ],
+    "reason": "Original combined final check ended 1 due to git diff --no-index against /dev/null; see verification-report.json and HANDOFF.md"
+  },
+  "verification_cache_root": "/tmp/gps-denied-provenance-audit",
+  "hash_status_semantics": {
+    "local_hash": "44 locally verified source/document rows; 43 distinct content digests; every digest has one canonical relative cache path and byte size",
+    "upstream_hash": "14 officially published release-asset SHA-256 values, not locally verified; payloads not downloaded",
+    "no_published_hash": "NO_PUBLISHED_SHA256_IN_REVIEWED_EVIDENCE means no upstream SHA-256 in the reviewed file metadata; not a claim that none exists anywhere. It is independent of local hash computation.",
+    "unknown_publication": "2 placeholders have NOT_ESTABLISHED publication/asset identity; absence of a published hash is not proven",
+    "download_status": "Separate axis: 44 small text rows downloaded; 16 artifact payloads not downloaded (14 published digests plus 2 unknown placeholders)"
+  },
+  "prior_final_check_failure": {
+    "command": "git diff --check --no-index /dev/null docs/integration-decision.md",
+    "argv": [
+      "git",
+      "diff",
+      "--check",
+      "--no-index",
+      "/dev/null",
+      "docs/integration-decision.md"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "",
+    "failed_assertion": null,
+    "historical_context": "This was the trailing command after a Python consistency check printed result PASS. The shell/tool inherited the trailing git command status 1.",
+    "reproduction": "Reproduced before repair: exit 1, stdout empty, stderr empty.",
+    "cause": "git diff --no-index compares the nonempty document with /dev/null and uses diff exit status; a difference produces 1. No assertion traceback or whitespace diagnostic was emitted.",
+    "repair": "Remove diff-as-pass/fail ambiguity: final verifier checks all delivered Markdown bytes for whitespace directly and itself exits 0 only after every consistency check succeeds."
+  },
+  "verification_repair_history": [
+    {
+      "command": "python3 provenance/verify_consistency.py --cache-root /tmp/gps-denied-provenance-audit --report provenance/verification-report.json",
+      "exit_code": 1,
+      "failed_assertion": "Broken local Markdown link docs/upstream-method-matrix.md: ../provenance/verification-report.json",
+      "stdout": "",
+      "stderr": "{\"status\": \"BLOCKED\", \"exit_code\": 1, \"failed_assertion\": \"Broken local Markdown link docs/upstream-method-matrix.md: ../provenance/verification-report.json\", \"command\": \"python3 provenance/verify_consistency.py --cache-root /tmp/gps-denied-provenance-audit --report provenance/verification-report.json\", \"downloads_performed\": 0}\n",
+      "cause": "First-run output bootstrap: report path checked before it had been materialized.",
+      "repair": "Materialize the designated generated report path before validating Markdown links; do not read/trust previous report contents."
+    }
+  ]
+}
