@@ -7,6 +7,25 @@ permissions:
   contents: read
 
 jobs:
+  forensics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: python -m venv .venv
+      - run: .venv/bin/python -m pip install -r requirements-forensics.txt
+      - run: .venv/bin/ruff check src/aegisland/forensics tests/test_forensics*.py
+      - run: .venv/bin/ruff format --check src/aegisland/forensics tests/test_forensics*.py
+      - run: timeout 60s .venv/bin/python -m pytest tests/test_forensics.py tests/test_forensics_integration.py
+      - run: PYTHONPATH=src .venv/bin/python -m aegisland.forensics fixtures --output runs/forensics-fixtures
+      - run: PYTHONPATH=src .venv/bin/python -m aegisland.forensics report --px4 runs/forensics-fixtures/synthetic.ulg --jetson runs/forensics-fixtures/jetson.jsonl --output runs/forensics-ci
+      - uses: actions/upload-artifact@v4
+        with:
+          name: synthetic-forensics-evidence
+          path: runs/forensics-ci/
   test:
     runs-on: ubuntu-latest
     steps:

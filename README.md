@@ -1,5 +1,9 @@
 # AegisLand — Agentic Vision for Emergency Drone Landing
 
+DroneHacks offline analysis: [Flight Forensics & Replay Workbench](docs/forensics/README.md).
+Reads local PX4 ULog and Jetson JSONL, produces HTML/JSON/Markdown evidence reports,
+and keeps `executed=False`. [Competition data boundary](docs/competition-data-boundary.md).
+
 > When navigation becomes uncertain, AegisLand turns OpenCV evidence into a safer next action—then preserves the full reason-and-action trace.
 
 AegisLand is a safety-first prototype for the **OpenCV AI Competition 2026, powered by AWS**. A deterministic drone simulator injects low battery, GPS loss, poor illumination, static obstacles, and moving-zone intrusions. An OpenCV 5 perception stack scores candidate landing regions; an auditable safety planner chooses whether to continue, return, hold and rescan, request approval, evade, or land.
