@@ -17,7 +17,7 @@
 | 状态来自观察 | 无 checkpoint 转移表，无路线累计量，逐帧独立 | 没有时序跟踪、迟滞或穿门完成判断 |
 
 硬化后的相关回归命令通过 170 项测试，覆盖对抗反例、新模块、现有深度扇区、感知质量/信任、
-恢复、profiling、跨场景基线和非米制 motion。命令记录在 [HANDOFF.md](../HANDOFF.md)。Ruff 对修改和新增的 Python 文件
+恢复、profiling、跨场景基线和非米制 motion。命令记录在 [perception HANDOFF](handoffs/perception-HANDOFF.md)。Ruff 对修改和新增的 Python 文件
 检查通过。测试选择针对本次改动；未声称运行所有仓库测试或硬件/SITL 测试。
 
 [当前报告](../examples/course-perception-hardened/report.json) 是一次 36 帧合成回放，分辨率为
