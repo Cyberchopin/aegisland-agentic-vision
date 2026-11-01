@@ -305,13 +305,19 @@ class Analysis:
                 "Inferred means a threshold or clock model, not a confirmed failure or causality.",
                 "Unknown means absent/invalid evidence; missing events do not prove health.",
                 "Timestamp decreases may be resets or reordered records; epochs are not guessed.",
-                "Source hashes in Jetson records are producer claims; only input file hashes "
-                "and supplied alignment evidence hashes are computed by this tool.",
-                "Samples remain in source/stream order. Separate clocks must not be compared "
-                "without bounded evidence; physical synchronization is unknown.",
+                (
+                    "Source hashes in Jetson records are producer claims; only input file hashes "
+                    "and supplied alignment evidence hashes are computed by this tool."
+                ),
+                (
+                    "Samples remain in source/stream order. Separate clocks must not be compared "
+                    "without bounded evidence; physical synchronization is unknown."
+                ),
                 "No map, coordinates, trajectory, mission, command or future-flight export.",
-                "Local sensing plane only; full_3d_traversability=UNKNOWN. Local depth/width "
-                "and descent geometry do not establish 3D traversability.",
+                (
+                    "Local sensing plane only; full_3d_traversability=UNKNOWN. Local depth/width "
+                    "and descent geometry do not establish 3D traversability."
+                ),
             ],
             "native_clocks": {"px4": PX4_CLOCK, "jetson": "jetson_monotonic_ns"},
         }

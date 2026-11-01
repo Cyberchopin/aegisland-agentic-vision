@@ -258,6 +258,7 @@ def test_payload_traversal_symlinks_and_nonregular_files_rejected(bundle, tmp_pa
 def test_archive_hash_or_array_changes_are_unknown(bundle):
     # Even an updated declared hash cannot make invalid array dimensions valid.
     import io
+
     import numpy as np
 
     payload = io.BytesIO()
@@ -525,6 +526,7 @@ def test_four_stream_replay_controls_use_safe_text_and_keep_unknown_3d(bundle, t
     script = Path(__file__).with_name("forensics_replay_smoke.cjs")
     result = subprocess.run(
         [shutil.which("node"), str(script), str(run / "report.html"), "--integration"],
+        check=False,
         capture_output=True,
         text=True,
         timeout=10,

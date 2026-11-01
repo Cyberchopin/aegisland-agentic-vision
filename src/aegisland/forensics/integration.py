@@ -10,6 +10,7 @@ import html
 import io
 import math
 import zipfile
+from itertools import pairwise
 from pathlib import Path
 
 from .ingest import HASH
@@ -705,7 +706,7 @@ def _check_clock_pairs(pairs: object, issue) -> None:
                 "Invalid paired-clock uncertainty",
             )
         first, last = pairs[0], pairs[-1]
-        for prior, current in zip(pairs, pairs[1:]):
+        for prior, current in pairwise(pairs):
             require(
                 all(current[key] == first[key] for key in ("source_clock", "target_clock"))
                 and current["source_ns"] > prior["source_ns"]

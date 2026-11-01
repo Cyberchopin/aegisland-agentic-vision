@@ -7,7 +7,7 @@ import os
 import re
 import stat
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from uuid import uuid4
 
@@ -83,7 +83,7 @@ def record_run(
         name: sha256(payload) for name, payload in sources.items()
     }:
         raise ValueError("Summary source hashes differ from captured snapshots")
-    run_id = run_id or datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ-") + uuid4().hex
+    run_id = run_id or datetime.now(UTC).strftime("%Y%m%dT%H%M%S%fZ-") + uuid4().hex
     if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]{0,95}", run_id):
         raise ValueError("Invalid run ID")
     implementation = {
@@ -105,7 +105,8 @@ def record_run(
         raise ValueError("Reserved report filename")
     for name, data in sources.items():
         if not isinstance(data, bytes):
-            raise ValueError("Source snapshots must be bytes")
+            # ValueError, not TypeError: CLI callers catch (OSError, ValueError).
+            raise ValueError("Source snapshots must be bytes")  # noqa: TRY004
         payloads["source/" + name] = data
     for name in payloads:
         if (
@@ -166,7 +167,8 @@ def verify_run(directory: Path) -> dict:
             raise ValueError(f"Evidence hash mismatch: {name}")
     summary = strict_json(read_regular(directory / "summary.json").decode())
     if not isinstance(summary, dict):
-        raise ValueError("Evidence summary must be an object")
+        # ValueError, not TypeError: CLI callers catch (OSError, ValueError).
+        raise ValueError("Evidence summary must be an object")  # noqa: TRY004
     _safe_authority(summary)
     if summary.get("executed") is not False or summary.get("authority") != "NONE":
         raise ValueError("Invalid evidence authority boundary")

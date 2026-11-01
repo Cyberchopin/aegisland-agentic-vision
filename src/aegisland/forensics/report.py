@@ -29,8 +29,10 @@ def ledger(summary: dict) -> str:
         "",
         summary["validation"],
         "",
-        "`observed`: recorded value; `inferred`: review rule/model; "
-        "`unknown`: insufficient evidence. None establishes flight truth or causality.",
+        (
+            "`observed`: recorded value; `inferred`: review rule/model; "
+            "`unknown`: insufficient evidence. None establishes flight truth or causality."
+        ),
         "",
         f"Clock alignment: **{summary['alignment']['status']}**. "
         + _md(summary["alignment"]["reason"]),

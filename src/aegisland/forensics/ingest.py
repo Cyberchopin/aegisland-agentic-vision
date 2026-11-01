@@ -279,7 +279,7 @@ def ingest_px4(path: Path | None) -> Ingestion:
                 "this is logger loss, not proof of camera frame loss.",
                 knowledge="observed",
             )
-    except Exception as error:
+    except Exception as error:  # noqa: BLE001 - see reason below
         # PyULog may raise struct/NumPy/version-specific exceptions on damaged data.
         # Retain already recovered rows and make incompleteness explicit.
         result.issue(

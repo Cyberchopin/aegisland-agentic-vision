@@ -394,7 +394,7 @@ def test_reports_are_offline_self_contained_safe_and_linked_to_input_bytes(tmp_p
     assert 'type="range"' in document
     assert sha256(path.read_bytes()) in document
     embedded = re.search(
-        r'<script type="application/json" id="evidence">(.*?)</script>', document, flags=re.S
+        r'<script type="application/json" id="evidence">(.*?)</script>', document, flags=re.DOTALL
     ).group(1)
     assert json.loads(embedded) == summary
     assert json.loads((tmp_path / "report" / "summary.json").read_text()) == summary
@@ -415,6 +415,7 @@ def test_replay_interactions_and_nanosecond_precision(tmp_path):
             str(Path(__file__).with_name("forensics_replay_smoke.cjs")),
             str(report_path / "report.html"),
         ],
+        check=False,
         capture_output=True,
         text=True,
         timeout=10,
